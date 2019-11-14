@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: green;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.title {
+    text-align: center;
+    justify-content: center;
+    background-color: rgb(93, 61, 124, 0.2) ;
+    padding: 10px;
+}
+
+
+
+  

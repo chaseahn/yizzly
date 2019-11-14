@@ -3,7 +3,6 @@
 
 import os
 import time
-import sqlite3
 
 from flask import Flask, render_template, request, url_for, redirect, session
 from werkzeug.utils import secure_filename
@@ -21,7 +20,7 @@ controller.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 controller.secret_key = 'SUPER-DUPER-SECRET'
 
 
-controller.register_blueprint(private_sub)
+# controller.register_blueprint(private_sub)
 
 
 
