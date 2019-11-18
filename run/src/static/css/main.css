@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: rgb(39, 36, 36);
+    background-color: rgb(34, 34, 34);
     min-height: 100vh;
     justify-content: center;
     align-items: center;
@@ -10,6 +10,7 @@ body {
 h1 {
     color: #CC9BC4;
     font-family: 'PT Sans', sans-serif;
+    font-size: 3em;
 }
 
 h2 {
@@ -19,9 +20,8 @@ h2 {
 
 .title {
     text-align: center;
-    background-color: rgba(243, 255, 72, 0.1); 
     padding-top: 60px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 p{
@@ -48,6 +48,8 @@ p{
     justify-content: center;
     align-items: center;
     display: flex;
+    border-radius: 10%;
+    cursor: pointer;
 }
 
 .container .cards:before {
@@ -57,19 +59,23 @@ p{
     left: 0;
     width: 50%;
     height: 100%;
-    background: rgba(255,255, 255, .1);
+    background: rgba(187, 187, 187, 0.2);
     z-index: 20;
     pointer-events: none;
+    border-radius: 20%;
 }
 
 .container .cards:nth-child(1) {
     background: linear-gradient(45deg, #86A8E7, #7F7FD5);
+    box-shadow: 1px 3px 5px rgb(136, 170, 235, .3);
 }
  
 .container .cards:nth-child(2) {
-    background: linear-gradient(45deg, #43C6AC, #F8FFAE);
+    background: linear-gradient(45deg, #43C6AC, rgb(50, 150, 130));
+    box-shadow: 1px 3px 5px rgb(68, 199, 173, .3);
 }
 
 .container .cards:nth-child(3) {
-    background: linear-gradient(45deg, #FBD786, #f7797d);
+    background: linear-gradient(45deg, rgb(231, 185, 76), #f7797d);
+    box-shadow: 1px 3px 5px rgb(231, 185, 76, .3);
 }
