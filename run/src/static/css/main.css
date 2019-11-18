@@ -13,7 +13,7 @@ h1 {
 }
 
 h2 {
-    color: #CC9BC4;
+    color: rgb(255, 255, 255);
     font-family: 'PT Sans', sans-serif;
 }
 
@@ -24,9 +24,10 @@ h2 {
     padding-bottom: 30px;
 }
 
-.title p{
+p{
     color: white;
     font-family: 'Open Sans', sans-serif;
+    padding: 10px;
 }
 
 .container {
@@ -43,10 +44,32 @@ h2 {
     position: relative;
     width: 300px;
     height: 400px;
-    background: whitesmoke;
+    background: rgb(66, 66, 66);
     justify-content: center;
     align-items: center;
     display: flex;
 }
 
-  
+.container .cards:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255,255, 255, .1);
+    z-index: 20;
+    pointer-events: none;
+}
+
+.container .cards:nth-child(1) {
+    background: linear-gradient(45deg, #86A8E7, #7F7FD5);
+}
+ 
+.container .cards:nth-child(2) {
+    background: linear-gradient(45deg, #43C6AC, #F8FFAE);
+}
+
+.container .cards:nth-child(3) {
+    background: linear-gradient(45deg, #FBD786, #f7797d);
+}
