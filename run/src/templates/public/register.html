@@ -9,6 +9,7 @@
         <title>Winik Workflow: Register</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
@@ -26,13 +27,13 @@
                 <input type="password" placeholder="Password" name="password">
             </div>
             <div>
-                <input type="password" placeholder="Confirm password" name="password">
+                <input type="password" placeholder="Confirm password" name="confirm_password">
             </div>
             <div>
                 <font color="red">{{message}}</font>
             </div>
             <div>
-                <input name="post_button" type="submit" value="Create Account">
+                <input name="post_button" type="submit" value="Submit">
             </div>
             <div>
                 <a href="/"> Return to login </a>

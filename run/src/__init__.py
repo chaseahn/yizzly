@@ -48,12 +48,19 @@ def register():
     if request.method == 'GET':
         return render_template('public/register.html')
     elif request.method == 'POST':
-        print("1")
+        print("start register")
+        un = request.form['username']
+        pw = request.form['password']
         #check login and serve to index
-        try:
-            if request.form['post_button'] == 'Submit':
-                pass
-        except TypeError:
-            pass
+        #check for unique USERNAME
+        #TODO make registration flow
+        with User(username=un,password=pw) as u:
+            if u.check_username():
+                return render_template(
+                    'public/register.html', 
+                    message="Username Exists" )
+            else:
+
     else:
         pass
+

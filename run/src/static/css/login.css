@@ -1,10 +1,10 @@
 body {
-    background-color: darkgray;
+    background-color: rgb(236, 233, 233);
 }
 
 .login-container {
     width: 400px;
-    height: 300px;
+    height: 340px;
     background-color: cornsilk;
     box-shadow:  5px 5px rgb(233, 153, 126, 0.8);
     margin: 100px auto 0;
@@ -52,3 +52,15 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: rgb(56, 151, 85);
   }
+
+a {
+    color: rgb(52, 50, 202);
+    font-family: 'PT Sans', sans-serif;
+    font-size: .7em;
+}
+
+a:hover {
+    color: rgb(235, 82, 159);
+    font-family: 'PT Sans', sans-serif;
+    font-size: .7em;
+}

@@ -9,6 +9,7 @@
         <title>Winik Workflow: Login</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
@@ -30,6 +31,9 @@
             </div>
             <div>
                 <input name="post_button" type="submit" value="Login">
+            </div>
+            <div>
+                <a href="/register"> Register </a>
             </div>
         </div>
         </form>
