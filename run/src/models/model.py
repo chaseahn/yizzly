@@ -38,6 +38,7 @@ class User:
                 ?,?); """
             val = (self.username,self.password)
             cur.execute(SQL,val)
+            print('user created')
     
     def login(self,password):
         with OpenCursor() as cur:

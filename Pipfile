@@ -10,8 +10,7 @@ pylint = "*"
 requests = "*"
 flask = "*"
 bs4 = "*"
-sqlite3 = "*"
-sqlite = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.7"

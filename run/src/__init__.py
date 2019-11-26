@@ -22,19 +22,24 @@ controller.secret_key = 'SUPER-DUPER-SECRET'
 
 # controller.register_blueprint(private_sub)
 
-
-
 @controller.route('/',methods=['GET','POST'])
 def index():
     if request.method == 'GET':
         return render_template('public/login.html')
     elif request.method == 'POST':
-        #check login and serve to index
-        try:
-            if request.form['post_button'] == 'Login':
-                pass
-        except TypeError:
-            pass
+        if request.form['post_button'] == 'Login':
+            un = request.form['username']
+            pw = request.form['password']
+            #check login and serve to main page
+            try:
+                with User(username=un,password=pw) as u:
+                    if u.login(pw):
+                        #send to mainpage
+                        print("DWKJNAWBHDAWBKHAWjkaknjwnjb")
+                        # return redirect('/main')
+            except TypeError as e:
+                print(e)
+
     else:
         pass
 
@@ -45,7 +50,7 @@ def register():
     elif request.method == 'POST':
         #check login and serve to index
         try:
-            if request.form['post_button'] == 'Login':
+            if request.form['post_button'] == 'Submit':
                 pass
         except TypeError:
             pass
