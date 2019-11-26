@@ -48,6 +48,7 @@ def register():
     if request.method == 'GET':
         return render_template('public/register.html')
     elif request.method == 'POST':
+        print("1")
         #check login and serve to index
         try:
             if request.form['post_button'] == 'Submit':
