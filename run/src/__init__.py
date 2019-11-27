@@ -60,7 +60,8 @@ def register():
                     'public/register.html', 
                     message="Username Exists" )
             else:
-
+                #TODO ad
+                pass
     else:
         pass
 
