@@ -46,22 +46,31 @@ def index():
 @controller.route('/register',methods=['GET','POST'])
 def register():
     if request.method == 'GET':
+        print('this is register page')
         return render_template('public/register.html')
     elif request.method == 'POST':
         print("start register")
         un = request.form['username']
         pw = request.form['password']
-        #check login and serve to index
-        #check for unique USERNAME
-        #TODO make registration flow
-        with User(username=un,password=pw) as u:
-            if u.check_username():
+        print([un, pw])
+        # #check login and serve to index
+        # #check for unique USERNAME
+        with User(username=un,password=pw) as user:
+            print('checking user....')
+            if user.username_exist(un):
+                print("exists")
                 return render_template(
                     'public/register.html', 
-                    message="Username Exists" )
+                    message="Username Exists" 
+                    )
             else:
-                #TODO ad
-                pass
+                print("ELSE")
+                user.create_user(un, pw)
+                return redirect('/')
     else:
         pass
+
+@controller.errorhandler(404)
+def not_found(error):
+    return render_template('public/404.html')
 

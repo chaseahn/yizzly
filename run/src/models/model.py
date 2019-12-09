@@ -59,3 +59,15 @@ class User:
             self.row_set(row)
         else:
             self.row_set({})
+
+    def username_exist(self, username):
+        with OpenCursor() as cur:
+            SQL = """ SELECT * FROM user WHERE
+                  username=?; """
+            val = (username,)
+            cur.execute(SQL,val)
+            row = cur.fetchone()
+        if row:
+            return True
+        else:
+            return False
