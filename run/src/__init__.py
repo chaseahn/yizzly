@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 
 from .controllers.private import subcontroller as private_sub
 from .models.model import User
+from .extensions.security import hash
 
 
 UPLOAD_FOLDER = '/Users/ahn.ch/Projects/shoe_data/run/src/static'
@@ -63,8 +64,8 @@ def register():
                     'public/register.html', 
                     message="Username exists." 
                     )
-            elif pw == request.form['conf_password']:
-                user.create_user(un, pw)
+            elif pw == request.form['confirm_password']:
+                user.create_user(un, hash(pw))
                 return redirect('/')
             else:
                 return render_template(
