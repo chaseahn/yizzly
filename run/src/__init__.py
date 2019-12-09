@@ -7,7 +7,7 @@ import time
 from flask import Flask, render_template, request, url_for, redirect, session
 from werkzeug.utils import secure_filename
 
-#from .controllers.private import subcontroller as private_sub
+from .controllers.private import subcontroller as private_sub
 from .models.model import User
 
 
@@ -20,7 +20,7 @@ controller.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 controller.secret_key = 'SUPER-DUPER-SECRET'
 
 
-# controller.register_blueprint(private_sub)
+controller.register_blueprint(private_sub)
 
 @controller.route('/',methods=['GET','POST'])
 def index():
@@ -32,11 +32,13 @@ def index():
             pw = request.form['password']
             #check login and serve to main page
             try:
-                with User(username=un,password=pw) as u:
-                    if u.login(pw):
+                with User(username=un,password=pw) as user:
+                    if user.login(pw):
                         #send to mainpage
-                        print("DWKJNAWBHDAWBKHAWjkaknjwnjb")
-                        # return redirect('/main')
+                        #TODO create session
+                        session['username'] = user.username
+                        session['pk'] = user.pk
+                        return redirect('private/index')
             except TypeError as e:
                 print(e)
 
@@ -46,27 +48,29 @@ def index():
 @controller.route('/register',methods=['GET','POST'])
 def register():
     if request.method == 'GET':
-        print('this is register page')
+
         return render_template('public/register.html')
+
     elif request.method == 'POST':
-        print("start register")
+
         un = request.form['username']
         pw = request.form['password']
-        print([un, pw])
-        # #check login and serve to index
-        # #check for unique USERNAME
+
         with User(username=un,password=pw) as user:
             print('checking user....')
             if user.username_exist(un):
-                print("exists")
                 return render_template(
                     'public/register.html', 
-                    message="Username Exists" 
+                    message="Username exists." 
                     )
-            else:
-                print("ELSE")
+            elif pw == request.form['conf_password']:
                 user.create_user(un, pw)
                 return redirect('/')
+            else:
+                return render_template(
+                    'public/register.html', 
+                    message="Passwords do not match." 
+                    )
     else:
         pass
 
