@@ -30,14 +30,15 @@ class User:
         self.username = row.get('username')
         self.password = row.get('password')
 
-    def create_user(self,username,password):
+    def create_user(self,username,password,email):
         self.username = username
         self.password = password
+        self.email = email
         with OpenCursor() as cur:
             SQL = """ INSERT INTO user(
-                username,password) VALUES (
-                ?,?); """
-            val = (self.username,self.password)
+                username,password,email) VALUES (
+                ?,?,?); """
+            val = (self.username,self.password,self.email)
             cur.execute(SQL,val)
             print('user created')
     

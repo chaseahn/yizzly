@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 
 from .controllers.private import subcontroller as private_sub
 from .models.model import User
-from .extension.security import hasher
+from .extension.security import *
 
 controller = Flask(__name__, instance_relative_config=True)
 controller.config.from_pyfile('config.py')
@@ -57,6 +57,7 @@ def register():
 
         un = request.form['username']
         pw = request.form['password']
+        em = request.form['email']
 
         with User(username=un,password=pw) as user:
             print('checking user....')
@@ -66,13 +67,26 @@ def register():
                     message="Username exists." 
                     )
             elif pw == request.form['confirm_password']:
-                user.create_user(un, hasher(pw))
-                return redirect('/')
+                session['code'] = generate_code()
+                print(session['code'])
+                return redirect('/verify')
             else:
                 return render_template(
                     'public/register.html', 
                     message="Passwords do not match." 
                     )
+    else:
+        pass
+
+@controller.route('/verify',methods=['GET','POST'])
+def verify():
+    if request.method == 'GET':
+        print(session['code'])
+        return render_template('public/verify.html')
+    elif request.method == 'POST':
+        if session['code'] == request.form['code']:
+            return redirect('/success')
+        
     else:
         pass
 
