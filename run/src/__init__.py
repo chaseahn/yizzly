@@ -5,38 +5,43 @@ import os
 import time
 
 from flask import Flask, render_template, request, url_for, redirect, session
+from flask_mail import Mail, Message
+from config import * 
+
 from werkzeug.utils import secure_filename
 
 from .controllers.private import subcontroller as private_sub
 from .models.model import User
-from .extensions.security import hash
+from .extensions.security import hasher
 
 
 UPLOAD_FOLDER = '/Users/ahn.ch/Projects/shoe_data/run/src/static'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg']) #might have to change for videos 
 
 controller = Flask(__name__)
-
-controller.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-controller.secret_key = 'SUPER-DUPER-SECRET'
-
-
+controller.config.from_object('config')
+controller.secret_key = controller.config['SECRET_KEY']
 controller.register_blueprint(private_sub)
 
+controller.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# set up Flask_Mail Instance
+mail = Mail(controller)
+
+
 @controller.route('/',methods=['GET','POST'])
-def index():
+def login():
     if request.method == 'GET':
         return render_template('public/login.html')
     elif request.method == 'POST':
         if request.form['post_button'] == 'Login':
             un = request.form['username']
-            pw = request.form['password']
+            pw = hasher(request.form['password'])
             #check login and serve to main page
             try:
                 with User(username=un,password=pw) as user:
                     if user.login(pw):
                         #send to mainpage
-                        #TODO create session
                         session['username'] = user.username
                         session['pk'] = user.pk
                         return redirect('private/index')
@@ -49,7 +54,7 @@ def index():
 @controller.route('/register',methods=['GET','POST'])
 def register():
     if request.method == 'GET':
-
+        # welcome to register page
         return render_template('public/register.html')
 
     elif request.method == 'POST':
@@ -65,7 +70,7 @@ def register():
                     message="Username exists." 
                     )
             elif pw == request.form['confirm_password']:
-                user.create_user(un, hash(pw))
+                user.create_user(un, hasher(pw))
                 return redirect('/')
             else:
                 return render_template(

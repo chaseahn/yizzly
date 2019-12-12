@@ -50,6 +50,16 @@ input[type=password], select {
     box-sizing: border-box;
   }
 
+input[type=email], select {
+    width: 320px;
+    padding: 12px 20px;
+    margin: 8px 2px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
 input[type=submit] {
     width: 320px;
     background-color: rgb(70, 187, 105);
