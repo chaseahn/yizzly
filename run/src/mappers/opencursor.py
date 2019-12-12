@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+
 import sqlite3
 
 DBNAME = 'winik.db'

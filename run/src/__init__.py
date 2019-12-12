@@ -6,24 +6,20 @@ import time
 
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_mail import Mail, Message
-from config import * 
 
 from werkzeug.utils import secure_filename
 
 from .controllers.private import subcontroller as private_sub
 from .models.model import User
-from .extensions.security import hasher
+from .extension.security import hasher
 
-
-UPLOAD_FOLDER = '/Users/ahn.ch/Projects/shoe_data/run/src/static'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg']) #might have to change for videos 
-
-controller = Flask(__name__)
-controller.config.from_object('config')
+controller = Flask(__name__, instance_relative_config=True)
+controller.config.from_pyfile('config.py')
 controller.secret_key = controller.config['SECRET_KEY']
-controller.register_blueprint(private_sub)
+controller.upload_folder = controller.config['UPLOAD_FOLDER']
+controller.allowed_extensions = controller.config['ALLOWED_EXTENSIONS']
 
-controller.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+controller.register_blueprint(private_sub)
 
 # set up Flask_Mail Instance
 mail = Mail(controller)

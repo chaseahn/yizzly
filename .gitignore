@@ -63,8 +63,8 @@ db.sqlite3-journal
 
 # Flask stuff:
 instance/
+extension/
 .webassets-cache
-config.py
 
 # Scrapy stuff:
 .scrapy
@@ -132,6 +132,5 @@ dmypy.json
 .DS_Store
 .vscode
 
-security.py
 
 *.db

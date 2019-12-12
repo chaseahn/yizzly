@@ -12,7 +12,9 @@ def run(dbname='winik.db'):
         pk INTEGER PRIMARY KEY AUTOINCREMENT,
         username VARCHAR,
         password VARCHAR,
-        CONSTRAINT unique_username UNIQUE(username)
+        email VARCHAR,
+        CONSTRAINT unique_username UNIQUE(username),
+        CONSTRAINT unique_email UNIQUE(email)
     );""")
 
     CON.commit()
