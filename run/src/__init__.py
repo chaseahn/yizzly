@@ -55,40 +55,62 @@ def register():
 
     elif request.method == 'POST':
 
-        un = request.form['username']
-        pw = request.form['password']
-        em = request.form['email']
+        #store user information into session object
+        #can be accessed by calling session['NEW_USER'][attr]
+        session['NEW_USER'] = {
+            'username': request.form['username'],
+            'password': request.form['password'],
+            'email': request.form['email'],
+            'code': randint(6)
+        }
 
-        with User(username=un,password=pw) as user:
-            print('checking user....')
-            if user.username_exist(un):
-                return render_template(
-                    'public/register.html', 
-                    message="Username exists." 
-                    )
-            elif pw == request.form['confirm_password']:
-                session['code'] = generate_code()
-                print(session['code'])
-                return redirect('/verify')
-            else:
-                return render_template(
-                    'public/register.html', 
-                    message="Passwords do not match." 
-                    )
+        #Check for User Existance
+        user = User()
+        if user.exists(session['NEW_USER']['username']):
+            return render_template(
+                'public/register.html', 
+                message="Username exists." 
+                )
+        else:
+            return redirect('/verify')
     else:
         pass
 
 @controller.route('/verify',methods=['GET','POST'])
 def verify():
+    #get new_user session object
+    new_user = session.get('NEW_USER')
+    print(new_user['code'])
     if request.method == 'GET':
-        print(session['code'])
+        #verifincation page
         return render_template('public/verify.html')
+
     elif request.method == 'POST':
-        if session['code'] == request.form['code']:
-            return redirect('/success')
-        
+        #match the session code with the user input
+        if request.form['code'] == new_user['code']:
+            
+            with User(
+                username=new_user['username'],
+                password=new_user['password']
+                ) as user:
+                
+                user.create_user(
+                    new_user['username'],
+                    hasher(new_user['password']),
+                    new_user['email']
+                )
+
+                return redirect('/success')
+        else:
+            return render_template(
+                'public/verify.html',
+                messsage="Incorrect code. Please Try again.")
     else:
         pass
+
+@controller.route('/success',methods=['GET'])
+def success():
+    return render_template('public/success.html')
 
 @controller.errorhandler(404)
 def not_found(error):
