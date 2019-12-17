@@ -4,13 +4,13 @@
 import os
 import requests
 
-from bs4 import BeautifulSoup
 from flask import Blueprint,render_template,request,redirect,url_for,session,flash
 from time  import gmtime,strftime
 
 from ..models.model import User
+from ..models.app import DMMLogger
 
-subcontroller = Blueprint('private',__name__,url_prefix='/private')
+subcontroller = Blueprint('private',__name__)
 
 
 
@@ -21,5 +21,19 @@ def index():
         return render_template('private/index.html')
     elif request.method == 'POST':
         pass
+    else:
+        pass
+
+@subcontroller.route('/log',methods=['GET','POST'])
+def log():
+    if request.method == 'GET':
+        return render_template('private/log.html')
+    elif request.method == 'POST':
+        clip_input = str(request.form['info'])
+        converted_input = DMMLogger(clip_input)
+        return render_template(
+            'private/log.html', 
+            message=converted_input
+            )
     else:
         pass

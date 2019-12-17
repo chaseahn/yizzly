@@ -40,7 +40,7 @@ def login():
                         #send to mainpage
                         session['username'] = user.username
                         session['pk'] = user.pk
-                        return redirect('private/index')
+                        return redirect('/index')
             except TypeError as e:
                 print(e)
 
