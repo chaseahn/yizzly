@@ -79,3 +79,7 @@ p{
     background: linear-gradient(45deg, rgb(231, 185, 76), #f7797d);
     box-shadow: 1px 3px 5px rgb(231, 185, 76, .3);
 }
+
+a:link {
+    text-decoration: none;
+}

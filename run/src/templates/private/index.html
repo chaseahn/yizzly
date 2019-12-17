@@ -1,3 +1,5 @@
+{% extends "structure.html" %}
+{% block viewport %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -52,13 +54,15 @@
                 <div class="overlay"></div>
             </div>
             <div class="cards">
+                <a href="/log">
                 <div class="image-box">
                     <img src="{{url_for('static', filename='img/transcribe.png')}}" />
-                    <h2>Transcribe Video</h2>  
+                    <h2>Log Footage</h2>  
                     <p>
-                        Upload an MP3 file and transcribe the audio into text
+                        Organize and store every clip for fast and easy access
                     </p>
                 </div>
+                </a>
                 <div class="overlay"></div>
             </div>
         </div>
@@ -68,3 +72,4 @@
         <script src="" async defer></script>
     </body>
 </html>
+{% endblock %}
