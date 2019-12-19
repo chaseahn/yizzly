@@ -1,16 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC&display=swap');
+
 body {
     margin: 0;
     padding: 0;
-    background-color: rgb(34, 34, 34);
+    background-color: white;
     min-height: 100vh;
     justify-content: center;
     align-items: center;
 }
 
+hr {
+    display: block; 
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid #ccc;
+    margin: 1em 0; 
+    padding: 0; 
+}
+
 h1 {
     color: #CC9BC4;
     font-family: 'PT Sans', sans-serif;
-    font-size: 3em;
+    font-size: 2em;
+    margin-block-start: 0.2em;
+    margin-block-end: 0.2em;
 }
 
 h2 {
@@ -18,16 +31,82 @@ h2 {
     font-family: 'PT Sans', sans-serif;
 }
 
+input[type=submit] {
+    width: 80px;
+    height: 25px;
+    background-color: rgb(223, 83, 59);
+    color: white;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
 .title {
-    text-align: center;
-    padding-top: 60px;
-    padding-bottom: 10px;
+    text-align: justify;
 }
 
-p{
-    color: white;
+.title .header-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.user-store .user-greeting {
+    width: 80px;
+    height: 25px;
+    text-align: center;
+    border: 0px dashed #f69c55;
+    background: white;
+    text-align: center;
+}
+
+.user-store .user-greeting span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    padding-top: 4px;
+}
+
+
+.user-store {
+    padding-top: 10px;
+    display: flex;
+    flex-flow: row-reverse wrap;
     font-family: 'Open Sans', sans-serif;
-    padding: 10px;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+p {
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0px;
+}
+
+.logo-text {
+    font-family: 'Bowlby One SC', cursive;
+    font-size: 1em;
+    color: black
+}
+
+.row-container {
+    width: 80%;
+    height: 80%;
+    background-color:white;
+    margin: auto;
+}
+
+.row-container .horizontal-col {
+    width: 100%;
+    height: 100px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-radius: .5em;
 }
 
 .container {

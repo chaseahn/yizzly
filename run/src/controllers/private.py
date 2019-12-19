@@ -8,7 +8,7 @@ from flask import Blueprint,render_template,request,redirect,url_for,session,fla
 from time  import gmtime,strftime
 
 from ..models.model import User
-from ..models.app import DMMLogger
+from ..models.app import *
 
 subcontroller = Blueprint('private',__name__)
 
@@ -18,7 +18,11 @@ subcontroller = Blueprint('private',__name__)
 def index():
     if request.method == 'GET':
         user = User({'username': session['username'], 'pk': session['pk']})
-        return render_template('private/index.html')
+        return render_template(
+            'private/index.html', 
+            title="Rooks Portal",
+            username=user.username
+            )
     elif request.method == 'POST':
         pass
     else:

@@ -11,26 +11,44 @@
         <title>Homepage</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
 
-        <div class="title">
-            <h1> 
-                What would you like to do today?
-            </h1>
-            <p> 
-                Speed up your production workflow 
-                by choosing one of the options below
-            </p>        
+        <div class="row-container">
+            <div class="title">
+                <div class="user-store">
+                    <input name="post_button" type="submit" value="Logout">
+                    </input>
+                    <div class="user-greeting">
+                        <span>Hello {{username}}!</span>
+                    </div>
+                </div>
+                <div class="header-container">
+                    <div class="logo-text">
+                        ROOKS PORTAL
+                    </div>
+                </div>
+                <h1> 
+                    What would you like to do today?
+                </h1>
+                <hr>
+                <p> 
+                    Speed up your production workflow 
+                    by choosing one of the options below
+                </p>        
+            </div>
+            <div class="horizontal-col">
+                <div class="row-info">
+
+                </div>
+            </div>
         </div>
 
-        <div class="container">
+
+        <!-- <div class="container">
             <div class="cards">
                 <div class="image-box">
                     <img src="{{url_for('static', filename='img/edl.png')}}" />
@@ -65,7 +83,7 @@
                 </a>
                 <div class="overlay"></div>
             </div>
-        </div>
+        </div> -->
 
 
         

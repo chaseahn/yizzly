@@ -5,28 +5,25 @@ import csv
 
 from edl import Parser
 
-def DMMLogger(s):
-
-    # isolate date,teams, type of clip, gameid, players involved, gametime
-    # Period, Away score, home score, Description, 
-    s = s.replace('\n',' ')
-    print(type(s))
-    print(s)
-    return s
 
 
 class EDL():
+    
+    # App One: DML Model will parse an EDL file
+    # Parser returns { events } and Converter returns a CSV
+    # Execute() runs it in one motion
 
-    def __init__(self, path=path, name=name):
+    def __init__(self, path='', name='', frame_rate=''):
         self.path = path
         self.name = name
+        self.frame_rate = frame_rate
 
     def parser(self):
         events = []
 
         # Accepted framerates
         # 60, 59.94, 50, 30, 29.97, 25, 24, 23.98
-        parser = Parser('59.94')
+        parser = Parser(self.frame_rate)
 
         with open(self.path) as f:
             edl = parser.parse(f)
@@ -48,7 +45,7 @@ class EDL():
         csv_columns = events[0].keys()
 
         try:
-            with open(CSV_NAME, 'w') as csvfile:
+            with open(self.name, 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
                 writer.writeheader()
                 for data in events:
@@ -56,8 +53,6 @@ class EDL():
         except IOError as e:
             print("I/O error: "+ str(e))    
 
-            
-    
     def execute(self):
         self.converter(self.parser())
 
