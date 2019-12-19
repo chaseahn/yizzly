@@ -36,7 +36,7 @@ text {
     color: black;
     font-family: 'Open Sans', sans-serif;
     padding: 0px;
-    font-size: 17px;
+    font-size: 16px;
 }
 
 input[type=submit] {
@@ -49,7 +49,32 @@ input[type=submit] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
+}
+
+label {
+    cursor: pointer;
+    vertical-align: middle;
+    /* Style as you please, it will become the visible UI component. */
+ }
+
+#upload-file {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+input[type=upload] {
+    width: 80%;
+    height: 25px;
+    background-color: rgb(0, 153, 33);
+    color: white;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
 
 .title {
     text-align: justify;
@@ -103,7 +128,7 @@ p {
 
 .subheader {
     font-family: 'Exo', sans-serif;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 1em;
     color: black
 }
@@ -123,7 +148,7 @@ p {
     height: 80%;
     background-color:white;
     margin: auto;
-    background-color: rgb(176, 236, 236);
+    /* background-color: rgb(176, 236, 236); */
 }
 
 /* App Directors CSS */
@@ -134,34 +159,52 @@ p {
     border-width: 1px;
     border-color: black;
     border-radius: .5em;
+    line-height: 30px;
 }
 
 .h-col .row-info {
     display: flex;
+    vertical-align: middle;
 }
+
 
 .h-col .row-info .image-box {
     position: relative;
-    /* background-color: tomato; */
+    background-color: tomato;
     width: 12%;
     text-align: center;
     display: block;
     overflow: hidden;
     min-height: 100%;
+    line-height: 90px;
 }
 
 
 .h-col .row-info .image-box img {
     max-width:90%;
     margin: 0 auto;
+    vertical-align: middle;
 }
 
 .h-col .row-info .row-description {
-    background-color: white;
+    background-color: yellow;
     width:68%;
     padding: 10px;
 }   
 
+.h-col .row-info .row-action {
+    background-color: gray;
+    width:20%;
+    text-align: center;
+    padding-top: 15px;
+}   
+
+.h-col .row-info .row-action .upload-border {
+    width: 80%;
+    height: 50px;
+    background-color: white;
+    margin: 0 auto;
+}
 
 a:link {
     text-decoration: none;
