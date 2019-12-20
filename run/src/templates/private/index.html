@@ -16,7 +16,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
-
+        <!-- TODO ADD HOVERS -->
         <div class="row-container">
             <div class="title">
                 <div class="user-store">
@@ -45,19 +45,88 @@
                             Edit Decision Log
                         </div>
                         <text>
-                            Upload your .edl file and export it into an excel sheet! <br>
+                            Upload your .edl file and export into an excel sheet! <br>
                             Click here for help on how to prepare your file.
                         </text>
                     </div>
                     <div class="row-action">
-                        <div class="upload-border">
-                            <label for="upload-file">Choose File</label>
-                            <input type="file" name="file" id="upload-file"/>
+                        <div class="button-container">
+                            <div class="upload-border">
+                                <label for="upload-file">
+                                    <div class="subtext">
+                                        Upload
+                                    </div>
+                                </label>
+                                <input type="file" name="file" id="upload-file"/>
+                            </div>
+                            <input type="upload" value="Convert"/>
                         </div>
-                        <input type="upload" value="Upload"/>
                     </div>
                 </div>
             </div>
+            <div class="h-col">
+                <div class="row-info">
+                    <div class="image-box">
+                        <img src="{{url_for('static', filename='img/transcribe.png')}}" />
+                    </div>
+                    <div class="row-description">
+                        <div class="subheader">
+                            Transcribe a Video/Audio Clip
+                        </div>
+                        <text>
+                            Not yet activated
+                        </text>
+                    </div>
+                    <div class="row-action">
+                        <div class="button-container">
+                            <div class="upload-border">
+                                <label for="upload-file">
+                                    <div class="subtext">
+                                        Upload
+                                    </div>
+                                </label>
+                                <input type="file" name="file" id="upload-file"/>
+                            </div>
+                            <input type="upload" value="Convert"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-col">
+                <div class="row-info">
+                    <div class="image-box">
+                        <img src="{{url_for('static', filename='img/cue.png')}}" />
+                    </div>
+                    <div class="row-description">
+                        <div class="subheader">
+                            Create a Cuesheet
+                        </div>
+                        <text>
+                            Just copy & paste your cues from FilmTrack, <br>
+                            I'll take care of the rest!
+                        </text>
+                    </div>
+                    <div class="row-action">
+                        <div class="button-container">
+                            <div class="upload-border">
+                                <label for="upload-file">
+                                    <div class="subtext">
+                                        Upload
+                                    </div>
+                                </label>
+                                <input type="file" name="file" id="upload-file"/>
+                            </div>
+                            <input type="upload" value="Convert"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-break">
+                <h1> 
+                    Player Tracker
+                </h1>
+            </div>
+            <hr> 
         </div>
 
 
