@@ -163,14 +163,15 @@ p {
 .h-col {
     width: 100%;
     height: auto;
-    /* border-style: solid;
-    border-width: 1px;
-    border-color: black;*/
-    border-radius: .5em; 
+    border-style: solid;
+    border-width: .5px;
+    border-color: rgb(223, 223, 223);
+    border-radius: .2em; 
     line-height: 30px;
     margin-top: 20px;
     min-height: 115px;
-    background-image: linear-gradient(90deg, rgb(240, 240, 240), rgb(230, 230, 230))
+    background-image: linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
+    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .3);
 }
 
 .h-col .row-info {

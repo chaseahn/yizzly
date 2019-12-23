@@ -2,6 +2,7 @@
 
 import os
 import csv
+import string
 
 from edl import Parser
 
@@ -58,6 +59,59 @@ class EDL():
 
 
 
-if __name__ == "__main__":
-    edl = EDL()
-    edl.execute()
+class DMMLogger():
+
+    def __init__(self, log_input=""):
+        if log_input:
+            self.log_input = ' '.join(log_input.split())
+        return None
+    
+    def clip_concatenation(self):
+        
+        # Sort Input from list to look for:
+        # Home Team / Away Team / Final Score / Date / Game ID
+        # Type of Play /  Players Tagged / Time of Play + H/A Score
+        # Play Rating / Description
+
+        input_list = self.log_input.split()
+        game_info = input_list[:input_list.index("ID:")+2]
+        clip_info = input_list[input_list.index("ID:")+2:]
+
+        clip_object = {}
+
+        clip_object['away_team'] = game_info[1]
+        clip_object['home_team'] = game_info[4]
+        clip_object['home_score'] = game_info[2]
+        clip_object['away_score'] = game_info[5]
+        clip_object['game_date'] = game_info[6] 
+        clip_object['clip_type'] = game_info[7:game_info.index("ID:")-1]
+        clip_object['game_id'] = game_info[game_info.index("ID:")+1]
+
+        # account for missing Run Score or Empty Players
+        for index in range(len(clip_info)-1):
+            
+            if clip_info[index] == "Players:":
+                if clip_info[index+1] == "Game":
+                    clip_object['players'] = None
+                clip_object['players'] = clip_info[index:clip_info.index("Time:")-1]
+            elif clip_info[index] == "Time:":
+                if clip_info[index+1] == "Run":
+                    clip_object['time'] = None
+                clip_object['time'] = clip_info[index+1]
+            elif clip_info[index] == "Period:":
+                clip_object['period'] = clip_info[index+1]
+            elif clip_info[index] == "Away":
+                clip_object['away_run_score'] = clip_info[index+1]
+            elif clip_info[index] == "Home":
+                clip_object['home_run_score'] = clip_info[index+1]
+            elif clip_info[index] == "Rating:":
+                clip_object['rating'] = clip_info[index+1]
+            elif clip_info[index] == "Description:":
+                clip_object['description'] = clip_info[index+1:len(clip_info)]            
+
+        return clip_object
+    
+
+
+
+        

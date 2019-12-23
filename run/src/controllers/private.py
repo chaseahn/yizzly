@@ -33,8 +33,9 @@ def log():
     if request.method == 'GET':
         return render_template('private/log.html')
     elif request.method == 'POST':
-        clip_input = str(request.form['info'])
-        converted_input = DMMLogger(clip_input)
+        log_input = request.form['info']
+        dmm = DMMLogger(log_input=log_input)
+        converted_input = dmm.clip_concatenation()
         return render_template(
             'private/log.html', 
             message=converted_input
