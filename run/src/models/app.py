@@ -83,17 +83,20 @@ class DMMLogger():
         clip_object['home_team'] = game_info[4]
         clip_object['home_score'] = game_info[2]
         clip_object['away_score'] = game_info[5]
-        clip_object['game_date'] = game_info[6] 
-        clip_object['clip_type'] = game_info[7:game_info.index("ID:")-1]
+        clip_object['game_date'] = game_info[6]
         clip_object['game_id'] = game_info[game_info.index("ID:")+1]
+        clip_object['clip_type'] = ' '.join(
+            game_info[7:game_info.index("ID:")-1]
+            )
 
         # account for missing Run Score or Empty Players
+        #TODO account for no description
         for index in range(len(clip_info)-1):
             
             if clip_info[index] == "Players:":
                 if clip_info[index+1] == "Game":
                     clip_object['players'] = None
-                clip_object['players'] = clip_info[index:clip_info.index("Time:")-1]
+                clip_object['players'] = ' '.join(clip_info[index+1:clip_info.index("Time:")-1])
             elif clip_info[index] == "Time:":
                 if clip_info[index+1] == "Run":
                     clip_object['time'] = None
@@ -107,9 +110,13 @@ class DMMLogger():
             elif clip_info[index] == "Rating:":
                 clip_object['rating'] = clip_info[index+1]
             elif clip_info[index] == "Description:":
-                clip_object['description'] = clip_info[index+1:len(clip_info)]            
+                clip_object['description'] = ' '.join(clip_info[index+1:len(clip_info)])            
 
-        return clip_object
+        log_str = f"Rating: {clip_object['rating']} | {clip_object['clip_type']}\
+                | Info: {clip_object['description']} [Q{clip_object['period']}\
+                    {clip_object['time']}] Players: {clip_object['players']}"
+
+        return log_str
     
 
 
