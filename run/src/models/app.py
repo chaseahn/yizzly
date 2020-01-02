@@ -78,7 +78,7 @@ class DMMLogger():
         clip_info = input_list[input_list.index("ID:")+2:]
 
         clip_object = {}
-
+        clip_object['description'] = None
         clip_object['away_team'] = game_info[1]
         clip_object['home_team'] = game_info[4]
         clip_object['home_score'] = game_info[2]
@@ -110,7 +110,7 @@ class DMMLogger():
             elif clip_info[index] == "Rating:":
                 clip_object['rating'] = clip_info[index+1]
             elif clip_info[index] == "Description:":
-                clip_object['description'] = ' '.join(clip_info[index+1:len(clip_info)])            
+                clip_object['description'] = ' '.join(clip_info[index+1:len(clip_info)])       
 
         log_str = f"Rating: {clip_object['rating']} | {clip_object['clip_type']}\
                 | Info: {clip_object['description']} [Q{clip_object['period']}\
