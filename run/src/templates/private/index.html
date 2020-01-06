@@ -21,7 +21,7 @@
         <div class="row-container">
             <div class="title">
                 <div class="user-store">
-                    <input name="post_button" type="submit" value="Logout">
+                    <input name="post_button" type="button" value="Logout">
                     <div class="user-greeting">
                         <span>Hello {{username}}!</span>
                     </div>
@@ -42,7 +42,7 @@
             <div class="h-col">
                 <div class="row-info">
                     <div class="image-box">
-                        <img src="{{url_for('static', filename='img/cue.png')}}" />
+                        <img src="{{url_for('static', filename='img/logs.png')}}" />
                     </div>
                     <div class="row-description">
                         <div class="subheader">
@@ -68,7 +68,7 @@
             <div class="h-col">
                 <div class="row-info">
                     <div class="image-box">
-                        <img src="{{url_for('static', filename='img/cue.png')}}" />
+                        <img src="{{url_for('static', filename='img/headphones.png')}}" />
                     </div>
                     <div class="row-description">
                         <div class="subheader">
@@ -82,14 +82,9 @@
                     <div class="row-action">
                         <div class="button-container">
                             <div class="upload-border">
-                                <label for="upload-file">
-                                    <div class="subtext">
-                                        Upload
-                                    </div>
-                                </label>
-                                <input type="file" name="file" id="upload-file"/>
+                                <input type="file" name="file"/>
                             </div>
-                            <input type="upload" value="Convert"/>
+                            <input type="submit" value="Convert"/>
                         </div>
                     </div>
                 </div>
@@ -97,7 +92,7 @@
             <div class="h-col">
                 <div class="row-info">
                     <div class="image-box">
-                        <img src="{{url_for('static', filename='img/edl.png')}}" />
+                        <img src="{{url_for('static', filename='img/document.png')}}" />
                     </div>
                     <div class="row-description">
                         <div class="subheader">
@@ -118,7 +113,7 @@
                                 </label>
                                 <input type="file" name="file" id="upload-file"/>
                             </div>
-                            <input type="upload" value="Convert"/>
+                            <input type="submit" value="Convert"/>
                         </div>
                     </div>
                 </div>
@@ -126,7 +121,7 @@
             <div class="h-col">
                 <div class="row-info">
                     <div class="image-box">
-                        <img src="{{url_for('static', filename='img/transcribe.png')}}" />
+                        <img src="{{url_for('static', filename='img/language.png')}}" />
                     </div>
                     <div class="row-description">
                         <div class="subheader">
@@ -146,7 +141,7 @@
                                 </label>
                                 <input type="file" name="file" id="upload-file"/>
                             </div>
-                            <input type="upload" value="Convert"/>
+                            <input type="submit" value="Convert"/>
                         </div>
                     </div>
                 </div>
