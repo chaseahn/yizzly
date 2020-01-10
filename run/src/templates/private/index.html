@@ -8,7 +8,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Homepage</title>
+        <title>{(title}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
@@ -17,7 +17,7 @@
     </head>
     <body>
         <!-- TODO ADD HOVERS -->
-
+        <form action="/index" method="post" enctype="multipart/form-data">
         <div class="row-container">
             <div class="title">
                 <div class="user-store">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="header-container">
                     <div class="logo-text">
-                        <span>ROOKS PORTAL</span> 
+                        <span>PORTAL</span> 
                     </div>
                 </div>
                 <h1> 
@@ -81,9 +81,9 @@
                     </div>
                     <div class="row-action">
                         <div class="button-container">
-                            <div class="upload-border">
+                            <!-- <div class="upload-border">
                                 <input type="file" name="file"/>
-                            </div>
+                            </div> -->
                             <input type="submit" value="Convert"/>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                                 </label>
                                 <input type="file" name="file" id="upload-file"/>
                             </div>
-                            <input type="submit" value="Convert"/>
+                            <input name="post_button" type="submit" value="Convert EDL"/>
                         </div>
                     </div>
                 </div>
@@ -158,6 +158,7 @@
         </div>
 
 
+        </form>
         <!-- <div class="container">
             <div class="cards">
                 <div class="image-box">

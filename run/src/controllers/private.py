@@ -24,7 +24,12 @@ def index():
             username=user.username
             )
     elif request.method == 'POST':
-        pass
+        if request.form['post_button'] == 'Convert':
+            print('WORKING!')
+            
+            pass
+        else:
+            pass
     else:
         pass
 
