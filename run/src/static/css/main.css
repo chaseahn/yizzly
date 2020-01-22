@@ -65,7 +65,7 @@ input[type=button] {
 
 label {
     cursor: pointer;
-    line-height: 36px;
+    line-height: 42px;
     /* Style as you please, it will become the visible UI component. */
  }
 
@@ -78,19 +78,31 @@ label {
 input[type=submit] {
     width: 80%;
     height: 35px;
-    background-color: rgb(255, 196, 0);
-    color: white;
     padding: 0;
     margin: 0;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
     text-align: center;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: rgba(231, 184, 255, 0.6);
+    color: rgb(182, 134, 206);
+    border-radius: 10px;
+    overflow: hidden;
     box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
-    text-shadow: 1px 1px 2px rgb(37, 37, 16, .2);
     font-family: 'Exo', sans-serif;
     font-weight: 700;
+    background-color: rgb(201, 76, 76, 0);
+    transition: ease-in .4s;
+    display: inline-block;
     letter-spacing: 3px;
+}
+
+input[type=submit]:hover {
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.397), rgba(147, 235, 187, 0.4));
+    border-color: rgba(172, 255, 172);
+    box-shadow: 0px 3px 10px -5px rgba(151, 255, 151, 0.678);
+    transition: ease-in;
+    color: rgb(172, 255, 172);
 }
 
 .title {
@@ -175,7 +187,7 @@ p {
     border-radius: 1em; 
     line-height: 25px;
     margin-top: 20px;
-    min-height: 100px;
+    min-height: 103px;
     background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
     box-shadow: 0px 10px 20px -10px rgba(20, 65, 150, .5);
 }
@@ -219,7 +231,7 @@ p {
 }  
 
 .h-col .row-info .row-action .button-container {
-    text-align: center;
+    text-align: center ; 
 }
 
 .h-col .row-info .row-action .button-container .go-button {
@@ -267,7 +279,7 @@ p {
     height: 36px;
     background-color: None;
     margin: 0  auto;
-    margin-top: 15px;
+    margin-top: 3px;
     margin-bottom: 10px;
     border-style: solid;
     border-width: 1px;
@@ -282,4 +294,9 @@ a:link {
 
 .section-break {
     margin-top: 50px;
+}
+
+
+.upload-content {
+    justify-items: center;
 }

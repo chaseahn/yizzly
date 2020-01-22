@@ -5,7 +5,7 @@ import csv
 import string
 
 from edl import Parser
-
+from flask import current_app
 
 
 class EDL():
@@ -18,6 +18,7 @@ class EDL():
         self.path = path
         self.name = name
         self.frame_rate = frame_rate
+        self.upload_folder = current_app.config['UPLOAD_FOLDER']
 
     def parser(self):
         events = []
@@ -44,9 +45,11 @@ class EDL():
     def converter(self, events):
 
         csv_columns = events[0].keys()
+        file_name = self.name.split('.')[0]+'.csv'
+        print(self.upload_folder+file_name)
 
         try:
-            with open(self.name, 'w') as csvfile:
+            with open(self.upload_folder+'/'+file_name, 'w') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
                 writer.writeheader()
                 for data in events:
@@ -55,7 +58,9 @@ class EDL():
             print("I/O error: "+ str(e))    
 
     def execute(self):
+        print("Converting User File")
         self.converter(self.parser())
+        print("File Converted")
 
 
 
@@ -74,6 +79,7 @@ class DMMLogger():
         # Play Rating / Description
 
         input_list = self.log_input.split()
+
         game_info = input_list[:input_list.index("ID:")+2]
         clip_info = input_list[input_list.index("ID:")+2:]
 

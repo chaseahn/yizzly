@@ -4,15 +4,20 @@
 import os
 import requests
 
-from flask import Blueprint,render_template,request,redirect,url_for,session,flash
+from flask import Blueprint,render_template,request,redirect,url_for,session,flash, current_app, send_from_directory
 from time  import gmtime,strftime
+from werkzeug.utils import secure_filename
 
 from ..models.model import User
 from ..models.app import *
 
 subcontroller = Blueprint('private',__name__)
 
+ALLOWED_EXTENSIONS = set(['edl'])
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @subcontroller.route('/index',methods=['GET','POST'])
 def index():
@@ -24,11 +29,53 @@ def index():
             username=user.username
             )
     elif request.method == 'POST':
-        if request.form['post_button'] == 'Convert':
-            print('WORKING!')
-            
-            pass
+        if request.form['post_button'] == 'CONVERT':
+
+            # check if the post request has the file part
+            if 'file' not in request.files:
+                flash('No file part')
+                print('No file part')
+                return redirect(url_for('private.index'))
+
+            file = request.files['file']
+
+            print("Current File: "+str(file))
+            print("Filename: "+str(file.filename))
+
+            # if user does not select file, browser also
+            # submit an empty part without filename
+            if file.filename == '':
+                flash('No selected file')
+                return redirect(url_for('private.index'))
+
+            if file and allowed_file(file.filename):
+                #secure_filename check
+                filename = secure_filename(file.filename)
+                uploads = current_app.config['UPLOAD_FOLDER']
+                file_path = os.path.join(uploads, filename)
+                #save file to server
+                print("Saving to " + str(file_path))
+                file.save(file_path)
+                print("Saved")
+                #read file from server
+                with open(file_path) as user_file:
+                    #convert EDL 
+                    edl = EDL(path=file_path,name=filename,frame_rate='29.97')
+                    edl.execute()
+                directory = os.path.join(current_app.root_path, uploads)
+                print(directory)
+                return send_from_directory(
+                    directory=uploads, 
+                    filename=filename,
+                    as_attachment=True)
+
+
+
+
+
+                return redirect(url_for('private.index'))
         else:
+            print('else hit')
             pass
     else:
         pass
