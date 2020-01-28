@@ -26,7 +26,8 @@ def index():
         return render_template(
             'private/index.html', 
             title="Rooks Portal",
-            username=user.username
+            username=user.username,
+            message="What would you like to do today?"
             )
     elif request.method == 'POST':
         if request.form['post_button'] == 'CONVERT':
@@ -34,7 +35,6 @@ def index():
             # check if the post request has the file part
             if 'file' not in request.files:
                 flash('No file part')
-                print('No file part')
                 return redirect(url_for('private.index'))
 
             file = request.files['file']
@@ -62,18 +62,19 @@ def index():
                     #convert EDL 
                     edl = EDL(path=file_path,name=filename,frame_rate='29.97')
                     edl.execute()
+                os.remove(file_path)
                 directory = os.path.join(current_app.root_path, uploads)
                 print(directory)
+                csv_file = filename.split('.')[0]+'.csv'
                 return send_from_directory(
                     directory=uploads, 
-                    filename=filename,
+                    filename=csv_file,
                     as_attachment=True)
+                # os.remove(directory+csv_file)
 
-
-
-
-
-                return redirect(url_for('private.index'))
+        elif request.form['post_button'] == 'TRANSCRIBE':
+            flash('Not active')
+            return redirect(url_for('private.index'))
         else:
             print('else hit')
             pass
@@ -83,14 +84,32 @@ def index():
 @subcontroller.route('/log',methods=['GET','POST'])
 def log():
     if request.method == 'GET':
+        user = User({'username': session['username'], 'pk': session['pk']})
         return render_template('private/log.html')
     elif request.method == 'POST':
-        log_input = request.form['info']
-        dmm = DMMLogger(log_input=log_input)
+        user_input = request.form['info']
+        dmm = DMMLogger(log_input=user_input)
         converted_input = dmm.clip_concatenation()
         return render_template(
             'private/log.html', 
             message=converted_input
             )
+    else:
+        pass
+
+@subcontroller.route('/cuesheet',methods=['GET','POST'])
+def cuesheet():
+    user = User({'username': session['username'], 'pk': session['pk']})
+    if request.method == 'GET':
+        return render_template('private/cuesheet.html', 
+            title="Cuesheet",
+            username=user.username,
+            message="Let's make a cuesheet!")
+    elif request.method == 'POST':
+        user_input = request.form['info']
+        # dmm = DMMLogger(log_input=log_input)
+        # converted_input = dmm.clip_concatenation()
+        flash('suphomes')
+        return redirect(url_for('private.cuesheet'))
     else:
         pass

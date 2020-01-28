@@ -61,12 +61,13 @@ class EDL():
         print("Converting User File")
         self.converter(self.parser())
         print("File Converted")
+        #TODO delete the original file
 
 
 
 class DMMLogger():
 
-    def __init__(self, log_input=""):
+    def __init__(self, log_input=''):
         if log_input:
             self.log_input = ' '.join(log_input.split())
         return None
@@ -127,4 +128,79 @@ class DMMLogger():
 
 
 
+# THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+# PATH = os.path.join(THIS_FOLDER, 'sheet.txt')
+# CSV_NAME = os.path.join(THIS_FOLDER, 'csv/Ep10.csv')
+
+# # load file from sheet
+# def load():
+#     with open(PATH) as file:
+#         file_contents = file.read()
+#         return file_contents.split('\n')
+
+# #identify individual tracks from split list
+# def parse():
+
+#     cue_list = load()
+#     track_list, events = [], []
+
+#     for index in range(len(cue_list)):
+
+#         if cue_list[index].isdigit():
+
+#             try:
+#                 current_index = cue_list.index(cue_list[index])
+
+#                 next_digit = str(int(cue_list[index])+1)
+#                 next_digit_index = cue_list.index(next_digit)
+
+#                 current_track = cue_list[current_index:next_digit_index]
+
+#                 track_list.append(current_track)
+
+#             except ValueError:
+
+#                 current_index = cue_list.index(cue_list[index])
+#                 last_track = cue_list[current_index:len(cue_list)-1]
+#                 track_list.append(last_track)
+
+#     for track in track_list:
         
+#         composer_index = track.index('Composer:')
+#         publisher_index = track.index('Publisher:')
+
+#         title = track[1]
+        
+#         if track[3] == 'Composer:':
+#             timing = 0
+#         else:
+#             timing = track[composer_index+1]
+        
+#         composers = track[composer_index+1:publisher_index]
+#         publishers = track[publisher_index+1:]
+
+#         track_info = {
+#             'title': title,
+#             'timing': timing, 
+#             'composers': ' '.join(composers),
+#             'publishers': ' '.join(publishers)
+#         }
+        
+#         events.append(track_info)
+
+#     print(events)
+#     return events
+
+# def export():
+
+#     events = parse()
+#     csv_columns = events[0].keys()
+
+#     try:
+#         with open(CSV_NAME, 'w') as csvfile:
+#             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+#             writer.writeheader()
+#             for data in events:
+#                 writer.writerow(data)
+#     except IOError:
+#         print("I/O error") 

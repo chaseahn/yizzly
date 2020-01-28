@@ -9,7 +9,7 @@
         <title>{{title}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/structure.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -24,6 +24,49 @@
             <a href="#">Footage</a>
             <a href="#">Tasks</a>
         </div> -->
+        {% with error = get_flashed_messages() %}
+        {% if error %}
+            {% for e in error %}
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                    <div class="alert-text">
+                        {{e}}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="row-container">
+        <div class="title">
+            <div class="user-store">
+                <div class="button">
+                    <div class="button-text">
+                        Logout
+                    </div>
+                </div>
+                <div class="button">
+                    <div class="button-text">
+                        Account
+                    </div>
+                </div>
+                <div class="user-greeting">
+                    <span>Hello {{username}}!</span>
+                </div>
+            </div>
+            <div class="header-container">
+                <div class="logo-text">
+                    <a href="/index">
+                        <span>ROOKS PORTAL</span> 
+                    </a>
+                </div>
+            </div>
+            <h1> 
+                {{message}}
+            </h1>
+            <hr>     
+        </div>
+        </div>
         
         <script src="" async defer></script>
     </body>
