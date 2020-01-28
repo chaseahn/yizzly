@@ -126,81 +126,82 @@ class DMMLogger():
         return log_str
     
 
+class CueSheet():
+
+    def __init__(self, user_input='', name=''):
+        if user_input:
+            clean_user_input= user_input.replace('\r','')
+        self.name = name
+        self.user_input = clean_user_input.split('\n')
+        self.upload_folder = current_app.config['UPLOAD_FOLDER']
 
 
-# THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-# PATH = os.path.join(THIS_FOLDER, 'sheet.txt')
-# CSV_NAME = os.path.join(THIS_FOLDER, 'csv/Ep10.csv')
+    def parse_input(self):
 
-# # load file from sheet
-# def load():
-#     with open(PATH) as file:
-#         file_contents = file.read()
-#         return file_contents.split('\n')
+        cue_list = self.user_input
+        print('jbawjbjfabhekbjhfeabhjkafewbkjafw')
+        print(cue_list)
+        track_list, events = [], []
 
-# #identify individual tracks from split list
-# def parse():
+        for index in range(len(cue_list)):
 
-#     cue_list = load()
-#     track_list, events = [], []
+            if cue_list[index].isdigit():
 
-#     for index in range(len(cue_list)):
+                try:
+                    current_index = cue_list.index(cue_list[index])
 
-#         if cue_list[index].isdigit():
+                    next_digit = str(int(cue_list[index])+1)
+                    next_digit_index = cue_list.index(next_digit)
 
-#             try:
-#                 current_index = cue_list.index(cue_list[index])
+                    current_track = cue_list[current_index:next_digit_index]
 
-#                 next_digit = str(int(cue_list[index])+1)
-#                 next_digit_index = cue_list.index(next_digit)
+                    track_list.append(current_track)
 
-#                 current_track = cue_list[current_index:next_digit_index]
+                except ValueError:
 
-#                 track_list.append(current_track)
+                    current_index = cue_list.index(cue_list[index])
+                    last_track = cue_list[current_index:len(cue_list)-1]
+                    track_list.append(last_track)
 
-#             except ValueError:
+        for track in track_list:
+            
+            composer_index = track.index('Composer:')
+            publisher_index = track.index('Publisher:')
 
-#                 current_index = cue_list.index(cue_list[index])
-#                 last_track = cue_list[current_index:len(cue_list)-1]
-#                 track_list.append(last_track)
+            title = track[1]
+            
+            if track[3] == 'Composer:':
+                timing = 0
+            else:
+                timing = track[composer_index+1]
+            
+            composers = track[composer_index+1:publisher_index]
+            publishers = track[publisher_index+1:]
 
-#     for track in track_list:
-        
-#         composer_index = track.index('Composer:')
-#         publisher_index = track.index('Publisher:')
+            track_info = {
+                'title': title,
+                'timing': timing, 
+                'composers': ' '.join(composers),
+                'publishers': ' '.join(publishers)
+            }
+            
+            events.append(track_info)
 
-#         title = track[1]
-        
-#         if track[3] == 'Composer:':
-#             timing = 0
-#         else:
-#             timing = track[composer_index+1]
-        
-#         composers = track[composer_index+1:publisher_index]
-#         publishers = track[publisher_index+1:]
+        print(events)
+        return events
 
-#         track_info = {
-#             'title': title,
-#             'timing': timing, 
-#             'composers': ' '.join(composers),
-#             'publishers': ' '.join(publishers)
-#         }
-        
-#         events.append(track_info)
+    def convert_cues_to_csv(self):
 
-#     print(events)
-#     return events
+        events = self.parse_input()
+        csv_columns = events[0].keys()
+        file_name = self.name+'.csv'
 
-# def export():
+        try:
+            with open(self.upload_folder+'/'+file_name, 'w') as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+                writer.writeheader()
+                for data in events:
+                    writer.writerow(data)
+        except IOError:
+            print("I/O error") 
 
-#     events = parse()
-#     csv_columns = events[0].keys()
-
-#     try:
-#         with open(CSV_NAME, 'w') as csvfile:
-#             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
-#             writer.writeheader()
-#             for data in events:
-#                 writer.writerow(data)
-#     except IOError:
-#         print("I/O error") 

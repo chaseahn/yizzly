@@ -106,10 +106,17 @@ def cuesheet():
             username=user.username,
             message="Let's make a cuesheet!")
     elif request.method == 'POST':
+        filename = 'name'
         user_input = request.form['info']
-        # dmm = DMMLogger(log_input=log_input)
-        # converted_input = dmm.clip_concatenation()
-        flash('suphomes')
-        return redirect(url_for('private.cuesheet'))
+        print(user_input)
+        uploads = current_app.config['UPLOAD_FOLDER']
+        cue = CueSheet(user_input=user_input, name=filename)
+        cue.convert_cues_to_csv()
+        directory = os.path.join(current_app.root_path, uploads)
+        csv_file = filename+'.csv'
+        return send_from_directory(
+            directory=uploads, 
+            filename=csv_file,
+            as_attachment=True)
     else:
         pass
