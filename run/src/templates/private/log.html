@@ -1,3 +1,5 @@
+{% extends "structure.html" %}
+{% block viewport %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -6,10 +8,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Footage Log</title>
+        <title>{(title}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/log.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
@@ -17,20 +19,14 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <form action="/log" method="post" enctype="multipart/form-data">
+        <form action="/cuesheet" method="post" enctype="multipart/form-data">
         <div class="container">
-            <h1>Log</h1>
             <div>
-                <textarea type="text" placeholder="Copy & paste the exact clip information from the DMM to here." name="info"></textarea>
+                <textarea type="text" placeholder="Copy & paste the clip information from the DMM to here." name="info"></textarea>
             </div>
-            <div>
-                <input name="post_button" type="submit" value="Convert">
-            </div>
-            <div>
-                <font color="red">{{message}}</font>
-            </div>
-            <div>
-                <a href="/index"> Index </a>
+            <input name="post_button" type="submit" value="CONVERT"/>
+            <div class="row">
+                
             </div>
         </div>
         </form>
@@ -38,3 +34,4 @@
         <script src="" async defer></script>
     </body>
 </html>
+{% endblock %}

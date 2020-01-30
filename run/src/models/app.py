@@ -130,7 +130,7 @@ class CueSheet():
 
     def __init__(self, user_input='', name=''):
         if user_input:
-            clean_user_input= user_input.replace('\r','')
+            clean_user_input = user_input.replace('\r','')
         self.name = name
         self.user_input = clean_user_input.split('\n')
         self.upload_folder = current_app.config['UPLOAD_FOLDER']
@@ -139,8 +139,6 @@ class CueSheet():
     def parse_input(self):
 
         cue_list = self.user_input
-        print('jbawjbjfabhekbjhfeabhjkafewbkjafw')
-        print(cue_list)
         track_list, events = [], []
 
         for index in range(len(cue_list)):
@@ -149,12 +147,9 @@ class CueSheet():
 
                 try:
                     current_index = cue_list.index(cue_list[index])
-
                     next_digit = str(int(cue_list[index])+1)
                     next_digit_index = cue_list.index(next_digit)
-
                     current_track = cue_list[current_index:next_digit_index]
-
                     track_list.append(current_track)
 
                 except ValueError:

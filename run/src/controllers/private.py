@@ -85,13 +85,17 @@ def index():
 def log():
     if request.method == 'GET':
         user = User({'username': session['username'], 'pk': session['pk']})
-        return render_template('private/log.html')
+        return render_template('private/log.html',
+            title="Footage Log",
+            username=user.username,
+            message="Let's log some clips!"
+            )
     elif request.method == 'POST':
         user_input = request.form['info']
         dmm = DMMLogger(log_input=user_input)
         converted_input = dmm.clip_concatenation()
         return render_template(
-            'private/log.html', 
+            'private/log_commit.html', 
             message=converted_input
             )
     else:

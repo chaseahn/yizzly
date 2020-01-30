@@ -4,7 +4,7 @@
 import os
 import time
 
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, flash
 from flask_mail import Mail, Message
 
 from werkzeug.utils import secure_filename
@@ -102,9 +102,9 @@ def verify():
 
                 return redirect('/success')
         else:
-            return render_template(
-                'public/verify.html',
-                messsage="Incorrect code. Please Try again.")
+            flash("Incorrect code. Please Try again.")
+            return render_template('public/verify.html')
+
     else:
         pass
 
