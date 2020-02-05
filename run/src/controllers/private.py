@@ -93,11 +93,40 @@ def log():
     elif request.method == 'POST':
         user_input = request.form['info']
         dmm = DMMLogger(log_input=user_input)
-        converted_input = dmm.clip_concatenation()
-        return render_template(
-            'private/log_commit.html', 
-            message=converted_input
+        clip_object = dmm.create_clip_object()
+        #bring over clip info
+        session['clip'] = clip_object
+        # log_str = f"Rating: {clip_object['rating']} | {clip_object['clip_type']}\
+        #         | Info: {clip_object['description']} [Q{clip_object['period']}\
+        #             {clip_object['time']}] Players: {clip_object['players']}"
+        return redirect(url_for('private.log_commit'))
+    else:
+        pass
+
+@subcontroller.route('/log-commit',methods=['GET','POST'])
+def log_commit():
+    if request.method == 'GET':
+        clip = session['clip']
+        print(clip)
+        user = User({'username': session['username'], 'pk': session['pk']})
+        return render_template('private/log_commit.html',
+            title="Footage Log: Commit",
+            username=user.username,
+            clip=clip,
+            message="Save this clip for later! :)"
             )
+    elif request.method == 'POST':
+        #execute save to db
+        return redirect(url_for('private.clip_success '))
+    else:
+        pass
+
+@subcontroller.route('/clip-success',methods=['GET','POST'])
+def clip_success():
+    if request.method == 'GET':
+        return render_template('private/clip_success.html')
+    elif request.method == 'POST':
+        pass
     else:
         pass
 

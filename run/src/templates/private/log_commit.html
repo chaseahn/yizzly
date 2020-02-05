@@ -1,0 +1,61 @@
+{% extends "structure.html" %}
+{% block viewport %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{(title}}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/log.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <form action="/log-commit" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <div class="clip_container">
+                <div class="column">
+                   <div class="inline_input">
+                        Game ID: <input type="text" name="game_id" value="{{clip.game_id}}"><br>
+                        Home Team: <input type="text" name="home_team" value="{{clip.home_team}}"><br>
+                        Away Team: <input type="text" name="away_team" value="{{clip.away_team}}"><br>
+                   </div>
+                </div>
+                <div class="column">
+                    <div class="inline_input">
+                            Clip Rating: <input type="text" name="game_id" value="{{clip.rating}}"><br>
+                            Play Type: <input type="text" name="home_team" value="{{clip.clip_type}}"><br>
+                            Players: <input type="text" name="away_team" value="{{clip.players}}"><br>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="inline_input">
+                            Livecall Rating: <input type="text" name="livecall_rating" value=""><br>
+                            Description: <input type="text" name="home_team" value="{{clip.description}}"><br>
+                            Copy For Premerie <input type="text" name="away_team"><br>
+                    </div>
+                </div>
+ <!-- Game ID: <input type="text" name="fname"><br>
+                        Home Team: <input type="text" name="lname"><br>
+                        Away Team: <input type="text" name="email"> -->
+            </div>
+            <input name="post_button" type="submit" value="COMMIT"/>
+            <div class="row">
+                
+            </div>
+        </div>
+
+        </form>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
+{% endblock %}

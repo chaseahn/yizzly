@@ -19,6 +19,34 @@ textarea, select {
     box-sizing: border-box;
 }
 
+.clip_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
+    box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.5);
+}
+
+.column {
+    width: 33%;
+    height: 100%;
+    /* background: lightgray;
+    border-style: solid;
+    border-width: 1.5px; */
+}
+
+.inline_input {
+    display: block;
+    color: rgb(32, 32, 70);
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+}
+
 input[type=submit] {
     width: 100%;
     height: 50px;
@@ -48,3 +76,14 @@ input[type=submit]:hover {
     color: rgb(82, 188, 96);
     border-color: #C9FFD0;
 }
+
+input[type=text], select {
+    width: 90%;
+    padding: 6px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }

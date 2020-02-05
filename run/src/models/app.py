@@ -72,7 +72,7 @@ class DMMLogger():
             self.log_input = ' '.join(log_input.split())
         return None
     
-    def clip_concatenation(self):
+    def create_clip_object(self):
         
         # Sort Input from list to look for:
         # Home Team / Away Team / Final Score / Date / Game ID
@@ -119,11 +119,7 @@ class DMMLogger():
             elif clip_info[index] == "Description:":
                 clip_object['description'] = ' '.join(clip_info[index+1:len(clip_info)])       
 
-        log_str = f"Rating: {clip_object['rating']} | {clip_object['clip_type']}\
-                | Info: {clip_object['description']} [Q{clip_object['period']}\
-                    {clip_object['time']}] Players: {clip_object['players']}"
-
-        return log_str
+        return clip_object
     
 
 class CueSheet():
