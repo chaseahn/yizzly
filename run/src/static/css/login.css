@@ -13,14 +13,14 @@ body {
 .login-container {
     width: 400px;
     height: 340px;
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgba(207, 147, 235, 0.4));
     box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.5);
     margin: 150px auto 0;
     text-align: center;
 }
 
 h1 {
-    color: rgb(135, 65, 165);
+    color: #976EFF;
     font-family: 'PT Sans', sans-serif;
     font-size: 1.5em;
     padding-top: 25px;
