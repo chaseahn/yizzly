@@ -95,7 +95,7 @@ class DMMLogger():
         clip_object['clip_type'] = ' '.join(
             game_info[7:game_info.index("ID:")-1]
             )
-
+        print(clip_info)
         # account for missing Run Score or Empty Players
         #TODO account for no description
         for index in range(len(clip_info)-1):
@@ -103,11 +103,15 @@ class DMMLogger():
             if clip_info[index] == "Players:":
                 if clip_info[index+1] == "Game":
                     clip_object['players'] = None
-                clip_object['players'] = ' '.join(clip_info[index+1:clip_info.index("Time:")-1])
+                else:
+                    clip_object['players'] = ' '.join(clip_info[index+1:clip_info.index("Time:")-1])
             elif clip_info[index] == "Time:":
                 if clip_info[index+1] == "Run":
-                    clip_object['time'] = None
-                clip_object['time'] = clip_info[index+1]
+                    clip_object['time'] = "N/A"
+                elif clip_info[index+1] == "Period:":
+                    clip_object['time'] = "N/A"
+                else:
+                    clip_object['time'] = clip_info[index+1]
             elif clip_info[index] == "Period:":
                 clip_object['period'] = clip_info[index+1]
             elif clip_info[index] == "Away":
@@ -118,7 +122,7 @@ class DMMLogger():
                 clip_object['rating'] = clip_info[index+1]
             elif clip_info[index] == "Description:":
                 clip_object['description'] = ' '.join(clip_info[index+1:len(clip_info)])       
-
+        print(clip_object)
         return clip_object
     
 

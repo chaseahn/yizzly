@@ -3,6 +3,7 @@
 
 import os
 import requests
+import pyperclip
 
 from flask import Blueprint,render_template,request,redirect,url_for,session,flash, current_app, send_from_directory
 from time  import gmtime,strftime
@@ -118,7 +119,7 @@ def log_commit():
             )
     elif request.method == 'POST':
         if request.form['post_button'] == 'COPY INFO':
-            print('hi')
+            
             final_clip = {
                 'game_id': request.form.get('game_id'),
                 'home_team': request.form.get('home_team'),
@@ -133,7 +134,10 @@ def log_commit():
                 'time': request.form.get('time')
             }
 
-            print(final_clip)
+            log_str = f"Rating: {final_clip['rating']} [Play Type] {final_clip['type']} | {final_clip['includes']} [Info] {final_clip['description']} [Players] {final_clip['players']} [Q{final_clip['quarter']} {final_clip['time']}]"
+
+            pyperclip.copy(log_str)
+
             return ('', 204)
         else:
             #save clip

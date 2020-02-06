@@ -34,20 +34,22 @@
                     <div class="inline_input">
                         Clip Rating: <input type="text" name="rating" value="{{clip.rating}}"><br>
                         Clip Type: <select name="type">
-                                    <option value="layup">Layup</option>
-                                    <option value="jumper">Jumper</option>
-                                    <option value="assist">Assist</option>
-                                    <option value="three">Three Pointer</option>
-                                    <option value="steal">Steal</option>
-                                    <option value="block">Block</option>
-                                    <option value="player-story">Player Story</option>
-                                    <option value="other">Other</option>
+                                    <option value="Layup" {% if 'Layup' in clip.clip_type %} selected="selected"{% endif %}>Layup</option>
+                                    <option value="Dunk" {% if 'Dunk' in clip.clip_type %} selected="selected"{% endif %}>Dunk</option>
+                                    <option value="Jumper" {% if 'Jump' in clip.clip_type %} selected="selected"{% endif %}>Jump Shot</option>
+                                    <option value="Three" {% if 'three' in clip.description %} selected="selected"{% endif %}>Three Pointer</option>
+                                    <option value="Rebound">Rebound</option>
+                                    <option value="Assist">Assist</option>
+                                    <option value="Steal">Steal</option>
+                                    <option value="Block">Block</option>
+                                    <option value="Player Story" {% if 'Player' in clip.clip_type %} selected="selected"{% endif %}>Player Story</option>
+                                    <option value="Other">Other</option>
                                 </select><br>
                         Includes: <select name="includes">
-                                <option value="none">---</option>
-                                <option value="livecall">Livecall</option>
-                                <option value="dribble">Dribble</option>
-                                <option value="emotion">Emotion</option>
+                                <option value="None">---</option>
+                                <option value="Livecall" {% if 'Livecall' in clip.clip_type %} selected="selected"{% endif %}>Livecall</option>
+                                <option value="Dribble" {% if 'Dribble' in clip.clip_type %} selected="selected"{% endif %}>Dribble</option>
+                                <option value="Emotion" {% if 'Emotion' in clip.clip_type %} selected="selected"{% endif %}>Emotion</option>
                                 </select><br>   
                         Players: <input type="text" name="players" value="{{clip.players}}"><br>     
                     </div>
@@ -88,7 +90,7 @@
         </form>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" async defer>
-            $("#quarter option[value=3]").prop('selected', 'selected');
+
         </script>
     </body>
 </html>
