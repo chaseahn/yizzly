@@ -44,7 +44,7 @@ textarea {
     display: block;
     color: rgb(32, 32, 70);
     font-family: 'Lato', sans-serif;
-    font-size: 14px;
+    font-size: 10px;
 }
 
 input[type=submit] {
@@ -79,6 +79,7 @@ input[type=submit]:hover {
 
 input[type=text] {
     width: 90%;
+    height: 26px;
     padding: 6px 10px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -92,8 +93,8 @@ select  {
     width: 90%;
     height: 26px;
     padding: 6px 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 4px;
+    margin-bottom: 6px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -103,10 +104,10 @@ select  {
 
 textarea[name=description] {
     width: 100%;
-    height: 79px;
+    height: 74px;
     padding: 6px 10px;
     margin-top: 5px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -145,5 +146,21 @@ button:hover {
 }
 
 .column .inline_input .button-push {
-    margin-top: 12px;
+    margin-top: 7px;
+}
+
+.column .inline_input .gametime {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.column .inline_input .gametime .gametime-col1 {
+    width: 33%;
+    height: 100%;
+}
+.column .inline_input .gametime .gametime-col2 {
+    width: 67%;
+    height: 100%;
+    margin-top: -1px;
 }

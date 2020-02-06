@@ -27,13 +27,13 @@
                         Game ID: <input type="text" name="game_id" value="{{clip.game_id}}"><br>
                         Home Team: <input type="text" name="home_team" value="{{clip.home_team}}"><br>
                         Away Team: <input type="text" name="away_team" value="{{clip.away_team}}"><br>
-                        Game Date: <input type="text" name="away_team" value="{{clip.game_date}}"><br>
+                        Game Date: <input type="text" name="game_date" value="{{clip.game_date}}"><br>
                    </div>
                 </div>
                 <div class="column">
                     <div class="inline_input">
-                        Clip Rating: <input type="text" name="game_id" value="{{clip.rating}}"><br>
-                        Clip Type: <select>
+                        Clip Rating: <input type="text" name="rating" value="{{clip.rating}}"><br>
+                        Clip Type: <select name="type">
                                     <option value="layup">Layup</option>
                                     <option value="jumper">Jumper</option>
                                     <option value="assist">Assist</option>
@@ -43,18 +43,33 @@
                                     <option value="player-story">Player Story</option>
                                     <option value="other">Other</option>
                                 </select><br>
-                        Includes: <select>
+                        Includes: <select name="includes">
                                 <option value="none">---</option>
                                 <option value="livecall">Livecall</option>
                                 <option value="dribble">Dribble</option>
                                 <option value="emotion">Emotion</option>
                                 </select><br>   
-                        Players: <input type="text" name="away_team" value="{{clip.players}}"><br>     
+                        Players: <input type="text" name="players" value="{{clip.players}}"><br>     
                     </div>
                 </div>
                 <div class="column">
                     <div class="inline_input">
                         Description: <textarea  ID="clipDescription" name="description">{{clip.description}}</textarea><br>
+                        Occurs At:
+                        <div class="gametime">
+                            <div class="gametime-col1">
+                                <select name="quarter" id="quarter">
+                                    <option value="1" {% if clip.period=='1' %} selected="selected"{% endif %}>Q1</option>
+                                    <option value="2" {% if clip.period=='2' %} selected="selected"{% endif %}>Q2</option>
+                                    <option value="3" {% if clip.period=='3' %} selected="selected"{% endif %}>Q3</option>
+                                    <option value="4" {% if clip.period=='4' %} selected="selected"{% endif %}>Q4</option>
+                                    <option value="5" {% if clip.period=='5' %} selected="selected"{% endif %}>OT</option>
+                                </select>
+                            </div>
+                            <div class="gametime-col2">
+                                <input type="text" name="time" value="{{clip.time}}"><br>
+                            </div>
+                        </div>
                         <div class="button-push">
                             <button name="post_button" value="COPY INFO"/>COPY INFO</button><br>
                         </div>
@@ -72,8 +87,8 @@
 
         </form>
         
-        <script src="" async defer>
-            
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" async defer>
+            $("#quarter option[value=3]").prop('selected', 'selected');
         </script>
     </body>
 </html>

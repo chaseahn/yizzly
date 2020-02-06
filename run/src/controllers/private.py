@@ -96,9 +96,6 @@ def log():
         clip_object = dmm.create_clip_object()
         #bring over clip info
         session['clip'] = clip_object
-        # log_str = f"Rating: {clip_object['rating']} | {clip_object['clip_type']}\
-        #         | Info: {clip_object['description']} [Q{clip_object['period']}\
-        #             {clip_object['time']}] Players: {clip_object['players']}"
         return redirect(url_for('private.log_commit'))
     else:
         pass
@@ -106,18 +103,37 @@ def log():
 @subcontroller.route('/log-commit',methods=['GET','POST'])
 def log_commit():
     if request.method == 'GET':
-        clip = session['clip']
-        print(clip)
+        clip_object = session['clip']
+        # print(clip_object)
+        # log_str = f"Rating: {clip_object['rating']} | {clip_object['clip_type']}\
+        #         | Info: {clip_object['description']} [Q{clip_object['period']}\
+        #             {clip_object['time']}] Players: {clip_object['players']}"
+        # print(log_str)
         user = User({'username': session['username'], 'pk': session['pk']})
         return render_template('private/log_commit.html',
             title="Footage Log: Commit",
             username=user.username,
-            clip=clip,
+            clip=clip_object,
             message="Save this clip for later! :)"
             )
     elif request.method == 'POST':
         if request.form['post_button'] == 'COPY INFO':
             print('hi')
+            final_clip = {
+                'game_id': request.form.get('game_id'),
+                'home_team': request.form.get('home_team'),
+                'away_team': request.form.get('away_team'),
+                'game_date': request.form.get('game_date'),
+                'rating': request.form.get('rating'),
+                'type': request.form.get('type'),
+                'includes': request.form.get('includes'),
+                'players': request.form.get('players'),
+                'description': request.form.get('description'),
+                'quarter': request.form.get('quarter'),
+                'time': request.form.get('time')
+            }
+
+            print(final_clip)
             return ('', 204)
         else:
             #save clip
