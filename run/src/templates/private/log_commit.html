@@ -27,20 +27,37 @@
                         Game ID: <input type="text" name="game_id" value="{{clip.game_id}}"><br>
                         Home Team: <input type="text" name="home_team" value="{{clip.home_team}}"><br>
                         Away Team: <input type="text" name="away_team" value="{{clip.away_team}}"><br>
+                        Game Date: <input type="text" name="away_team" value="{{clip.game_date}}"><br>
                    </div>
                 </div>
                 <div class="column">
                     <div class="inline_input">
-                            Clip Rating: <input type="text" name="game_id" value="{{clip.rating}}"><br>
-                            Play Type: <input type="text" name="home_team" value="{{clip.clip_type}}"><br>
-                            Players: <input type="text" name="away_team" value="{{clip.players}}"><br>
+                        Clip Rating: <input type="text" name="game_id" value="{{clip.rating}}"><br>
+                        Clip Type: <select>
+                                    <option value="layup">Layup</option>
+                                    <option value="jumper">Jumper</option>
+                                    <option value="assist">Assist</option>
+                                    <option value="three">Three Pointer</option>
+                                    <option value="steal">Steal</option>
+                                    <option value="block">Block</option>
+                                    <option value="player-story">Player Story</option>
+                                    <option value="other">Other</option>
+                                </select><br>
+                        Includes: <select>
+                                <option value="none">---</option>
+                                <option value="livecall">Livecall</option>
+                                <option value="dribble">Dribble</option>
+                                <option value="emotion">Emotion</option>
+                                </select><br>   
+                        Players: <input type="text" name="away_team" value="{{clip.players}}"><br>     
                     </div>
                 </div>
                 <div class="column">
                     <div class="inline_input">
-                            Livecall Rating: <input type="text" name="livecall_rating" value=""><br>
-                            Description: <input type="text" name="home_team" value="{{clip.description}}"><br>
-                            Copy For Premerie <input type="text" name="away_team"><br>
+                        Description: <textarea  ID="clipDescription" name="description">{{clip.description}}</textarea><br>
+                        <div class="button-push">
+                            <button name="post_button" value="COPY INFO"/>COPY INFO</button><br>
+                        </div>
                     </div>
                 </div>
  <!-- Game ID: <input type="text" name="fname"><br>
@@ -55,7 +72,9 @@
 
         </form>
         
-        <script src="" async defer></script>
+        <script src="" async defer>
+            
+        </script>
     </body>
 </html>
 {% endblock %}

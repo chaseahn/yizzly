@@ -116,8 +116,12 @@ def log_commit():
             message="Save this clip for later! :)"
             )
     elif request.method == 'POST':
-        #execute save to db
-        return redirect(url_for('private.clip_success '))
+        if request.form['post_button'] == 'COPY INFO':
+            print('hi')
+            return ('', 204)
+        else:
+            #save clip
+            return redirect(url_for('private.clip_success'))
     else:
         pass
 

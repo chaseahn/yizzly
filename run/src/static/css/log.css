@@ -9,7 +9,7 @@
     margin: 0 auto;
 }
 
-textarea, select {
+textarea {
     width: 100%;
     height: 200px;
     padding: 12px 20px;
@@ -24,7 +24,7 @@ textarea, select {
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    height: 200px;
+    height: auto;
     padding: 12px 20px;
     border-radius: 4px;
     box-sizing: border-box;
@@ -77,7 +77,7 @@ input[type=submit]:hover {
     border-color: #C9FFD0;
 }
 
-input[type=text], select {
+input[type=text] {
     width: 90%;
     padding: 6px 10px;
     margin-top: 5px;
@@ -87,3 +87,63 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
   }
+
+select  {
+    width: 90%;
+    height: 26px;
+    padding: 6px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: white;
+  }
+
+textarea[name=description] {
+    width: 100%;
+    height: 79px;
+    padding: 6px 10px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    height: 26px;
+    margin: 0;
+    cursor: pointer;
+    text-align: center;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: rgba(231, 184, 255, 0.6);
+    color: rgb(182, 134, 206);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    background-color: rgb(201, 76, 76, 0);
+    transition: ease-in .4s;
+    display: inline-block;
+    letter-spacing: 3px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.397), rgba(147, 235, 187, 0.4));
+    box-shadow: 0px 3px 10px -5px rgba(151, 255, 163, 0.678);
+    transition: ease-in;
+    color: rgb(82, 188, 96);
+    border-color: #C9FFD0;
+}
+
+.column .inline_input .button-push {
+    margin-top: 12px;
+}
