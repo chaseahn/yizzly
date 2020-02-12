@@ -21,6 +21,14 @@
         <![endif]-->
         <form action="/log-commit" method="post" enctype="multipart/form-data">
         <div class="container">
+            <div class="mini-button align-left">
+                <div class="v-center">
+                   GO BACK
+                </div>
+            </div>
+            <div class="mini-button align-right">
+                RESET
+            </div>
             <div class="clip_container">
                 <div class="column">
                    <div class="inline_input">
@@ -33,25 +41,36 @@
                 <div class="column">
                     <div class="inline_input">
                         Clip Rating: <input type="text" name="rating" value="{{clip.rating}}"><br>
-                        Clip Type: <select name="type">
-                                    <option value="Layup" {% if 'Layup' in clip.clip_type %} selected="selected"{% endif %}>Layup</option>
-                                    <option value="Dunk" {% if 'Dunk' in clip.clip_type %} selected="selected"{% endif %}>Dunk</option>
-                                    <option value="Jumper" {% if 'Jump' in clip.clip_type %} selected="selected"{% endif %}>Jump Shot</option>
-                                    <option value="Three" {% if 'three' in clip.description %} selected="selected"{% endif %}>Three Pointer</option>
-                                    <option value="Rebound">Rebound</option>
-                                    <option value="Assist">Assist</option>
-                                    <option value="Steal">Steal</option>
-                                    <option value="Block">Block</option>
-                                    <option value="Player Story" {% if 'Player' in clip.clip_type %} selected="selected"{% endif %}>Player Story</option>
-                                    <option value="Other">Other</option>
-                                </select><br>
-                        Includes: <select name="includes">
-                                <option value="None">---</option>
-                                <option value="Livecall" {% if 'Livecall' in clip.clip_type %} selected="selected"{% endif %}>Livecall</option>
-                                <option value="Dribble" {% if 'Dribble' in clip.clip_type %} selected="selected"{% endif %}>Dribble</option>
-                                <option value="Emotion" {% if 'Emotion' in clip.clip_type %} selected="selected"{% endif %}>Emotion</option>
-                                </select><br>   
-                        Players: <input type="text" name="players" value="{{clip.players}}"><br>     
+                        Clip Type: 
+                            <select name="type">
+                                <option value="Layup" {% if 'Layup' in clip.clip_type %} selected="selected"{% endif %}>Layup</option>
+                                <option value="Dunk" {% if 'Dunk' in clip.clip_type %} selected="selected"{% endif %}>Dunk</option>
+                                <option value="Jumper" {% if 'Jump' in clip.clip_type %} selected="selected"{% endif %}>Jump Shot</option>
+                                <option value="Three" {% if 'three' in clip.description %} selected="selected"{% endif %}>Three Pointer</option>
+                                <option value="Rebound">Rebound</option>
+                                <option value="Assist">Assist</option>
+                                <option value="Steal">Steal</option>
+                                <option value="Block">Block</option>
+                                <option value="Player Story" {% if 'Player' in clip.clip_type %} selected="selected"{% endif %}>Player Story</option>
+                                <option value="Interview">Interview</option>
+                                <option value="Other">Other</option>
+                            </select><br>
+                        Includes:
+                            <div class="li-container">
+                                <div class="checks">
+                                    <input type="checkbox" id="check_1" name="check_1" value="Livecall">
+                                    <label for="check_1">Livecall</label>
+                                </div>
+                                <div class="checks">
+                                    <input type="checkbox" id="check_2" name="check_2" value="Dribble">
+                                    <label for="check_2">Dribble</label>
+                                </div>
+                                <div class="checks">
+                                    <input type="checkbox" id="check_3" name="check_3" value="Moment">
+                                    <label for="check_3">Moment</label>
+                                </div>
+                            </div>
+                        Players:<br> <input type="text" name="players" value="{{clip.players}}"><br>     
                     </div>
                 </div>
                 <div class="column">
@@ -61,11 +80,12 @@
                         <div class="gametime">
                             <div class="gametime-col1">
                                 <select name="quarter" id="quarter">
+                                    <option value="0" {% if clip.period=='1' %} selected="selected"{% endif %}>Pregame</option>
                                     <option value="1" {% if clip.period=='1' %} selected="selected"{% endif %}>Q1</option>
                                     <option value="2" {% if clip.period=='2' %} selected="selected"{% endif %}>Q2</option>
                                     <option value="3" {% if clip.period=='3' %} selected="selected"{% endif %}>Q3</option>
                                     <option value="4" {% if clip.period=='4' %} selected="selected"{% endif %}>Q4</option>
-                                    <option value="5" {% if clip.period=='5' %} selected="selected"{% endif %}>OT</option>
+                                    <option value="5" {% if clip.period>'4' %} selected="selected"{% endif %}>OT</option>
                                 </select>
                             </div>
                             <div class="gametime-col2">
@@ -77,9 +97,6 @@
                         </div>
                     </div>
                 </div>
- <!-- Game ID: <input type="text" name="fname"><br>
-                        Home Team: <input type="text" name="lname"><br>
-                        Away Team: <input type="text" name="email"> -->
             </div>
             <input name="post_button" type="submit" value="COMMIT"/>
             <div class="row">

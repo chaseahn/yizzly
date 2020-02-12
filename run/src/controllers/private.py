@@ -9,7 +9,7 @@ from flask import Blueprint,render_template,request,redirect,url_for,session,fla
 from time  import gmtime,strftime
 from werkzeug.utils import secure_filename
 
-from ..models.model import User
+from ..models.model import *
 from ..models.app import *
 
 subcontroller = Blueprint('private',__name__)
@@ -22,8 +22,9 @@ def allowed_file(filename):
 
 @subcontroller.route('/index',methods=['GET','POST'])
 def index():
+    user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
-        user = User({'username': session['username'], 'pk': session['pk']})
+        session['clip_was_logged'] = False
         return render_template(
             'private/index.html', 
             title="Rooks Portal",
@@ -72,25 +73,33 @@ def index():
                     filename=csv_file,
                     as_attachment=True)
                 # os.remove(directory+csv_file)
-
-        elif request.form['post_button'] == 'TRANSCRIBE':
-            flash('Not active')
-            return redirect(url_for('private.index'))
         else:
-            print('else hit')
             pass
     else:
         pass
 
 @subcontroller.route('/log',methods=['GET','POST'])
 def log():
+    user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
-        user = User({'username': session['username'], 'pk': session['pk']})
-        return render_template('private/log.html',
-            title="Footage Log",
-            username=user.username,
-            message="Let's log some clips!"
-            )
+        if session['clip_was_logged']:
+            return render_template('private/log.html',
+                title="Footage Log",
+                username=user.username,
+                message="Successfully logged! Way to go!",
+                placeholder="Start a new clip.",
+                previous_clip=session['clip'],
+                home_team = session['last_clip_logged']['home_team'],
+                away_team = session['last_clip_logged']['away_team']
+                )
+        else:
+            return render_template('private/log.html',
+                title="Footage Log",
+                username=user.username,
+                message="Let's log some clips!",
+                placeholder="Copy & paste the clip information from the DMM to here."
+                )
+        
     elif request.method == 'POST':
         user_input = request.form['info']
         dmm = DMMLogger(log_input=user_input)
@@ -105,11 +114,6 @@ def log():
 def log_commit():
     if request.method == 'GET':
         clip_object = session['clip']
-        # print(clip_object)
-        # log_str = f"Rating: {clip_object['rating']} | {clip_object['clip_type']}\
-        #         | Info: {clip_object['description']} [Q{clip_object['period']}\
-        #             {clip_object['time']}] Players: {clip_object['players']}"
-        # print(log_str)
         user = User({'username': session['username'], 'pk': session['pk']})
         return render_template('private/log_commit.html',
             title="Footage Log: Commit",
@@ -118,39 +122,39 @@ def log_commit():
             message="Save this clip for later! :)"
             )
     elif request.method == 'POST':
+
+        check_one = str(request.form.get('check_1'))
+        check_two = str(request.form.get('check_2'))
+        check_three = str(request.form.get('check_3'))
+        includes = ', '.join([check_one,check_two,check_three])
+
+        final_clip = {
+            'game_id': request.form.get('game_id'),
+            'home_team': request.form.get('home_team'),
+            'away_team': request.form.get('away_team'),
+            'game_date': request.form.get('game_date'),
+            'rating': request.form.get('rating'),
+            'type': request.form.get('type'),
+            'includes': includes,
+            'players': request.form.get('players'),
+            'description': request.form.get('description'),
+            'quarter': request.form.get('quarter'),
+            'time': request.form.get('time')
+        }
+
+        #TODO make string cleaner
+        log_str = f"Rating: {final_clip['rating']} // Clip Type: {final_clip['type']}, {final_clip['includes']} [Info] {final_clip['description']} // Players: {final_clip['players']} [Q{final_clip['quarter']} {final_clip['time']}]"
+
         if request.form['post_button'] == 'COPY INFO':
-            
-            final_clip = {
-                'game_id': request.form.get('game_id'),
-                'home_team': request.form.get('home_team'),
-                'away_team': request.form.get('away_team'),
-                'game_date': request.form.get('game_date'),
-                'rating': request.form.get('rating'),
-                'type': request.form.get('type'),
-                'includes': request.form.get('includes'),
-                'players': request.form.get('players'),
-                'description': request.form.get('description'),
-                'quarter': request.form.get('quarter'),
-                'time': request.form.get('time')
-            }
-
-            log_str = f"Rating: {final_clip['rating']} [Play Type] {final_clip['type']} | {final_clip['includes']} [Info] {final_clip['description']} [Players] {final_clip['players']} [Q{final_clip['quarter']} {final_clip['time']}]"
-
+            """ OS COPY LOG STR """
             pyperclip.copy(log_str)
-
             return ('', 204)
         else:
-            #save clip
-            return redirect(url_for('private.clip_success'))
-    else:
-        pass
-
-@subcontroller.route('/clip-success',methods=['GET','POST'])
-def clip_success():
-    if request.method == 'GET':
-        return render_template('private/clip_success.html')
-    elif request.method == 'POST':
-        pass
+            clip = Clips()
+            clip.save_clip(final_clip)
+            session['clip_was_logged'] = True
+            session['last_clip_logged'] = final_clip
+            return redirect(url_for('private.log'))
     else:
         pass
 
@@ -162,6 +166,7 @@ def cuesheet():
             title="Cuesheet",
             username=user.username,
             message="Let's make a cuesheet!")
+    #TODO make more dynamic
     elif request.method == 'POST':
         filename = 'name'
         user_input = request.form['info']

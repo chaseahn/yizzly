@@ -92,8 +92,7 @@ input[type=button] {
 }
 
 label {
-    cursor: pointer;
-    line-height: 42px;
+    cursor: pointer;]
     /* Style as you please, it will become the visible UI component. */
  }
 
@@ -315,6 +314,7 @@ p {
     border-color: rgb(21, 11, 163,.0);
     border-radius: 5px;
     overflow: hidden;
+    line-height: 50px;
 }
 
 a:link {

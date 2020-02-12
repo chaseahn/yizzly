@@ -19,38 +19,15 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <form action="/log" method="post" enctype="multipart/form-data">
+        <form action="/clip-commmit" method="post" enctype="multipart/form-data">
         <div class="container">
             <div>
-                <textarea type="text" placeholder="{{placeholder}}" name="info"></textarea>
+                <textarea type="text" placeholder={{placeholder}} name="info"></textarea>
             </div>
             <input name="post_button" type="submit" value="CONVERT"/>
             <div class="row">
+                
             </div>
-            {% with clip = previous_clip %}
-            {% if previous_clip %}
-                <div class="clip-title">
-                    <text>Previous Clip:</text>
-                </div>
-                <div class="h-col">
-                    <div class="matchup-column">
-                        <div class="sub-column">
-                            (A) {{away_team}}
-                            <img src="{{url_for('static', filename='img/nba/'+away_team+'.png')}}" />
-                            
-                        </div>
-                        <div class="sub-column">
-                            (H) {{home_team}}
-                            <img src="{{url_for('static', filename='img/nba/'+home_team+'.png')}}" />
-                            
-                        </div>
-                    </div>
-                    <div class="column">
-                        info
-                    </div>
-                </div>
-            {% endif %}
-            {% endwith %}
         </div>
 
         </form>

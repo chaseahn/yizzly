@@ -23,11 +23,19 @@ def run(dbname='winik.db'):
     # create USER table FOR LOGIN AND SESSION
     CUR.execute("""CREATE TABLE clips(
         pk INTEGER PRIMARY KEY AUTOINCREMENT,
-        game_info VARCHAR,
-        clip_info VARCHAR
+        game_id VARCHAR,
+        home_team VARCHAR,
+        away_team VARCHAR,
+        game_date VARCHAR,
+        rating VARCHAR,
+        type VARCHAR,
+        includes VARCHAR,
+        players VARCHAR,
+        description VARCHAR,
+        quarter VARCHAR,
+        time VARCHAR
     );""")
     
-
 
     CON.commit()
     CUR.close()
