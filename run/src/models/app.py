@@ -3,9 +3,14 @@
 import os
 import csv
 import string
+import requests
+import json
+import jsonify
 
 from edl import Parser
 from flask import current_app
+
+from ..extension.security import *
 
 
 class EDL():
@@ -200,3 +205,42 @@ class CueSheet():
         except IOError:
             print("I/O error") 
 
+class NBAapi():
+
+    def __init__(self):
+        self.url = "https://api-nba-v1.p.rapidapi.com/"
+        self.headers = {
+            'x-rapidapi-host': "api-nba-v1.p.rapidapi.com",
+            'x-rapidapi-key': NBA_API_KEY
+            }
+    
+    def check_response_for_200(self, res):
+        if res == 200:
+            return True
+        return False
+    
+    def find_matching_players(self, fname='', lname=''):
+        # Request all players with matching input
+        # Results can show more than one
+        # No matches returns NONE
+        if fname:
+            player_url = self.url + f'players/firstName/{fname}'
+            res = requests.request(
+                "GET", player_url, headers=self.headers
+                ).json()['api']
+            if self.check_response_for_200(res['status']):
+                if res['results']==0:
+                    return None
+                elif res['results']==1:
+                    print(res['players'])
+                    return res['players']
+                else:
+                    for player in res['players']:
+                        if player['lastName'] != lname:
+                            res['players'].remove(player)
+                    print(res['players'])
+                    return res['players']
+            else:
+                print('404 Error: Something went wrong.')
+        else:
+            pass

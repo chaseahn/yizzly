@@ -83,6 +83,9 @@ def log():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
         if session['clip_was_logged']:
+            # only if directed from log-commit with new clip
+            # show same template with last logged clip
+            # allow users to make edits to PREV clip  
             return render_template('private/log.html',
                 title="Footage Log",
                 username=user.username,
@@ -93,6 +96,7 @@ def log():
                 away_team = session['last_clip_logged']['away_team']
                 )
         else:
+            # standard log template
             return render_template('private/log.html',
                 title="Footage Log",
                 username=user.username,
@@ -101,6 +105,8 @@ def log():
                 )
         
     elif request.method == 'POST':
+        # create a clip
+        # redirect to log_commit for inspection and submission
         user_input = request.form['info']
         dmm = DMMLogger(log_input=user_input)
         clip_object = dmm.create_clip_object()
@@ -122,7 +128,8 @@ def log_commit():
             message="Save this clip for later! :)"
             )
     elif request.method == 'POST':
-
+        # Check for includes....
+        # FIXME maybe consider radio?
         check_one = str(request.form.get('check_1'))
         check_two = str(request.form.get('check_2'))
         check_three = str(request.form.get('check_3'))
@@ -145,10 +152,14 @@ def log_commit():
         #TODO make string cleaner
         log_str = f"Rating: {final_clip['rating']} // Clip Type: {final_clip['type']}, {final_clip['includes']} [Info] {final_clip['description']} // Players: {final_clip['players']} [Q{final_clip['quarter']} {final_clip['time']}]"
 
+        # OS Copy function for markers in Premerie
         if request.form['post_button'] == 'COPY INFO':
             """ OS COPY LOG STR """
             pyperclip.copy(log_str)
             return ('', 204)
+        # commit the clip to the database
+        # turn session['clip_was_logged'] into True
+        # init session['clip_was_logged'] into False at /index
         else:
             clip = Clips()
             clip.save_clip(final_clip)
@@ -182,3 +193,11 @@ def cuesheet():
             as_attachment=True)
     else:
         pass
+
+@subcontroller.route('/add-player',methods=['GET','POST'])
+def add_player():
+    user = User({'username': session['username'], 'pk': session['pk']})
+    if request.method == 'GET':
+        api = NBAapi()
+        api.find_matching_players(fname='rj', lname='barrett')
+        return ('', 204)
