@@ -22,12 +22,18 @@
         <form action="/log-commit" method="post" enctype="multipart/form-data">
         <div class="container">
             <div class="mini-button align-left">
-                <div class="v-center">
-                   GO BACK
-                </div>
+                <a href='/log'>
+                    <div class="v-center">
+                        GO BACK
+                    </div>
+                </a>
             </div>
             <div class="mini-button align-right">
-                RESET
+                <a href='/log-commit'>
+                    <div class="v-center">
+                        RESET
+                    </div>
+                </a>
             </div>
             <div class="clip_container">
                 <div class="column">
@@ -53,6 +59,8 @@
                                 <option value="Block">Block</option>
                                 <option value="Player Story" {% if 'Player' in clip.clip_type %} selected="selected"{% endif %}>Player Story</option>
                                 <option value="Interview">Interview</option>
+                                <option value="Layup" {% if 'Opening' in clip.clip_type %} selected="selected"{% endif %}>Opening Call</option>
+                                <option value="Layup" {% if 'Closing' in clip.clip_type %} selected="selected"{% endif %}>Closing Call</option>
                                 <option value="Other">Other</option>
                             </select><br>
                         Includes:
@@ -80,12 +88,13 @@
                         <div class="gametime">
                             <div class="gametime-col1">
                                 <select name="quarter" id="quarter">
-                                    <option value="0" {% if clip.period=='1' %} selected="selected"{% endif %}>Pregame</option>
+                                    <option value="0" {% if clip.period=='0' %} selected="selected"{% endif %}>Pre</option>
                                     <option value="1" {% if clip.period=='1' %} selected="selected"{% endif %}>Q1</option>
                                     <option value="2" {% if clip.period=='2' %} selected="selected"{% endif %}>Q2</option>
                                     <option value="3" {% if clip.period=='3' %} selected="selected"{% endif %}>Q3</option>
                                     <option value="4" {% if clip.period=='4' %} selected="selected"{% endif %}>Q4</option>
                                     <option value="5" {% if clip.period>'4' %} selected="selected"{% endif %}>OT</option>
+                                    <option value="6" {% if 'Post' in clip.clip_type %} selected="selected"{% endif %}>Post</option>
                                 </select>
                             </div>
                             <div class="gametime-col2">

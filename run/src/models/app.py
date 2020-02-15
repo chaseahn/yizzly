@@ -90,17 +90,23 @@ class DMMLogger():
         clip_info = input_list[input_list.index("ID:")+2:]
 
         clip_object = {}
+        if game_info[1] == 'Trail':
+            i=1
+        else:
+            i = 0
         clip_object['description'] = None
-        clip_object['away_team'] = game_info[1]
-        clip_object['home_team'] = game_info[4]
-        clip_object['home_score'] = game_info[2]
-        clip_object['away_score'] = game_info[5]
-        clip_object['game_date'] = game_info[6]
+        clip_object['away_team'] = game_info[1+i] 
+        clip_object['home_team'] = game_info[4+i]
+        clip_object['home_score'] = game_info[2+i]
+        clip_object['away_score'] = game_info[5+i]
+        clip_object['game_date'] = game_info[6+i]
         clip_object['game_id'] = game_info[game_info.index("ID:")+1]
         clip_object['clip_type'] = ' '.join(
             game_info[7:game_info.index("ID:")-1]
             )
-        print(clip_info)
+
+        print(game_info)
+
         # account for missing Run Score or Empty Players
         #TODO account for no description
         for index in range(len(clip_info)-1):
@@ -127,7 +133,7 @@ class DMMLogger():
                 clip_object['rating'] = clip_info[index+1]
             elif clip_info[index] == "Description:":
                 clip_object['description'] = ' '.join(clip_info[index+1:len(clip_info)])       
-        print(clip_object)
+        
         return clip_object
     
 

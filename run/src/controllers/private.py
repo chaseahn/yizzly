@@ -129,11 +129,19 @@ def log_commit():
             )
     elif request.method == 'POST':
         # Check for includes....
-        # FIXME maybe consider radio?
+        # FIXME check ALGO for now it works
         check_one = str(request.form.get('check_1'))
         check_two = str(request.form.get('check_2'))
         check_three = str(request.form.get('check_3'))
-        includes = ', '.join([check_one,check_two,check_three])
+        includes, new_includes = [check_one,check_two,check_three], []
+        for x in range(len(includes)-1):
+            if includes[x] != 'None':
+                new_includes.append(includes[x])
+        if len(new_includes) == 1:
+            includes = includes[0]
+        else:
+            includes = ', '.join(new_includes)
+        print(new_includes)
 
         final_clip = {
             'game_id': request.form.get('game_id'),
@@ -142,7 +150,7 @@ def log_commit():
             'game_date': request.form.get('game_date'),
             'rating': request.form.get('rating'),
             'type': request.form.get('type'),
-            'includes': includes,
+            'includes': str(includes),
             'players': request.form.get('players'),
             'description': request.form.get('description'),
             'quarter': request.form.get('quarter'),

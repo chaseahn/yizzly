@@ -30,23 +30,74 @@
             {% with clip = previous_clip %}
             {% if previous_clip %}
                 <div class="clip-title">
-                    <text>Previous Clip:</text>
+                    Previously Logged Clip:
                 </div>
                 <div class="h-col">
                     <div class="matchup-column">
-                        <div class="sub-column">
-                            (A) {{away_team}}
-                            <img src="{{url_for('static', filename='img/nba/'+away_team+'.png')}}" />
-                            
-                        </div>
+                        
                         <div class="sub-column">
                             (H) {{home_team}}
                             <img src="{{url_for('static', filename='img/nba/'+home_team+'.png')}}" />
                             
                         </div>
+                        <div class="sub-column">
+                            (A) {{away_team}}
+                            <img src="{{url_for('static', filename='img/nba/'+away_team+'.png')}}" />
+                            
+                        </div>
                     </div>
-                    <div class="column">
-                        info
+                    <div class="game-info">
+                        <div class="info-column">
+                        <div class="push-left">
+                            <div class="info-header">
+                                Game ID:
+                            </div>
+                            {{clip.game_id}}
+                            <div class="info-header">
+                                Date:
+                            </div>
+                            {{clip.game_date}}
+                            <div class="info-header">
+                                Occurs:
+                            </div>
+                            [{{clip.quarter}}] {{clip.time}}
+                        </div>
+                        </div>
+                    </div>
+                    <div class="matchup-info">
+                        <div class="info-column">
+                        <div class="push-left">
+                            <div class="info-header">
+                                Players:
+                            </div>
+                            {{clip.players}}
+                            <div class="info-header">
+                                Type:
+                            </div>
+                            {{clip.clip_type}}
+                            <div class="info-header">
+                                Rating:
+                            </div>
+                            {{clip.rating}}
+                        </div>
+                        </div>
+                    </div>
+                    <div class="matchup-info">
+                        <div class="info-column">
+                        <div class="push-left">
+                            <div class="info-header">
+                                Includes:
+                            </div>
+                            {{clip.includes}}
+                            <div class="info-header">
+                                Description:
+                            </div>
+                            {{clip.description}}
+                        </div>
+                        </div>
+                    </div>
+                    <div class="button-cont">
+                        <input type="button" value="delete">
                     </div>
                 </div>
             {% endif %}
