@@ -47,57 +47,57 @@
                         </div>
                     </div>
                     <div class="game-info">
-                        <div class="info-column">
-                        <div class="push-left">
+                        <div class="col-1">
+                                <div class="info-header">
+                                    GAME ID
+                                </div>
+                                <div class="strip">
+                                {{clip.game_id}}
+                                </div>
                             <div class="info-header">
-                                Game ID:
+                                DATE
                             </div>
-                            {{clip.game_id}}
-                            <div class="info-header">
-                                Date:
-                            </div>
+                            <div class="strip">
                             {{clip.game_date}}
-                            <div class="info-header">
-                                Occurs:
                             </div>
-                            [{{clip.quarter}}] {{clip.time}}
+                            <div class="info-header">
+                                OCCURS AT
+                            </div>
+                            [Q{{clip.quarter}}] {{clip.time}}
                         </div>
-                        </div>
-                    </div>
-                    <div class="matchup-info">
-                        <div class="info-column">
-                        <div class="push-left">
+                        <div class="col-1">
                             <div class="info-header">
-                                Players:
+                                RATING
                             </div>
-                            {{clip.players}}
-                            <div class="info-header">
-                                Type:
-                            </div>
-                            {{clip.clip_type}}
-                            <div class="info-header">
-                                Rating:
-                            </div>
+                            <div class="strip">
                             {{clip.rating}}
-                        </div>
-                        </div>
-                    </div>
-                    <div class="matchup-info">
-                        <div class="info-column">
-                        <div class="push-left">
+                            </div>
                             <div class="info-header">
-                                Includes:
+                                TYPE
+                            </div>
+                            <div class="strip">
+                            {{clip.type}}
+                            </div>
+                            <div class="info-header">
+                                INCLUDES
                             </div>
                             {{clip.includes}}
+                        </div>
+                        <div class="col-2">
                             <div class="info-header">
-                                Description:
+                                PLAYERS
+                            </div>
+                            <div class="strip">
+                            {{clip.players}}
+                            </div>
+                            <div class="info-header">
+                                DESCRIPTION
                             </div>
                             {{clip.description}}
                         </div>
-                        </div>
                     </div>
                     <div class="button-cont">
-                        <input type="button" value="delete">
+                        <input type="button" value="DELETE CLIP">
                     </div>
                 </div>
             {% endif %}

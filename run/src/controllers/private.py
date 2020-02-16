@@ -91,7 +91,7 @@ def log():
                 username=user.username,
                 message="Successfully logged! Way to go!",
                 placeholder="Start a new clip.",
-                previous_clip=session['clip'],
+                previous_clip=session['last_clip_logged'],
                 home_team = session['last_clip_logged']['home_team'],
                 away_team = session['last_clip_logged']['away_team']
                 )

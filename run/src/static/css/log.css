@@ -270,7 +270,7 @@ input[type="checkbox"]:checked + label {
     color: rgb(141, 108, 171);
     font-family: 'Lato', sans-serif;
     padding: 0px;
-    font-size: 14px;
+    font-size: 10px;
 }
 
 .h-col img {
@@ -296,6 +296,7 @@ input[type="checkbox"]:checked + label {
 .sub-column {
     margin-top:10px;
     width:50%;
+    min-width: 70px;
     height: 100%;
     min-height: 80px;
     background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
@@ -309,13 +310,15 @@ input[type="checkbox"]:checked + label {
 }
 
 .game-info {
-    width: 12%;
+    width: 300px;
     color: rgb(32, 32, 70);
     font-family: 'Lato', sans-serif;
     padding: 0px;
     font-size: 8px;
     line-height: 13px;
     margin-top: 10px;
+    margin-left: 25px;
+    display: inline-flex;
 }
 
 .matchup-info {
@@ -327,6 +330,7 @@ input[type="checkbox"]:checked + label {
     line-height: 13px;
     margin-top: 10px;
     overflow: hidden;
+    display: inline-flex;
 }
 
 .info-column {
@@ -354,18 +358,62 @@ h6 {
 }
 
 .button-cont {
-    width: 20%;
+    width: 50%;
     margin-top: 10px;
+    justify-content: flex-end;
 }
 
 input[type=button] {
-    width:50%;
+    width:100px;
     float: right;
     background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
     margin-right: 10px;
     border-radius: 8px;
     box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.413);
-    color: rgb(32, 32, 70);
-
+    color: rgb(205, 66, 66);
     font-family: 'Lato', sans-serif;
+    font-size: 8px;
+    border-width: 0px;
+    border-style: solid;
+    padding: 8px;
+    transition: ease-in .4s;
+}
+
+input[type=button]:hover {
+
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgba(255, 65, 65, 0.804));
+    color: rgb(255, 255, 255);
+    transition: ease-in;
+    cursor: pointer;
+}
+
+.game-info {
+    height: 100%;
+    max-height: 80px;
+    color: rgb(32, 32, 70);
+    font-family: 'Lato', sans-serif;
+    padding: 0px;
+    font-size: 8px;
+    overflow: hidden;
+}
+
+.col-1 {
+    width: 25%;
+}
+
+.col-2 {
+    width: 50%;
+}
+
+.info-header {
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    font-size: 6px;
+    padding:0;
+}
+
+
+.strip {
+    padding: 0px;
+    margin-bottom: 1px;
 }
