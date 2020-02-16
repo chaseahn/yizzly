@@ -142,3 +142,71 @@ class Clips:
             self.row_set(row)
         else:
             self.row_set({})
+
+class Players:
+
+    def __init__(self, p_id='', row={}):
+        if p_id:
+            self.check_for_player(pid)
+        else:
+            self.row_set(row)
+    
+    def __bool__(self):
+        return bool(self.pk)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self,exception_type,exception_value,exception_traceback):
+        sleep(randint(10,10000)/10000)
+    
+    def row_set(self,row={}):
+        row = dict(row)
+        self.pk = row.get('pk')
+        self.first_name = row.get('first_name')
+        self.last_name = row.get('last_name')
+        self.team_id = row.get('team_id ')
+        self.years_pro = row.get('years_pro')
+        self.college_name = row.get('college_name')
+        self.country = row.get('country')
+        self.player_id = row.get('player_id')
+        self.birth_date = row.get('birth_date')
+        self.start_nba = row.get('start_nba ')
+        self.standard_number = row.get('standard_number')
+        self.position = row.get('position')
+    
+    def check_for_player(self,p_id):
+        with OpenCursor() as cur:
+            SQL = """ SELECT * FROM clips WHERE
+                  player_id=?; """
+            val = (p_id,)
+            cur.execute(SQL,val)
+            row = cur.fetchone()
+        if row:
+            self.row_set(row)
+        else:
+            self.row_set({})
+
+    #FIXME Save
+    def save_player(self, clip={}):
+        print(clip)
+        with OpenCursor() as cur:
+            SQL = """ INSERT INTO clips(
+                game_id,home_team,away_team,game_date,rating,type,
+                includes,players,quarter,time,description) VALUES (
+                ?,?,?,?,?,?,?,?,?,?,?); """
+            val = (
+                clip['game_id'],
+                clip['home_team'],
+                clip['away_team'],
+                clip['game_date'],
+                clip['rating'],
+                clip['type'],
+                clip['includes'],
+                clip['players'],
+                clip['quarter'],
+                clip['time'],
+                clip['description']
+                )
+            cur.execute(SQL,val)
+            print('clip saved')
