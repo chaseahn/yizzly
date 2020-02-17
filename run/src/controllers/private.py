@@ -24,13 +24,20 @@ def allowed_file(filename):
 def index():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
+        #from log_commit
         session['clip_was_logged'] = False
+
+        p = Players()
+        players_list = p.return_tracking_profiles()
+        
         return render_template(
             'private/index.html', 
             title="Rooks Portal",
             username=user.username,
-            message="What would you like to do today?"
+            message="What would you like to do today?",
+            player_list=players_list
             )
+
     elif request.method == 'POST':
         if request.form['post_button'] == 'CONVERT':
 
@@ -217,19 +224,45 @@ def add_player():
             fname=session['first_name'], 
             lname=session['last_name']
             )
-        #TODO search team
+        # set team and links information
         for player in session['found_players']:
-            print (player['firstName'])
+            player['team'] = api.match_number_to_team(player['teamId'])[0]
+            links = api.scrape_PBR_profile(
+                player['firstName'].capitalize(), player['lastName'].capitalize()
+            )
+            # get twitter link
+            player['twitter'] = links[0]
+            # get player headshot
+            player['headshot'] = links[1]
+            #pbr link
+            player['pbr_link'] = links[2]
+        # set journey indicator for results
+        if len(session['found_players']) == 1:
+            indicator = 'match'
+        else:
+            indicator = 'matches'
+
         return render_template('private/add_player.html',
             title="Add Player",
-            message="We found these results.",
+            message=f"We found {len(session['found_players'])} {indicator}!",
             username=user.username,
             results=session['found_players']
             )
+
     elif request.method == 'POST':
-        print('hi')
-        print(request.form['add_player'])
-        return ('', 204)
+        for player in session['found_players']:
+            if player['playerId'] == request.form['add_player']:
+                player_to_add = player
+            else:
+                print('No player? CHECK')
+        p = Players()
+        p.add_player(clip=player_to_add)
+        #TODO Add team to DB
+        print('added to db')
+        session.pop('found_players', None)
+        session.pop('first_name', None)
+        session.pop('last_name', None)
+        return redirect(url_for('private.index'))
     else:
         pass
 

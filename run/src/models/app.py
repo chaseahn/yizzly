@@ -9,6 +9,7 @@ import jsonify
 
 from edl import Parser
 from flask import current_app
+from bs4 import BeautifulSoup
 
 from ..extension.security import *
 
@@ -252,3 +253,47 @@ class NBAapi():
                 print('404 Error: Something went wrong.')
         else:
             pass
+    
+    def match_number_to_team (self, team_id):
+        if team_id:
+            team_url = self.url + f'teams/teamId/{team_id}'
+            res = requests.request(
+                "GET", team_url, headers=self.headers
+                ).json()['api']
+            if self.check_response_for_200(res['status']):
+                if res['results']==0:
+                    return [{}]
+                else:
+                    print(res['teams'])
+                    return res['teams']
+            
+    def get_player_PBR_link(self, first_name, last_name):
+        last_inital = last_name[:1].lower()
+        full_name = f"{first_name} {last_name}"
+        cap_full_name = f"{first_name.upper()} {last_name}"
+        pbr = 'https://www.basketball-reference.com/players/'
+        ln_url = pbr+last_inital
+        r = requests.get(ln_url)
+        data = r.text
+        soup = BeautifulSoup(data, 'html.parser')
+        filtered = soup.find_all('a')
+        for res in filtered:
+            if res.text == full_name:
+                player_link = 'https://www.basketball-reference.com'+str(res['href'])
+                return player_link
+            elif res.text == cap_full_name:
+                player_link = 'https://www.basketball-reference.com'+str(res['href'])
+                return player_link
+                    
+    def scrape_PBR_profile(self, first_name, last_name):
+        link = self.get_player_PBR_link(first_name, last_name)
+        r = requests.get(link)
+        soup = BeautifulSoup(r.text, 'html.parser')
+        filtered = soup.find("div", {"id": "meta"})
+        img = filtered.find_all('img')[0]
+        img = img['src']
+        a = filtered.find_all('a')
+        for index in range(0,len(a)-1):
+            if a[index].text == 'Twitter':
+                twitter = a[index+1]['href']
+        return [twitter,img,link]

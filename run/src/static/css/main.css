@@ -123,8 +123,8 @@ input[type=text] {
 
 input[type=submit] {
     width: 80%;
+    min-width:80px;
     height: 35px;
-    padding: 0;
     margin: 0;
     cursor: pointer;
     text-align: center;
@@ -284,6 +284,7 @@ p {
 
 .h-col .row-info .row-action .button-container .go-button {
     max-width: 70px;
+    min-width: 60px;
     width: 50%;
     height: 100%;
     background-color: None;
@@ -400,6 +401,7 @@ input[type=modal] {
     color: rgb(182, 134, 206);
     background-color: rgba(255, 255, 255, 0.411);
     box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
+    cursor: pointer;
 }
 
 input[type=modal]:hover {
@@ -451,3 +453,80 @@ input[type=modal]:hover {
     width: 100%;
     margin-bottom: 20px;
 }
+
+.players-grid {
+    width:100%;
+    height: auto;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+    grid-auto-rows: 120px 120px;
+}
+
+.players-grid .player-box {
+    height: 120px;
+    width:auto;
+    color:white;
+    box-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.308);
+    border-radius: 10px;
+    display: inline-flex;
+}
+
+/* 
+.players-grid .player-box .pcol1 .icon {
+    
+} */
+
+
+.players-grid .player-box .pcol1 .icon img {
+    margin-top: 10px;
+    height: 15px;
+    width: auto;
+    border-style: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+
+.players-grid .player-box .pcol1 img {
+    height:70px;
+    width:auto;
+    margin-left: 8px;
+    margin-top: 8px;
+    border-style: solid;
+    border-width: 0px;
+    border-color: rgba(83, 51, 95, 0.328);
+    box-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.568);
+    border-radius: 4px;
+    background-color: white;
+}
+
+.player-box .pcol1 {
+    width:33%;
+}
+
+.player-box .pcol2 {
+    width:67%;
+    margin-left:8px;
+}
+
+
+.pcol2 .header {
+    margin-top: 8px;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="players-grid"] {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    [class*="subheader"] {
+        font-size: 12px;
+    }
+    text {
+        font-size: 12px;
+    }
+    input {
+        font-size: 8px;
+    }
+  }

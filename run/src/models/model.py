@@ -2,6 +2,7 @@
 
 import sqlite3
 import time
+import jsonify
 
 from datetime import datetime
 from flask import session
@@ -150,7 +151,7 @@ class Players:
 
     def __init__(self, p_id='', row={}):
         if p_id:
-            self.check_for_player(pid)
+            self.check_for_player(p_id)
         else:
             self.row_set(row)
     
@@ -177,10 +178,12 @@ class Players:
         self.start_nba = row.get('start_nba')
         self.number = row.get('number')
         self.position = row.get('position')
+        self.headshot = row.get('headshot')
+        self.twitter = row.get('twitter')
     
     def check_for_player(self,p_id):
         with OpenCursor() as cur:
-            SQL = """ SELECT * FROM clips WHERE
+            SQL = """ SELECT * FROM players WHERE
                   player_id=?; """
             val = (p_id,)
             cur.execute(SQL,val)
@@ -191,12 +194,12 @@ class Players:
             self.row_set({})
 
     def add_player(self, clip={}):
-        print(clip)
         with OpenCursor() as cur:
-            SQL = """ INSERT INTO clips(
+            SQL = """ INSERT INTO players(
                 first_name,last_name,team_id,years_pro,college_name,country,
-                player_id,birth_date,start_nba,number,position) VALUES (
-                ?,?,?,?,?,?,?,?,?,?,?); """
+                player_id,birth_date,start_nba,number,position,twitter,headshot
+                ) VALUES (
+                ?,?,?,?,?,?,?,?,?,?,?,?,?); """
             val = (
                 clip['firstName'],
                 clip['lastName'],
@@ -208,18 +211,22 @@ class Players:
                 clip['dateOfBirth'],
                 clip['startNba'],
                 clip['leagues']['standard']['jersey'],
-                clip['leagues']['standard']['pos']
+                clip['leagues']['standard']['pos'],
+                clip['twitter'],
+                clip['headshot']
                 )
             cur.execute(SQL,val)
-            print('clip saved')
 
-    def return_all_saved_players(self):
+    def return_all_saved_player_ids(self):
         with OpenCursor() as cur:
             SQL = """ SELECT * FROM players; """
             cur.execute(SQL,)
             players = cur.fetchall()
         if players:
-            return players
+            id_list = []
+            for player in players:
+                id_list.append(player['player_id'])
+            return id_list
         else:
             return []
 
@@ -230,6 +237,32 @@ class Players:
             val = (player_id,)
             cur.execute(SQL,val)
         print('deleted')
+    
+    def return_tracking_profiles(self):
+
+        tracked_ids = self.return_all_saved_player_ids()
+        player_list = []
+        
+        for num in tracked_ids:
+            current_player = Players(p_id=num)
+            profile = {
+                'first_name': current_player.first_name,
+                'last_name': current_player.last_name,
+                'pos': current_player.position,
+                'number': current_player.number,
+                'team': current_player.team_id,
+                'headshot': current_player.headshot,
+                'twitter': current_player.twitter
+            }
+            player_list.append(profile)
+        
+        return player_list
+ 
+
+
+
+
+
     
     def get_all_tracked_teams(self):
         pass

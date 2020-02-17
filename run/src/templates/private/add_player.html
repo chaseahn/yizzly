@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/addplayers.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -26,10 +27,12 @@
                 <div class="h-col">
                         <div class="matchup-column">
                             <div class="sub-column">
-                                player_image
+                                {{player.firstName}} {{player.lastName[0]}}. <br>
+                                <img src={{player.headshot}}>
                             </div>
                             <div class="sub-column">
-                                team_image
+                                {{player.team.nickname}}<br>
+                                <img src="{{url_for('static', filename='img/nba/'+player.team.nickname+'.png')}}" />
                             </div>
                         </div>
                         <div class="game-info">
@@ -56,7 +59,7 @@
                                     Current Team
                                 </div>
                                 <div class="strip">
-                                    {{player.teamId}}
+                                    {{player.team.nickname}}
                                 </div>
                                 <div class="info-header">
                                     College Team
@@ -92,6 +95,28 @@
                     </div>
                 {% endfor %}
             {% endif %}
+            <div class="faq-title">
+                <input value="HELP"onclick="document.getElementById('id01').style.display='block'" type="modal">
+                <div class="w3-container">
+                    <div id="id01" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
+                                <div class="modal-header">
+                                    <div class="text">
+                                        Add Player: Enter first and last name
+                                    </div>
+                                    <div class="span-shift">
+                                        <span onclick="document.getElementById('id01').style.display='none'">&times;</span>
+                                    </div>
+                                </div>
+                                <div class="modal-box">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         </form>
         
