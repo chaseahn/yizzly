@@ -77,9 +77,9 @@ def index():
             print('modal')
             return ('', 204)
         else:
-            first_name = request.form.get('first_name')
-            last_name = request.form.get('last_name')
-            return ('', 204)
+            session['first_name'] = request.form.get('first_name')
+            session['last_name'] = request.form.get('last_name')
+            return redirect(url_for('private.add_player'))
     else:
         pass
 
@@ -211,6 +211,36 @@ def cuesheet():
 def add_player():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
+        #TODO see if there are seults and then return a flash or send to page if results are valid
         api = NBAapi()
-        api.find_matching_players(fname='rj', lname='barrett')
+        session['found_players'] = api.find_matching_players(
+            fname=session['first_name'], 
+            lname=session['last_name']
+            )
+        #TODO search team
+        for player in session['found_players']:
+            print (player['firstName'])
+        return render_template('private/add_player.html',
+            title="Add Player",
+            message="We found these results.",
+            username=user.username,
+            results=session['found_players']
+            )
+    elif request.method == 'POST':
+        print('hi')
+        print(request.form['add_player'])
         return ('', 204)
+    else:
+        pass
+
+# clip['firstName'],
+#                 clip['lastName'],
+#                 clip['teamId'],
+#                 clip['yearsPro'],
+#                 clip['collegeName'],
+#                 clip['country'],
+#                 clip['playerId'],
+#                 clip['dateOfBirth'],
+#                 clip['startNba'],
+#                 clip['leagues']['standard']['jersey'],
+#                 clip['leagues']['standard']['pos']

@@ -1,0 +1,101 @@
+{% extends "structure.html" %}
+{% block viewport %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{(title}}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/addplayers.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <form action="/add-player" method="post" enctype="multipart/form-data">
+        <div class="container">
+            {% if results %}
+                {% for player in results %}
+                <div class="h-col">
+                        <div class="matchup-column">
+                            <div class="sub-column">
+                                player_image
+                            </div>
+                            <div class="sub-column">
+                                team_image
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <div class="col-1">
+                                    <div class="info-header">
+                                    Name
+                                    </div>
+                                    <div class="strip">
+                                    {{player.firstName}} {{player.lastName}} 
+                                    </div>
+                                <div class="info-header">
+                                    Position
+                                </div>
+                                <div class="strip">
+                                    {{player.leagues.standard.pos}}
+                                </div>
+                                <div class="info-header">
+                                    Years Pro
+                                </div>
+                                {{player.yearsPro}}
+                            </div>
+                            <div class="col-1">
+                                <div class="info-header">
+                                    Current Team
+                                </div>
+                                <div class="strip">
+                                    {{player.teamId}}
+                                </div>
+                                <div class="info-header">
+                                    College Team
+                                </div>
+                                <div class="strip">
+                                    {{player.collegeName}}
+                                </div>
+                                <div class="info-header">
+                                    Number
+                                </div>
+                                {{player.leagues.standard.jersey}}
+                            </div>
+                            <div class="col-2">
+                                <div class="info-header">
+                                    Date of Birth
+                                </div>
+                                <div class="strip">
+                                    {{player.dateOfBirth}}
+                                </div>
+                                <div class="info-header">
+                                    Height
+                                </div>
+                                {{player.heightInMeters}}m
+                                <div class="info-header">
+                                    Weight
+                                </div>
+                                {{player.weightInKilograms}}kg
+                            </div>
+                        </div>
+                        <div class="button-cont">
+                            <button name="add_player" type="post" value={{player.playerId}}>ADD PLAYER</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        </form>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
+{% endblock %}
