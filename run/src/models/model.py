@@ -142,6 +142,9 @@ class Clips:
             self.row_set(row)
         else:
             self.row_set({})
+    
+    def search_for(self,player_id,type,includes,rating):
+        pass
 
 class Players:
 
@@ -172,7 +175,7 @@ class Players:
         self.player_id = row.get('player_id')
         self.birth_date = row.get('birth_date')
         self.start_nba = row.get('start_nba ')
-        self.standard_number = row.get('standard_number')
+        self.number = row.get('number')
         self.position = row.get('position')
     
     def check_for_player(self,p_id):
@@ -187,26 +190,57 @@ class Players:
         else:
             self.row_set({})
 
-    #FIXME Save
-    def save_player(self, clip={}):
+    def add_player(self, clip={}):
         print(clip)
         with OpenCursor() as cur:
             SQL = """ INSERT INTO clips(
-                game_id,home_team,away_team,game_date,rating,type,
-                includes,players,quarter,time,description) VALUES (
+                first_name,last_name,team_id,years_pro,college_name,country,
+                player_id,birth_date,start_nba,number,position) VALUES (
                 ?,?,?,?,?,?,?,?,?,?,?); """
             val = (
-                clip['game_id'],
-                clip['home_team'],
-                clip['away_team'],
-                clip['game_date'],
-                clip['rating'],
-                clip['type'],
-                clip['includes'],
-                clip['players'],
-                clip['quarter'],
-                clip['time'],
-                clip['description']
+                clip['firstName'],
+                clip['lastName'],
+                clip['teamId'],
+                clip['yearsPro'],
+                clip['collegeName'],
+                clip['country'],
+                clip['playerId'],
+                clip['dateOfBirth'],
+                clip['startNba'],
+                clip['leagues']['standard']['jersey'],
+                clip['leagues']['standard']['pos']
                 )
             cur.execute(SQL,val)
             print('clip saved')
+
+    def return_all_saved_players(self):
+        with OpenCursor() as cur:
+            SQL = """ SELECT * FROM players; """
+            cur.execute(SQL,)
+            players = cur.fetchall()
+        if players:
+            return players
+        else:
+            return []
+
+    def remove_player(self, player_id):
+        with OpenCursor() as cur:
+            SQL = """ DELETE * FROM players WHERE
+                  player_id=?; """
+            val = (player_id,)
+            cur.execute(SQL,val)
+        print('deleted')
+    
+    def get_all_tracked_teams(self):
+        pass
+
+    def get_last_nights_games(self, teams):
+        #teams = self.get_all_tracked_teams
+        #return ;ast night's games
+        pass
+    
+    def get_player_stats(self, player_id):
+        #return season avgs
+        pass
+
+    

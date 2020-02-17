@@ -236,11 +236,13 @@ class NBAapi():
                 ).json()['api']
             if self.check_response_for_200(res['status']):
                 if res['results']==0:
-                    return None
+                    return [{}]
                 elif res['results']==1:
                     print(res['players'])
                     return res['players']
                 else:
+                    #erase any bad match
+                    #can return multiple of same name
                     for player in res['players']:
                         if player['lastName'] != lname:
                             res['players'].remove(player)

@@ -73,8 +73,12 @@ def index():
                     filename=csv_file,
                     as_attachment=True)
                 # os.remove(directory+csv_file)
+        elif request.form['post_button'] == 'Search Player':
+            print('modal')
+            return ('', 204)
         else:
-            pass
+            print('else')
+            return ('', 204)
     else:
         pass
 

@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -111,51 +112,43 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="h-col">
-                <div class="row-info">
-                    <div class="image-box">
-                        <img src="{{url_for('static', filename='img/language.png')}}" />
-                    </div>
-                    <div class="row-description">
-                        <div class="subheader">
-                            Transcribe a Video/Audio Clip
-                        </div>
-                        <text>
-                            Not yet activated
-                        </text>
-                    </div>
-                    <div class="row-action">
-                        <div class="button-container">
-                            <div class="upload-border">
-                                <label for="upload-file">
-                                    <div class="subtext">
-                                        <input type="file" name="file"/>
-                                    </div>
-                                </label>
-                            </div>
-                            <input name="post_button" type="submit" value="TRANSCRIBE"/>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
             <br>
 
             <div class="section-break">
-                <h1> 
-                    <a href="/add-player">
-                    add player
-                    </a>
+                <h1>
+                    Player Tracker
                 </h1>
+                
+                <input value="+ ADD PLAYER"onclick="document.getElementById('id01').style.display='block'" type="modal">
+                </input>
             </div>
+
+
             <hr> 
+
+            <div class="w3-container">
+                    <div id="id01" class="w3-modal">
+                        <div class="w3-modal-content">
+                        <div class="w3-container">
+                            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                            <div class="modal-box">
+                                <input name="post_button" type="text" placeholder="First Name"></input>
+                                <input name="post_button" type="text" placeholder="Last Name"></input>
+                                <input name="post_button"type="submit" value="Search Player"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
 
 
         </form>
 
         
-        <script src="" async defer></script>
+        <script src="" async defer>
+
+        </script>
     </body>
 </html>
 {% endblock %}

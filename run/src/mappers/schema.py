@@ -35,6 +35,24 @@ def run(dbname='winik.db'):
         quarter VARCHAR,
         time VARCHAR
     );""")
+
+    """ PLAYERS TABLE """
+    CUR.execute("""DROP TABLE IF EXISTS players;""")
+    # create USER table FOR LOGIN AND SESSION
+    CUR.execute("""CREATE TABLE players(
+        pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        first_name VARCHAR,
+        last_name VARCHAR,
+        team_id VARCHAR,
+        years_pro VARCHAR,
+        college_name VARCHAR,
+        country VARCHAR,
+        player_id VARCHAR,
+        birth_date VARCHAR,
+        start_nba VARCHAR,
+        number VARCHAR,
+        position VARCHAR,
+    );""")
     
 
     CON.commit()
