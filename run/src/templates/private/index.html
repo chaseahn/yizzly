@@ -131,11 +131,22 @@
                     <div id="id01" class="w3-modal">
                         <div class="w3-modal-content">
                         <div class="w3-container">
-                            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                            <div class="modal-header">
+                                <div class="text">
+                                    Add Player: Enter first and last name
+                                </div>
+                                <div class="span-shift">
+                                    <span onclick="document.getElementById('id01').style.display='none'">&times;</span>
+                                </div>
+                            </div>
                             <div class="modal-box">
-                                <input name="post_button" type="text" placeholder="First Name"></input>
-                                <input name="post_button" type="text" placeholder="Last Name"></input>
-                                <input name="post_button"type="submit" value="Search Player"></input>
+                                <div class="input-container">
+                                    <input name="first_name" type="text" placeholder="First Name" required>
+                                    <input name="last_name" type="text" placeholder="Last Name" required>
+                                </div>
+                                <div class="submit-container">
+                                    <input name="post_button" type="submit" value="SEARCH FOR PLAYER">
+                                </div>
                             </div>
                         </div>
                     </div>

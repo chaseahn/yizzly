@@ -77,7 +77,8 @@ def index():
             print('modal')
             return ('', 204)
         else:
-            print('else')
+            first_name = request.form.get('first_name')
+            last_name = request.form.get('last_name')
             return ('', 204)
     else:
         pass
