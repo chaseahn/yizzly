@@ -156,19 +156,85 @@
             {% if player_list|length>0 %}
                 {% for player in player_list %}
                     <div class="player-box">
-                        <div class="pcol1">
-                            <img src="{{player.headshot}}">
-                            <div class="icon">
-                                <a href="{{player.twitter}}" target="_blank">
-                                    <img src="{{url_for('static', filename='img/twitter.png')}}">
-                                </a>
+                        <div class="box-top">
+                            <div class="pcol1">
+                                <img src="{{player.headshot}}">
+                                <div class="icon">
+                                    <a href="{{player.twitter}}" target="_blank">
+                                        <img src="{{url_for('static', filename='img/twitter.png')}}">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="pcol2">
+                                <div class="header">
+                                    <text>{{player.first_name}} {{player.last_name}}</text>
+                                </div>
+                                <div class="sub-info">
+                                    #{{player.number}} {{player.team}} POS: {{player.pos}}
+                                </div>
+                                <div class="stats-container">
+                                    
+                                    <div class="stat">
+                                        <div class="header-color red">
+                                            PTS
+                                        </div>
+                                        <div class="stat-number">
+                                            12.2
+                                        </div>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="header-color yellow">
+                                            REB
+                                        </div>
+                                        <div class="stat-number">
+                                            12.2
+                                        </div>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="header-color green">
+                                            AST
+                                        </div>
+                                        <div class="stat-number">
+                                            12.2
+                                        </div>
+                                </div>
+                                    <div class="stat">
+                                        <div class="header-color purple">
+                                            3PM
+                                        </div>
+                                    <div class="stat-number">
+                                            12.2
+                                        </div>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="header-color black">
+                                            STL
+                                        </div>
+                                        <div class="stat-number">
+                                            12.2
+                                        </div>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="header-color blue">
+                                            BLK
+                                        </div>
+                                        <div class="stat-number">
+                                            12.2
+                                        </div>
+                                    </div>
+                                    
+                                </div>
                             </div>
                         </div>
-                        <div class="pcol2">
-                            <div class="header">
-                                <text>{{player.first_name}} {{player.last_name}}</text>
+                        <div class="box-bottom">
+                            <div class="textbox">
+                                Last Night
+                            </div>
+                            <div class="statline">
+                                31pts
                             </div>
                         </div>
+                        
                     </div>
                 {% endfor %}
             {% endif %}

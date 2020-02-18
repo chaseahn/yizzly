@@ -231,6 +231,14 @@ class NBAapi():
         # Results can show more than one
         # No matches returns NONE
         if fname:
+            
+            fsplit = list(fname)
+            print(fsplit)
+            for i in range(0,len(fsplit)-1):
+                if fsplit[i] == "'":
+                    fsplit.pop(i)
+            fname = ''.join(fsplit)
+
             player_url = self.url + f'players/firstName/{fname}'
             res = requests.request(
                 "GET", player_url, headers=self.headers
@@ -239,16 +247,21 @@ class NBAapi():
                 if res['results']==0:
                     return [{}]
                 elif res['results']==1:
-                    print(res['players'])
                     return res['players']
                 else:
+                    #FIXME DENADRE
+                    return_list = []
+                    print(res['players'])
+                    print(len(res['players']))
                     #erase any bad match
                     #can return multiple of same name
-                    for player in res['players']:
-                        if player['lastName'] != lname:
-                            res['players'].remove(player)
-                    print(res['players'])
-                    return res['players']
+                    for i in range(0,len(res['players'])):
+                        player = res['players'][i]
+                        print(player['lastName'])
+                        if player['lastName'] == lname.capitalize():
+                            return_list.append(player)
+                    print(return_list)
+                    return return_list
             else:
                 print('404 Error: Something went wrong.')
         else:

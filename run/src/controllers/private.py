@@ -226,7 +226,11 @@ def add_player():
             )
         # set team and links information
         for player in session['found_players']:
-            player['team'] = api.match_number_to_team(player['teamId'])[0]
+            #TODO Check for aprostrophe names
+            try:
+                player['team'] = api.match_number_to_team(player['teamId'])[0]
+            except TypeError: 
+                player['team'] = None
             links = api.scrape_PBR_profile(
                 player['firstName'].capitalize(), player['lastName'].capitalize()
             )

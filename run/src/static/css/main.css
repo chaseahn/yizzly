@@ -459,18 +459,18 @@ input[type=modal]:hover {
     height: auto;
     padding: 0px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
-    grid-auto-rows: 120px 120px;
+    grid-auto-rows: 180px 180px;
 }
 
 .players-grid .player-box {
-    height: 120px;
+    height: 180px;
     width:auto;
     color:white;
     box-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.308);
     border-radius: 10px;
-    display: inline-flex;
+    background-color: rgba(255, 255, 255, 0.479);
 }
 
 /* 
@@ -479,7 +479,7 @@ input[type=modal]:hover {
 } */
 
 
-.players-grid .player-box .pcol1 .icon img {
+.players-grid .player-box .box-top .pcol1 .icon img {
     margin-top: 10px;
     height: 15px;
     width: auto;
@@ -488,32 +488,149 @@ input[type=modal]:hover {
 }
 
 
-.players-grid .player-box .pcol1 img {
-    height:70px;
+.players-grid .player-box .box-top .pcol1 img {
+    height:90px;
     width:auto;
     margin-left: 8px;
     margin-top: 8px;
-    border-style: solid;
-    border-width: 0px;
-    border-color: rgba(83, 51, 95, 0.328);
-    box-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.568);
     border-radius: 4px;
-    background-color: white;
+    box-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.308);
 }
 
-.player-box .pcol1 {
+.player-box .box-top .pcol1 {
     width:33%;
 }
 
-.player-box .pcol2 {
+.player-box .box-top .pcol2 {
     width:67%;
     margin-left:8px;
 }
 
 
 .pcol2 .header {
-    margin-top: 8px;
+    margin-top: 6px;
 }
+
+.pcol2 .sub-info {
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    font-size: 8px;
+    color:black;
+    background-color: rgb(255, 255, 255);
+    padding:2px;
+    width:89%;
+}
+
+.box-top {
+    width: 100%;
+    height:80%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+.box-bottom {
+    width: 100%;
+    height:20%;
+    background-image: linear-gradient(120deg,  rgb(255, 255, 255), rgb(207, 147, 235, .4));
+    display: inline-flex;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.box-bottom .textbox {
+    width: 60px;
+    height: 20px;
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
+    color: rgb(32, 32, 70);
+    font-family: 'Lato', sans-serif;
+    padding: 0px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 18px;
+    margin-top: 7px;
+    margin-left: 8px;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(165, 82, 204, 0.602);
+}
+
+.box-bottom .statline {
+    line-height: 18px;
+    margin-top: 8px;
+    margin-left: 8px;
+    color: rgb(32, 32, 70);
+    font-family: 'Lato', sans-serif;
+    padding: 0px;
+    font-size: 10px;
+}
+
+.stats-container {
+    margin-top: 5px;
+    width:90%;
+    height: auto;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+    grid-auto-rows: 40px 40px;
+}
+
+.stats-container .stat {
+    height: 40px;
+    width:auto;
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
+    box-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.308);
+    border-radius: 5px;
+}
+
+.stats-container .stat-number {
+    height: auto;
+    width:auto;
+    margin-top: 5px;
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
+    box-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.308);
+    border-radius: 5px;
+    text-align: center;
+    color: rgb(55, 15, 100);
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1em;
+}
+
+.stats-container .stat .header-color {
+    height: 12px;
+    width:100%;
+    border-radius: 4px 4px 0px 0px;
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    font-size: 8px;
+    color:white;
+    text-align: center;
+    line-height: 13px;
+}
+
+.red {
+    background-color: Red;
+}
+
+.yellow {
+    background-color: orange;
+}
+
+.green {
+    background-color: green;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.black {
+    background-color: black;
+}
+
+.blue {
+    background-color: blue;
+}
+
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
@@ -528,5 +645,9 @@ input[type=modal]:hover {
     }
     input {
         font-size: 8px;
+    }
+    .players-grid .player-box .box-top .pcol1 img {
+        height:130px;
+        margin-top: 8px;
     }
   }
