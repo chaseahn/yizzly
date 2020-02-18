@@ -18,7 +18,7 @@
     </head>
     <body>
         <!-- TODO ADD HOVERS -->
-        <form action="/index" method="post" enctype="multipart/form-data">
+        <form action="{{url_for('private.index')}}" method="post" enctype="multipart/form-data">
         <div class="row-container">
             <!-- <div class="title">
                 <div class="user-store">
@@ -104,10 +104,11 @@
                     </div>
                     <div class="row-action">
                         <div class="button-container">
-                            <div class="upload-border">
-                                <input type="file" name="file"/>
+                            <a onclick="document.getElementById('id02').style.display='block'">
+                            <div class="go-button"> 
+                                <i class="fa fa-angle-double-right" style="font-size:24px"></i>
                             </div>
-                            <input name="post_button" type="submit" value="CONVERT"/>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -120,38 +121,58 @@
                     Player Tracker
                 </h1>
                 
-                <input value="+ ADD PLAYER"onclick="document.getElementById('id01').style.display='block'" type="modal">
-                </input>
+                <input value="+ ADD PLAYER" onclick="document.getElementById('id01').style.display='block'" type="modal">
             </div>
 
 
             <hr> 
 
-            <div class="w3-container">
-                <div id="id01" class="w3-modal">
-                    <div class="w3-modal-content">
-                        <div class="w3-container">
-                            <div class="modal-header">
-                                <div class="text">
-                                    Add Player: Enter first and last name
-                                </div>
-                                <div class="span-shift">
-                                    <span onclick="document.getElementById('id01').style.display='none'">&times;</span>
-                                </div>
-                            </div>
-                            <div class="modal-box">
-                                <div class="input-container">
-                                    <input name="first_name" type="text" placeholder="First Name" required>
-                                    <input name="last_name" type="text" placeholder="Last Name" required>
-                                </div>
-                                <div class="submit-container">
-                                    <input name="post_button" type="submit" value="SEARCH FOR PLAYER">
-                                </div>
-                            </div>
+            <div id="id02" class="w3-modal">
+                <div class="w3-modal-content">
+                    <div class="modal-header">
+                        <div class="text">
+                            Convert EDL to Premerie
+                        </div>
+                        <div class="span-shift">
+                            <span onclick="document.getElementById('id02').style.display='none'">&times;</span>
+                        </div>
+                    </div>
+                    <div class="modal-box">
+                        <div class="input-container">
+                            before you convert make sure you followed these rules. 
+                        </div>
+                        <div class="submit-container">
+                            <a href="/convert-edl">
+                                <input name="post_button" type="button" value="LET'S BEGIN!" >
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div id="id01" class="w3-modal">
+                <div class="w3-modal-content">
+                    <div class="modal-header">
+                        <div class="text">
+                            Add Player: Enter first and last name
+                        </div>
+                        <div class="span-shift">
+                            <span onclick="document.getElementById('id01').style.display='none'">&times;</span>
+                        </div>
+                    </div>
+                    <div class="modal-box">
+                        <div class="input-container">
+                            <input name="first_name" type="text" placeholder="First Name" required>
+                            <input name="last_name" type="text" placeholder="Last Name" required>
+                        </div>
+                        <div class="submit-container">
+                            <input name="post_button" type="submit" value="SEARCH FOR PLAYER">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    
             <div class="players-grid">
             {% if player_list|length>0 %}
                 {% for player in player_list %}
@@ -162,6 +183,9 @@
                                 <div class="icon">
                                     <a href="{{player.twitter}}" target="_blank">
                                         <img src="{{url_for('static', filename='img/twitter.png')}}">
+                                    </a>
+                                    <a href="/" target="_blank">
+                                        <img src="{{url_for('static', filename='img/basketball.png')}}">
                                     </a>
                                 </div>
                             </div>
@@ -234,7 +258,6 @@
                                 31pts
                             </div>
                         </div>
-                        
                     </div>
                 {% endfor %}
             {% endif %}

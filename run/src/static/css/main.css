@@ -151,6 +151,69 @@ input[type=submit]:hover {
     color: rgb(82, 188, 96);
 }
 
+
+
+input[type=button] {
+    width: 80%;
+    min-width:80px;
+    height: 35px;
+    margin: 0;
+    cursor: pointer;
+    text-align: center;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: rgba(231, 184, 255, 0.6);
+    color: rgb(182, 134, 206);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    background-color: rgb(201, 76, 76, 0);
+    transition: ease-in .4s;
+    display: inline-block;
+    letter-spacing: 3px;
+}
+
+input[type=button]:hover {
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.397), rgba(147, 235, 187, 0.4));
+    border-color: #C9FFD0;
+    box-shadow: 0px 3px 10px -5px rgba(151, 255, 151, 0.678);
+    transition: ease-in;
+    color: rgb(82, 188, 96);
+}
+
+
+button[type=submit] {
+    width: 80%;
+    min-width:80px;
+    height: 35px;
+    margin: 0;
+    cursor: pointer;
+    text-align: center;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: rgba(231, 184, 255, 0.6);
+    color: rgb(182, 134, 206);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    background-color: rgb(201, 76, 76, 0);
+    transition: ease-in .4s;
+    display: inline-block;
+    letter-spacing: 3px;
+}
+
+button[type=submit]:hover {
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.397), rgba(147, 235, 187, 0.4));
+    border-color: #C9FFD0;
+    box-shadow: 0px 3px 10px -5px rgba(151, 255, 151, 0.678);
+    transition: ease-in;
+    color: rgb(82, 188, 96);
+}
+
 .title {
     text-align: justify;
 }
@@ -299,6 +362,7 @@ p {
     margin-top: 17px;
     transition: ease-in .4s;
     display: inline-block;
+    cursor: pointer;
 }
 
 .h-col .row-info .row-action .button-container:hover .go-button  {
@@ -630,6 +694,7 @@ input[type=modal]:hover {
 .blue {
     background-color: blue;
 }
+
 
 
 @media only screen and (max-width: 768px) {

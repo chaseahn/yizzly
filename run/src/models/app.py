@@ -13,6 +13,22 @@ from bs4 import BeautifulSoup
 
 from ..extension.security import *
 
+def getIndexPositions(listOfElements, element):
+    ''' Returns the indexes of all occurrences of give element in
+    the list- listOfElements '''
+    indexPosList = []
+    indexPos = 0
+    while True:
+        try:
+            # Search for item in list from indexPos to the end of list
+            indexPos = listOfElements.index(element, indexPos)
+            # Add the index position in list
+            indexPosList.append(indexPos)
+            indexPos += 1
+        except ValueError as e:
+            break
+ 
+    return indexPosList
 
 class EDL():
     
@@ -258,9 +274,23 @@ class NBAapi():
                     for i in range(0,len(res['players'])):
                         player = res['players'][i]
                         print(player['lastName'])
-                        if player['lastName'] == lname.capitalize():
+                        if player['lastName'].lower() == lname.lower():
+                            # check if for standard func has key
+                            try:
+                                player['leagues']['standard']
+                            except KeyError:
+                                player['leagues']['standard'] = {
+                                    'jersey': 'N/A', 
+                                    'active': 'N/A', 
+                                    'pos': 'N/A'
+                                }
+                            if player['collegeName'] == '':
+                                player['collegeName'] = 'N/A'
                             return_list.append(player)
                     print(return_list)
+
+
+
                     return return_list
             else:
                 print('404 Error: Something went wrong.')
@@ -279,22 +309,48 @@ class NBAapi():
                 else:
                     print(res['teams'])
                     return res['teams']
+        else:
+            print("NOTEAMID!!!")
+            empty_team = {
+                'city': 'N/A', 
+                'fullName': 'N/A', 
+                'teamId': 'N/A', 
+                'nickname': 'N/A', 
+                'logo': 'N/A', 
+                'shortName': 'N/A', 
+                'allStar': 'N/A', 
+                'nbaFranchise': 'N/A', 
+                'leagues': {
+                    'standard': {
+                        'confName': 'N/A', 
+                        'divName': 'N/A'
+                        }, 
+                        'vegas': {
+                            'confName': 'N/A', 
+                            'divName': 'N/A'
+                        }
+                    }
+                }
+            return [empty_team]
+
             
     def get_player_PBR_link(self, first_name, last_name):
         last_inital = last_name[:1].lower()
-        full_name = f"{first_name} {last_name}"
-        cap_full_name = f"{first_name.upper()} {last_name}"
+        fullname = f"{first_name} {last_name}"
         pbr = 'https://www.basketball-reference.com/players/'
         ln_url = pbr+last_inital
         r = requests.get(ln_url)
         data = r.text
         soup = BeautifulSoup(data, 'html.parser')
         filtered = soup.find_all('a')
+
         for res in filtered:
-            if res.text == full_name:
-                player_link = 'https://www.basketball-reference.com'+str(res['href'])
-                return player_link
-            elif res.text == cap_full_name:
+            fsplit = list(res.text)
+            for i in range(0,len(fsplit)-1):
+                if fsplit[i] == "'":
+                    fsplit.pop(i)
+            fname = ''.join(fsplit)
+            if fname.lower() == fullname.lower():
                 player_link = 'https://www.basketball-reference.com'+str(res['href'])
                 return player_link
                     
@@ -309,4 +365,20 @@ class NBAapi():
         for index in range(0,len(a)-1):
             if a[index].text == 'Twitter':
                 twitter = a[index+1]['href']
+
+        # all_years = soup.find_all('th')
+
+        # for year in all_years:
+        #     print(year.text)
+
+        # total_td = soup.find_all('td')
+        # max_index = getIndexPositions(total_td, """<td class="center iz" data-stat="pos"></td>""")
+        # print(max_index)
+        # current_season_stats = total_td[max_index+1]
+        # print(current_season_stats.text)
+
+
+
+
         return [twitter,img,link]
+

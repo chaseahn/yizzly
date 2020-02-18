@@ -1,0 +1,180 @@
+.container {
+    background-color: rgba(0, 0, 0, 0);
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+    max-width: 760px;
+    position: relative;
+}
+
+
+input[type=submit] {
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    cursor: pointer;
+    text-align: center;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: rgba(231, 184, 255, 0.6);
+    color: rgb(182, 134, 206);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    background-color: rgb(201, 76, 76, 0);
+    transition: ease-in .4s;
+    display: inline-block;
+    letter-spacing: 3px;
+    margin-top: 10px;
+}
+
+input[type=submit]:hover {
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.397), rgba(147, 235, 187, 0.4));
+    box-shadow: 0px 3px 10px -5px rgba(151, 255, 163, 0.678);
+    transition: ease-in;
+    color: rgb(82, 188, 96);
+    border-color: #C9FFD0;
+}
+
+.mini-button{
+    width: auto;
+    height: 20px;
+    margin: 0;
+    padding: 0px 12px;
+    cursor: pointer;
+    text-align: center;
+    color: rgb(182, 134, 206);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
+    font-family: 'Exo', sans-serif;
+    font-size: 10px;
+    transition: ease-in .4s;
+    display: inline-block;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    line-height: 20px;
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgba(255, 255, 255, 0.4));
+}
+
+.mini-button:nth-child(1):hover { 
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgba(38, 249, 63, 0.4));
+    transition: ease-in;
+}
+
+.mini-button:nth-child(2):hover { 
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgba(235, 156, 147, 0.4));
+    transition: ease-in;
+}
+
+.align-left{
+    float: left;
+}
+.align-right{ 
+    float: right;
+}
+
+.container .main-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    padding: 12px 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
+    box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.5);
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+
+.container .main-row .main-item {
+    display: inline-flex;
+
+}
+
+
+.container .main-row img {
+    width: 80px;
+    margin-top: 5px;
+}
+
+
+.awesome-yellow-container{
+    background-color: rgb(187, 255, 0);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: 12px 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
+    box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.5);
+    margin-bottom: 15px;
+
+}
+
+input[type="file"], input[type="submit"]  {
+    display: none;
+}
+
+.file-text {
+    color: rgb(55, 15, 100);
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    margin-left: 20px;
+    line-height: 98px;
+}
+
+
+.custom-file-upload {
+    border-radius: 5px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
+    box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.5);
+}
+
+.custom-file-upload:hover {
+    border-radius: 5px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
+    background-color: white;
+    box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.5);
+}
+
+.container .row-action {
+    max-width: 70px;
+    min-width: 60px;
+    width: 50%;
+    height: 100%;
+    background-color: None;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: rgba(231, 184, 255, 0.6);
+    color: rgb(182, 134, 206);
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 60px;
+    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
+    margin-top: 17px;
+    transition: ease-in .4s;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+}
+
+.container .row-action:hover {
+    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.397), rgba(147, 235, 187, 0.4));
+    box-shadow: 0px 3px 10px -5px rgba(151, 255, 151, 0.678);
+    transition: ease-in;
+    color: rgb(82, 188, 96);
+    border-color: #C9FFD0;
+}

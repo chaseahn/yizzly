@@ -12,6 +12,7 @@ from time import gmtime, strftime, sleep
 from ..mappers.opencursor import OpenCursor
 from ..extension.security import hasher
 
+
 class User:
     def __init__(self, row={}, username='', password=''):
         if username:

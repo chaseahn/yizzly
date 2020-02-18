@@ -26,10 +26,9 @@ def index():
     if request.method == 'GET':
         #from log_commit
         session['clip_was_logged'] = False
-
+        print('get')
         p = Players()
         players_list = p.return_tracking_profiles()
-        
         return render_template(
             'private/index.html', 
             title="Rooks Portal",
@@ -37,57 +36,12 @@ def index():
             message="What would you like to do today?",
             player_list=players_list
             )
-
     elif request.method == 'POST':
-        if request.form['post_button'] == 'CONVERT':
-
-            # check if the post request has the file part
-            if 'file' not in request.files:
-                flash('No file part')
-                return redirect(url_for('private.index'))
-
-            file = request.files['file']
-
-            print("Current File: "+str(file))
-            print("Filename: "+str(file.filename))
-
-            # if user does not select file, browser also
-            # submit an empty part without filename
-            if file.filename == '':
-                flash('No selected file')
-                return redirect(url_for('private.index'))
-
-            if file and allowed_file(file.filename):
-                #secure_filename check
-                filename = secure_filename(file.filename)
-                uploads = current_app.config['UPLOAD_FOLDER']
-                file_path = os.path.join(uploads, filename)
-                #save file to server
-                print("Saving to " + str(file_path))
-                file.save(file_path)
-                print("Saved")
-                #read file from server
-                with open(file_path) as user_file:
-                    #convert EDL 
-                    edl = EDL(path=file_path,name=filename,frame_rate='29.97')
-                    edl.execute()
-                os.remove(file_path)
-                directory = os.path.join(current_app.root_path, uploads)
-                print(directory)
-                csv_file = filename.split('.')[0]+'.csv'
-                return send_from_directory(
-                    directory=uploads, 
-                    filename=csv_file,
-                    as_attachment=True)
-                # os.remove(directory+csv_file)
-        elif request.form['post_button'] == 'Search Player':
-            print('modal')
-            return ('', 204)
-        else:
-            session['first_name'] = request.form.get('first_name')
-            session['last_name'] = request.form.get('last_name')
-            return redirect(url_for('private.add_player'))
+        session['first_name'] = request.form.get('first_name')
+        session['last_name'] = request.form.get('last_name')
+        return redirect(url_for('private.add_player'))
     else:
+        print('yo')
         pass
 
 @subcontroller.route('/log',methods=['GET','POST'])
@@ -232,7 +186,7 @@ def add_player():
             except TypeError: 
                 player['team'] = None
             links = api.scrape_PBR_profile(
-                player['firstName'].capitalize(), player['lastName'].capitalize()
+                session['first_name'], player['lastName']
             )
             # get twitter link
             player['twitter'] = links[0]
@@ -270,14 +224,63 @@ def add_player():
     else:
         pass
 
-# clip['firstName'],
-#                 clip['lastName'],
-#                 clip['teamId'],
-#                 clip['yearsPro'],
-#                 clip['collegeName'],
-#                 clip['country'],
-#                 clip['playerId'],
-#                 clip['dateOfBirth'],
-#                 clip['startNba'],
-#                 clip['leagues']['standard']['jersey'],
-#                 clip['leagues']['standard']['pos']
+@subcontroller.route('/convert-edl',methods=["GET","POST"])
+def convert_edl():
+    user = User({'username': session['username'], 'pk': session['pk']})
+    if request.method == 'GET':
+        return render_template('private/convert-edl.html',
+            username=user.username,
+            message="Let's convert your EDL file!",
+            title="Convert EDL"
+        )
+    elif request.method == 'POST':
+        #FIXME change flashes
+        if request.form.get('post_button') == 'CONVERT':
+            print('converter')
+            # print(request.files['filename'])
+            # # check if the post request has the file part
+
+            file = request.files['file']
+
+            if file.filename == '':
+                flash('No selected files 🙁')
+                return redirect(url_for('private.convert_edl'))
+
+            print("Current File: "+str(file))
+            print("Filename: "+str(file.filename))
+
+            # if user does not select file, browser also
+            # submit an empty part without filename
+            if allowed_file(file.filename) is False:
+                flash("We only accept EDL's 🙁")
+                return redirect(url_for('private.convert_edl'))
+
+            if file and allowed_file(file.filename):
+                #secure_filename check
+                filename = secure_filename(file.filename)
+                uploads = current_app.config['UPLOAD_FOLDER']
+                file_path = os.path.join(uploads, filename)
+                #save file to server
+                print("Saving to " + str(file_path))
+                file.save(file_path)
+                print("Saved")
+                #read file from server
+                with open(file_path) as user_file:
+                    #convert EDL 
+                    edl = EDL(path=file_path,name=filename,frame_rate='29.97')
+                    edl.execute()
+                os.remove(file_path)
+                directory = os.path.join(current_app.root_path, uploads)
+                print(directory)
+                csv_file = filename.split('.')[0]+'.csv'
+                return send_from_directory(
+                    directory=uploads, 
+                    filename=csv_file,
+                    as_attachment=True)
+                # os.remove(directory+csv_file)
+        else:
+            return render_template('private/convert-edl.html',
+            username=user.username,
+            message="Let's convert your EDL file!",
+            title="Convert EDL"
+            )

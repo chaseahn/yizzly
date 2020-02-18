@@ -1,0 +1,66 @@
+{% extends "structure.html" %}
+{% block viewport %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{(title}}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/edl.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <form action="/convert-edl" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <div class="mini-button align-left">
+                <a href='/log'>
+                    <div class="v-center">
+                        GO BACK
+                    </div>
+                </a>
+            </div>
+            <div class="mini-button align-right">
+                <a href='/log-commit'>
+                    <div class="v-center">
+                        HELP
+                    </div>
+                </a>
+            </div>
+            <div class="main-row">
+                <div class="main-item">
+                    <label for="file-upload" class="custom-file-upload">
+                        <img src="{{url_for('static', filename='img/edlfile.png')}}" />
+                    </label>
+                    <input name="file" id="file-upload" type="file"/>
+                    <div id="file-text" class="file-text" >
+                        No File Selected...Yet 😈
+                    </div>
+                </div>
+                <label for="convert" class="row-action">
+                    <i class="fa fa-angle-double-right" style="font-size:24px"></i>
+                </label>
+                <input name="post_button" id="convert" type="submit" value="CONVERT">
+            </div>
+        </div>
+
+        </form>
+        
+        <script>
+            document.getElementById('file-upload').onchange = function () {
+            var filename = this.value.replace(/^C:\\fakepath\\/, "");
+            document.getElementById('file-text').innerHTML = filename;            
+            };
+        </script>
+    </body>
+</html>
+{% endblock %}
