@@ -395,7 +395,23 @@ class NBAapi():
         season_stats= {}
         for attr in last_season_stats_cell:
             season_stats[attr['data-stat']] = attr.text
-        print(season_stats)
+        profile = {}
+        info = soup.find("div", {"itemtype": "https://schema.org/Person"})
+        span = info.find_all('span')
+        for attr in span:
+            try:
+                profile[attr['itemprop']] = attr.text.strip()
+            except:
+                pass
 
-        return [twitter,img,link,season_stats]
+        num = soup.find("div", {"class": "uni_holder bbr"})
+        jerseys = num.find_all('a')
+        current_jersey = jerseys[-1]
+        profile['jersey_number'] = current_jersey.text.strip()
+        profile['current_team'] = current_jersey['data-tip'].split(',')[0]
+
+        print(season_stats)
+        print(profile)
+
+        return [twitter,img,link,season_stats,profile]
 

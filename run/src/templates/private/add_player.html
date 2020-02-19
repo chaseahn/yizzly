@@ -32,61 +32,65 @@
                             </div>
                             <div class="sub-column">
                                 {{player.stats.team_id}}<br>
-                                <img src="{{url_for('static', filename='img/nba/'+player.stats.team_id+'.png')}}" />
+                                {% set list1 = player.profile.current_team.split(' ') %}
+                                <img src="{{url_for('static', filename='img/nba/'+list1[-1]+'.png')}}" />
                             </div>
                         </div>
                         <div class="game-info">
                             <div class="col-1">
-                                    <div class="info-header">
-                                    Name
-                                    </div>
-                                    <div class="strip">
-                                    {{player.firstName}} {{player.lastName}} 
-                                    </div>
+                                <div class="info-header">
+                                Name
+                                </div>
+                                <div class="strip">
+                                {{player.firstName}} {{player.lastName}} 
+                                </div>
                                 <div class="info-header">
                                     Position
                                 </div>
                                 <div class="strip">
-                                    {{player.leagues.standard.pos}}
+                                    {{player.stats.pos}}
                                 </div>
                                 <div class="info-header">
-                                    Years Pro
+                                    Age
                                 </div>
-                                {{player.yearsPro}}
+                                {{player.stats.age}}
                             </div>
                             <div class="col-1">
                                 <div class="info-header">
                                     Current Team
                                 </div>
                                 <div class="strip">
-                                    {{player.stats.team_id}}
+                                    {% set list1 = player.profile.current_team.split(' ') %}
+                                    {{list1[-1]}}
                                 </div>
                                 <div class="info-header">
-                                    College Team
+                                    Number
+                                </div>
+                                <div class="strip">
+                                {{player.profile.jersey_number}}
+                                </div>
+                                <div class="info-header">
+                                    Years Pro
+                                </div>
+                                {{player.yearsPro}}
+                            </div>
+                            <div class="col-2">
+                                <div class="info-header">
+                                    College
                                 </div>
                                 <div class="strip">
                                     {{player.collegeName}}
                                 </div>
                                 <div class="info-header">
-                                    Number
-                                </div>
-                                {{player.leagues.standard.jersey}}
-                            </div>
-                            <div class="col-2">
-                                <div class="info-header">
-                                    Date of Birth
-                                </div>
-                                <div class="strip">
-                                    {{player.dateOfBirth}}
-                                </div>
-                                <div class="info-header">
                                     Height
                                 </div>
-                                {{player.heightInMeters}}m
+                                <div class="strip">
+                                {{player.profile.height}}
+                                </div>
                                 <div class="info-header">
                                     Weight
                                 </div>
-                                {{player.weightInKilograms}}kg
+                                {{player.profile.weight}}
                             </div>
                         </div>
                         <div class="button-cont">

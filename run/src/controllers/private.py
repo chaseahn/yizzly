@@ -197,6 +197,11 @@ def add_player():
                 player['pbr_link'] = links[2]
                 #player stats
                 player['stats'] = links[3]
+                #player profile
+                player['profile'] = links[4]
+
+            print('FINAL')
+            print(player)
             # set journey indicator for results
             if len(session['found_players']) == 1:
                 indicator = 'match'
@@ -217,9 +222,16 @@ def add_player():
             else:
                 print('No player? CHECK')
         p = Players()
-        p.add_player(clip=player_to_add)
-        #TODO Add team to DB
-        print('added to db')
+        p.add_player(
+            clip=player_to_add,
+            user_pk=user.pk
+            )
+        p.add_season_stats(
+            player_id=player_to_add['playerId'],
+            clip=player['stats']
+            )
+
+        print('Complete.')
         session.pop('found_players', None)
         session.pop('first_name', None)
         session.pop('last_name', None)
