@@ -260,15 +260,18 @@ class NBAapi():
                 "GET", player_url, headers=self.headers
                 ).json()['api']
             if self.check_response_for_200(res['status']):
+
+                print("Connection to API-NBA made.")
+
                 if res['results']==0:
+                    print('Found Zero Players')
                     return [{}]
                 elif res['results']==1:
+                    print('Found 1 Players')
                     return res['players']
                 else:
-                    #FIXME DENADRE
+                    print('Found 1+ Players')
                     return_list = []
-                    print(res['players'])
-                    print(len(res['players']))
                     #erase any bad match
                     #can return multiple of same name
                     for i in range(0,len(res['players'])):
@@ -286,11 +289,12 @@ class NBAapi():
                                 }
                             if player['collegeName'] == '':
                                 player['collegeName'] = 'N/A'
+                            
+                            print('Adding '+str(player))
+
                             return_list.append(player)
+                    
                     print(return_list)
-
-
-
                     return return_list
             else:
                 print('404 Error: Something went wrong.')
@@ -332,9 +336,15 @@ class NBAapi():
                     }
                 }
             return [empty_team]
-
             
     def get_player_PBR_link(self, first_name, last_name):
+
+        first_n = list(first_name)
+        for i in range(0,len(first_n)-1):
+            if first_n[i] == "'":
+                first_n.pop(i)
+        first_name = ''.join(first_n)
+
         last_inital = last_name[:1].lower()
         fullname = f"{first_name} {last_name}"
         pbr = 'https://www.basketball-reference.com/players/'
@@ -345,19 +355,27 @@ class NBAapi():
         filtered = soup.find_all('a')
 
         for res in filtered:
+
             fsplit = list(res.text)
             for i in range(0,len(fsplit)-1):
                 if fsplit[i] == "'":
                     fsplit.pop(i)
             fname = ''.join(fsplit)
+
             if fname.lower() == fullname.lower():
+                print(fname + 'MATCHES')
                 player_link = 'https://www.basketball-reference.com'+str(res['href'])
+
+                print('Found: '+player_link)
+
                 return player_link
+            else:
+                pass
                     
     def scrape_PBR_profile(self, first_name, last_name):
         link = self.get_player_PBR_link(first_name, last_name)
         r = requests.get(link)
-        soup = BeautifulSoup(r.text, 'html.parser')
+        soup = BeautifulSoup(r.content, 'html.parser')
         filtered = soup.find("div", {"id": "meta"})
         img = filtered.find_all('img')[0]
         img = img['src']
@@ -365,20 +383,19 @@ class NBAapi():
         for index in range(0,len(a)-1):
             if a[index].text == 'Twitter':
                 twitter = a[index+1]['href']
+        print("Looking for table....")
+        table = soup.find('tbody')
+        cells = []
+        for cell in table:
+            if cell == '\n':
+                pass
+            else:
+                cells.append(cell)
+        last_season_stats_cell = cells[-1]
+        season_stats= {}
+        for attr in last_season_stats_cell:
+            season_stats[attr['data-stat']] = attr.text
+        print(season_stats)
 
-        # all_years = soup.find_all('th')
-
-        # for year in all_years:
-        #     print(year.text)
-
-        # total_td = soup.find_all('td')
-        # max_index = getIndexPositions(total_td, """<td class="center iz" data-stat="pos"></td>""")
-        # print(max_index)
-        # current_season_stats = total_td[max_index+1]
-        # print(current_season_stats.text)
-
-
-
-
-        return [twitter,img,link]
+        return [twitter,img,link,season_stats]
 

@@ -31,8 +31,8 @@
                                 <img src={{player.headshot}}>
                             </div>
                             <div class="sub-column">
-                                {{player.team.nickname}}<br>
-                                <img src="{{url_for('static', filename='img/nba/'+player.team.nickname+'.png')}}" />
+                                {{player.stats.team_id}}<br>
+                                <img src="{{url_for('static', filename='img/nba/'+player.stats.team_id+'.png')}}" />
                             </div>
                         </div>
                         <div class="game-info">
@@ -59,7 +59,7 @@
                                     Current Team
                                 </div>
                                 <div class="strip">
-                                    {{player.team.nickname}}
+                                    {{player.stats.team_id}}
                                 </div>
                                 <div class="info-header">
                                     College Team
