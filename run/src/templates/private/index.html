@@ -131,15 +131,26 @@
                 <div class="w3-modal-content">
                     <div class="modal-header">
                         <div class="text">
-                            Convert EDL to Premerie
+                            EDL to Premerie: Before you convert make sure you follow these rules.
                         </div>
                         <div class="span-shift">
                             <span onclick="document.getElementById('id02').style.display='none'">&times;</span>
                         </div>
                     </div>
                     <div class="modal-box">
-                        <div class="input-container">
-                            before you convert make sure you followed these rules. 
+                        <div class="img-settings">
+                            <div class="image-box">
+                                <img src="{{url_for('static', filename='img/settings.png')}}" />
+                            </div>
+                            <div class="text-setting">
+                                <h1>
+                                    <b>Step 1:</b> Make sure all clips are in a single line with the track highlighted as pictured below.
+                                </h1>
+                                <h1>
+                                    Step 2: Export Edl from File > Export > EDL with the settings pictured to the left.
+                                </h1>
+                                <img src="{{url_for('static', filename='img/timeline.png')}}" />
+                            </div>
                         </div>
                         <div class="submit-container">
                             <a href="/convert-edl">

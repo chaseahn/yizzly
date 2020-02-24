@@ -482,6 +482,32 @@ input[type=modal]:hover {
     text-align: center;
 }
 
+.modal-box .img-settings {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-box .img-settings .text-setting img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 3px 8px -3px rgba(14, 14, 14, 0.424);
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.modal-box .img-settings .text-setting{
+    margin-left: 20px;
+    text-align: left;
+}
+
+.modal-box .image-box img {
+    height: 200px;
+    width: auto;
+    box-shadow: 0px 3px 8px -3px rgba(0, 0, 0, 0.424);
+    border-radius: 4px;
+}
+
 .modal-header {
     background-color: rgb(131, 250, 145);
     width: 100%;
