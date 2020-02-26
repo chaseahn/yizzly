@@ -11,6 +11,7 @@ from time import gmtime, strftime, sleep
 
 from ..mappers.opencursor import OpenCursor
 from ..extension.security import hasher
+from ..models.app import NBAapi
 
 
 class User:
@@ -257,11 +258,18 @@ class Players:
 
         tracked_ids = self.return_all_saved_player_ids()
         player_list = []
-        
+
         for num in tracked_ids:
+
             current_player = Players(p_id=num)
-            print(current_player.pk)
             current_season = Stats(current_player.pk)
+            year = current_season.season.split('-')[1]
+            gamelog_link = current_player.pbr_link.replace('.html',f'/gamelog/20{year}')
+
+            last_game = NBAapi().scrape_pbr_profile_for(
+                gamelog_link,'last_game'
+                )
+
             profile = {
                 'first_name': current_player.first_name,
                 'last_name': current_player.last_name,
@@ -270,13 +278,17 @@ class Players:
                 'team': current_player.team_id,
                 'headshot': current_player.headshot,
                 'twitter': current_player.twitter,
+                'pbr': current_player.pbr_link,
                 'pts': current_season.pts_per_g,
                 'reb': current_season.trb_per_g,
                 'ast': current_season.ast_per_g,
                 'tpm': current_season.fg3_per_g,
                 'stl': current_season.stl_per_g,
-                'blk': current_season.blk_per_g
+                'blk': current_season.blk_per_g,
+                'id': current_player.player_id,
+                'pk': current_player.pk
             }
+
             player_list.append(profile)
 
 
@@ -314,6 +326,7 @@ class Stats():
 
     def __init__(self,player_pk='',row={}):
         if player_pk:
+            #check if latest row was recorded today:
             self.fetch_lastest_season_stats(player_pk)
         else:
             self.row_set(row)
@@ -364,8 +377,29 @@ class Stats():
             cur.execute(SQL,val)
             row = cur.fetchone()
         if row:
-            print('found player row')
-            self.row_set(row)
+            #if row recorded is from today, show it
+            print(row['date_recorded'] )
+            if row['date_recorded'] == date.today().strftime("%m/%d/%y"):
+                self.row_set(row)
+            #else scrape again for todays recent stats and save
+            else:
+                with OpenCursor() as cur:
+                    SQL = """SELECT * FROM players WHERE pk=? """
+                    val = (player_pk,)
+                    cur.execute(SQL,val)
+                    row = cur.fetchone()
+                    if row:
+                        p_id = row['player_id']
+                        updated_stats = NBAapi().scrape_pbr_profile_for(
+                            row['pbr_link'],'season'
+                            )
+                        seed = Players().add_season_stats(p_id,updated_stats)
+                        print('added a new update for season Stats')
+                        self.fetch_lastest_season_stats(
+                            player_pk
+                        )
+                    else:
+                        pass
         else:
             print('Nothing found')
             self.row_set({})
@@ -433,3 +467,89 @@ class Stats():
                 clip['player_pk']
                 )
             cur.execute(SQL,val)
+
+class GameLog():
+
+    def __init__(self,player_pk='',row={}):
+        if player_pk:
+            #check if latest row was recorded today:
+            self.fetch_last_game(player_pk)
+        else:
+            self.row_set(row)
+    
+    def __bool__(self):
+        return bool(self.pk)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self,exception_type,exception_value,exception_traceback):
+        sleep(randint(10,10000)/10000)
+
+    def row_set(self,row={}):
+        row = dict(row)
+        self.ranker = row.get('ranker')
+        self.game_season = row.get('game_season')
+        self.date_game = row.get('date_game')
+        self.age = row.get('age')
+        self.team_id = row.get('team_id')
+        self.game_location = row.get('game_location')
+        self.opp_id = row.get('opp_id')
+        self.game_result = row.get('game_result')
+        self.gs = row.get('gs')
+        self.mp = row.get('mp')
+        self.fg = row.get('fg')
+        self.fga = row.get('fga')
+        self.fg_pct = row.get('fg_pct')
+        self.fg3 = row.get('fg3')
+        self.fg3 = row.get('fg3')
+        self.fg3_pct = row.get('fg3_pct')
+        self.ft = row.get('ft')
+        self.fta = row.get('fta')
+        self.ft_pct = row.get('ft_pct')
+        self.orb = row.get('orb')
+        self.drb = row.get('drb')
+        self.trb = row.get('trb')
+        self.ast = row.get('ast')
+        self.stl = row.get('stl')
+        self.blk = row.get('blk')
+        self.tov = row.get('tov')
+        self.pf = row.get('pf')
+        self.pts = row.get('pts')
+        self.game_score = row.get('game_score')
+        self.plus_minus = row.get('plus_minus')
+
+    def fetch_last_game(self,player_pk):
+        with OpenCursor() as cur:
+            SQL = """SELECT * FROM gamelog WHERE player_pk=? 
+            ORDER BY pk DESC LIMIT 1"""
+            val = (player_pk,)
+            cur.execute(SQL,val)
+            row = cur.fetchone()
+        if row:
+            #if row recorded is from today, show it
+            print(row['date_recorded'] )
+            if row['date_recorded'] == date.today().strftime("%m/%d/%y"):
+                self.row_set(row)
+            #else scrape again for todays recent stats and save
+            else:
+                with OpenCursor() as cur:
+                    SQL = """SELECT * FROM players WHERE pk=? """
+                    val = (player_pk,)
+                    cur.execute(SQL,val)
+                    row = cur.fetchone()
+                    if row:
+                        p_id = row['player_id']
+                        updated_stats = NBAapi().scrape_pbr_profile_for(
+                            row['pbr_link'],'season'
+                            )
+                        seed = Players().add_season_stats(p_id,updated_stats)
+                        print('added a new update for season Stats')
+                        self.fetch_last_game(
+                            player_pk
+                        )
+                    else:
+                        pass
+        else:
+            print('Nothing found')
+            self.row_set({})

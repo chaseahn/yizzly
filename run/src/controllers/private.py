@@ -26,10 +26,12 @@ def index():
     if request.method == 'GET':
         #from log_commit
         session['clip_was_logged'] = False
-        print('get')
+        session['user_entered_cues_for_conversion'] = False
         p = Players()
         players_list = p.return_tracking_profiles()
         #TODO update stats
+        print(players_list)
+
         return render_template(
             'private/index.html', 
             title="Rooks Portal",
@@ -148,24 +150,58 @@ def log_commit():
 def cuesheet():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
-        return render_template('private/cuesheet.html', 
-            title="Cuesheet",
-            username=user.username,
-            message="Let's make a cuesheet!")
+        if session['user_entered_cues_for_conversion']:
+            print('User has entered cues')
+            return render_template('private/cuesheet.html', 
+                title="Cuesheet",
+                username=user.username,
+                message="Enter your timecodes from Premerie!",
+                tracks=session['tracked_events']
+                )
+        else:
+            print('No session for cues detected.')
+            return render_template('private/cuesheet.html', 
+                title="Cuesheet",
+                username=user.username,
+                message="Let's make a cuesheet!")
     #TODO make more dynamic
     elif request.method == 'POST':
-        filename = 'name'
-        user_input = request.form['info']
-        print(user_input)
-        uploads = current_app.config['UPLOAD_FOLDER']
-        cue = CueSheet(user_input=user_input, name=filename)
-        cue.convert_cues_to_csv()
-        directory = os.path.join(current_app.root_path, uploads)
-        csv_file = filename+'.csv'
-        return send_from_directory(
-            directory=uploads, 
-            filename=csv_file,
-            as_attachment=True)
+        if request.form['post_button'] == 'SUBMIT':
+            filename='name'
+            user_input = request.form['info']
+            cue = CueSheet(user_input=user_input, name=filename)
+            session['tracked_events'] = cue.parse_input()
+            session['user_entered_cues_for_conversion'] = True
+            return redirect(url_for('private.cuesheet'))
+        else:
+            events = session['tracked_events']
+            for i in range(len(events)):
+                events[i]['in-tc'] = request.form.get(f'in-tc-{i}')
+                events[i]['out-tc'] = request.form.get(f'out-tc-{i}')
+            filename = 'name'
+            uploads = current_app.config['UPLOAD_FOLDER']
+            cue = CueSheet(name=filename)
+            cue.convert_cues_to_csv(events)
+            directory = os.path.join(current_app.root_path, uploads)
+            csv_file = filename+'.csv'
+            session['user_entered_cues_for_conversion'] = False
+            print(session['tracked_events'])
+            return send_from_directory(
+                directory=uploads, 
+                filename=csv_file,
+                as_attachment=True)
+            # filename = 'name'
+            # user_input = request.form['info']
+            # uploads = current_app.config['UPLOAD_FOLDER']
+            # cue = CueSheet(user_input=user_input, name=filename)
+            # cue.convert_cues_to_csv()
+            # directory = os.path.join(current_app.root_path, uploads)
+            # csv_file = filename+'.csv'
+            # session['user_entered_cues_for_conversion'] = False
+            # return send_from_directory(
+            #     directory=uploads, 
+            #     filename=csv_file,
+            #     as_attachment=True)
     else:
         pass
 

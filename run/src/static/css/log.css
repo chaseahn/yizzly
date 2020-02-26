@@ -86,9 +86,9 @@ input[type=text] {
     margin-top: 5px;
     margin-bottom: 5px;
     display: inline-block;
-    border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: white;
   }
 
 select  {
@@ -245,9 +245,11 @@ input[type="checkbox"]:checked + label {
 
 .align-left{
     float: left;
+    margin-bottom: 10px;
 }
 .align-right{ 
     float: right;
+    margin-bottom: 10px;
 }
 
 
@@ -275,8 +277,8 @@ input[type="checkbox"]:checked + label {
 }
 
 .h-col img {
-    height: auto;
-    width: 45px;
+    max-height: 40px;
+    width:auto;
 }
 
 .matchup-column {

@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:700|Lato&display=swap');
 
 
+.body {
+    padding-bottom: 50px;
+}
+
 /* The sidebar menu */
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */

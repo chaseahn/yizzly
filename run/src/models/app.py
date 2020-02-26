@@ -10,6 +10,8 @@ import jsonify
 from edl import Parser
 from flask import current_app
 from bs4 import BeautifulSoup
+from datetime import date
+from time import gmtime, strftime, sleep
 
 from ..extension.security import *
 
@@ -102,21 +104,21 @@ class DMMLogger():
         # Play Rating / Description
 
         input_list = self.log_input.split()
+        try:
+            input_list.remove('Trail')
+        except ValueError:
+            pass
 
         game_info = input_list[:input_list.index("ID:")+2]
         clip_info = input_list[input_list.index("ID:")+2:]
 
         clip_object = {}
-        if game_info[1] == 'Trail':
-            i=1
-        else:
-            i = 0
         clip_object['description'] = None
-        clip_object['away_team'] = game_info[1+i] 
-        clip_object['home_team'] = game_info[4+i]
-        clip_object['home_score'] = game_info[2+i]
-        clip_object['away_score'] = game_info[5+i]
-        clip_object['game_date'] = game_info[6+i]
+        clip_object['away_team'] = game_info[1] 
+        clip_object['home_team'] = game_info[4]
+        clip_object['home_score'] = game_info[2]
+        clip_object['away_score'] = game_info[5]
+        clip_object['game_date'] = game_info[6]
         clip_object['game_id'] = game_info[game_info.index("ID:")+1]
         clip_object['clip_type'] = ' '.join(
             game_info[7:game_info.index("ID:")-1]
@@ -159,6 +161,8 @@ class CueSheet():
     def __init__(self, user_input='', name=''):
         if user_input:
             clean_user_input = user_input.replace('\r','')
+        else:
+            clean_user_input = ''
         self.name = name
         self.user_input = clean_user_input.split('\n')
         self.upload_folder = current_app.config['UPLOAD_FOLDER']
@@ -168,7 +172,7 @@ class CueSheet():
 
         cue_list = self.user_input
         track_list, events = [], []
-
+        i = 0
         for index in range(len(cue_list)):
 
             if cue_list[index].isdigit():
@@ -202,6 +206,7 @@ class CueSheet():
             publishers = track[publisher_index+1:]
 
             track_info = {
+                'index': i,
                 'title': title,
                 'timing': timing, 
                 'composers': ' '.join(composers),
@@ -209,13 +214,13 @@ class CueSheet():
             }
             
             events.append(track_info)
+            i+=1
 
         print(events)
         return events
 
-    def convert_cues_to_csv(self):
+    def convert_cues_to_csv(self,events):
 
-        events = self.parse_input()
         csv_columns = events[0].keys()
         file_name = self.name+'.csv'
 
@@ -414,4 +419,52 @@ class NBAapi():
         print(profile)
 
         return [twitter,img,link,season_stats,profile]
+
+    def get_last_game(self, p_id):
+        pass
+
+    def scrape_pbr_profile_for(self, link, opt):
+
+        r = requests.get(link)
+        soup = BeautifulSoup(r.content, 'html.parser')
+
+        if opt == 'season':
+            print("Looking for table....")
+            table = soup.find('tbody')
+            cells = []
+            for cell in table:
+                if cell == '\n':
+                    pass
+                else:
+                    cells.append(cell)
+            last_season_stats_cell = cells[-1]
+            season_stats= {}
+            for attr in last_season_stats_cell:
+                season_stats[attr['data-stat']] = attr.text
+            
+            return season_stats
+
+        elif opt == 'last_game':
+            today = date.today()
+            d = today.strftime("%m/%d/%y")
+            print("Looking for table....")
+            table = soup.find('tbody')
+            cells = []
+            for cell in table:
+                if cell == '\n':
+                    pass
+                else:
+                    cells.append(cell)
+            last_cell = cells[-1]
+            last_game = {}
+            for attr in last_cell:
+                last_game[attr['data-stat']] = attr.text
+            print(last_game)
+        else:
+            pass
+
+
+
+        #TODO Do for gamelog
+        #     return season_stats
 

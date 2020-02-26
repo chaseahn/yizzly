@@ -97,6 +97,47 @@ def run(dbname='winik.db'):
         FOREIGN KEY(player_pk) REFERENCES player(pk)
     );""")
 
+
+    """ GAMELOG TABLE """
+    CUR.execute("""DROP TABLE IF EXISTS gamelog;""")
+    # create USER table FOR LOGIN AND SESSION
+    CUR.execute("""CREATE TABLE gamelog(
+        pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        date_recorded VARCHAR,
+        ranker VARCHAR,
+        game_season VARCHAR,
+        date_game VARCHAR,
+        age VARCHAR,
+        team_id VARCHAR,
+        game_location VARCHAR,
+        opp_id VARCHAR,
+        game_result VARCHAR,
+        gs VARCHAR,
+        mp VARCHAR,
+        fg VARCHAR,
+        fga VARCHAR,
+        fg_pct VARCHAR,
+        fg3 VARCHAR,
+        fg3 VARCHAR,
+        fg3_pct VARCHAR,
+        ft VARCHAR,
+        fta VARCHAR,
+        ft_pct VARCHAR,
+        orb VARCHAR,
+        drb VARCHAR,
+        trb VARCHAR,
+        ast VARCHAR,
+        stl VARCHAR,
+        blk VARCHAR,
+        tov VARCHAR,
+        pf VARCHAR,
+        pts VARCHAR,
+        game_score VARCHAR,
+        plus_minus VARCHAR, 
+        player_pk INTEGER,
+        FOREIGN KEY(player_pk) REFERENCES player(pk)
+    );""")
+
     CON.commit()
     CUR.close()
     CON.close()

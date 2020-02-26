@@ -21,15 +21,36 @@
         <![endif]-->
         <form action="/cuesheet" method="post" enctype="multipart/form-data">
         <div class="container">
-            <div>
-                <textarea type="text" placeholder="Copy & paste your cues from FilmTrack to here." name="info"></textarea>
-            </div>
-            <input name="post_button" type="submit" value="CONVERT"/>
-            <div class="row">
-                <div class="column">hi</div>
-                <div class="column">hi</div>
-                <div class="column">hi</div>
-            </div>
+            {% if tracks %}
+                {% for track in tracks %}
+                <div class="h-col">
+                    <div class="half cue-info">
+                        <div class='cue-title'>
+                            {{track.title}}
+                        </div>
+                        <div class="cue-comp">
+                            {{track.composers}}
+                        </div>
+                    </div>
+                    <div class="quarter">
+                        <input type="text" name="in-tc-{{track.index}}" placeholder="Enter In Timecode" required>
+                    </div>
+                    <div class="quarter">
+                        <input type="text" name="out-tc-{{track.index}}" placeholder="Enter Out Timecode" required>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="push">
+                    <input name="post_button" type="submit" value="CONVERT"/>
+                </div>
+            {% else %}
+                <div>
+                    <textarea type="text" placeholder="Copy & paste your cues from FilmTrack to here." name="info" required></textarea>
+                </div>
+                <input name="post_button" type="submit" value="SUBMIT"/>
+            {% endif %}
+
+
         </div>
         </form>
         
