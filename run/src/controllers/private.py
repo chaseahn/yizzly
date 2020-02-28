@@ -29,7 +29,8 @@ def index():
         session['user_entered_cues_for_conversion'] = False
         p = Players()
         players_list = p.return_tracking_profiles()
-        #TODO update stats
+
+
         print(players_list)
 
         return render_template(
@@ -252,11 +253,12 @@ def add_player():
                 )
 
     elif request.method == 'POST':
+        
         for player in session['found_players']:
             if player['playerId'] == request.form['add_player']:
                 player_to_add = player
             else:
-                print('No player? CHECK')
+                pass
         p = Players()
         p.add_player(
             clip=player_to_add,
@@ -266,7 +268,16 @@ def add_player():
             player_id=player_to_add['playerId'],
             clip=player['stats']
             )
-
+        year = player_to_add['stats']['season'].split('-')[1]
+        gamelog = NBAapi().scrape_pbr_profile_for(
+            link=player_to_add['pbr_link'].replace('.html',f'/gamelog/20{year}'), 
+            opt='season_gamelog'
+            )
+        g = GameLog()
+        g.add_entire_player_gamelog(
+            clips=gamelog,
+            player_id=player_to_add['playerId']
+        )
         print('Complete.')
         session.pop('found_players', None)
         session.pop('first_name', None)

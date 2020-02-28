@@ -556,7 +556,7 @@ input[type=modal]:hover {
 }
 
 .players-grid .player-box {
-    height: 180px;
+    height: 100%;
     width:auto;
     color:white;
     box-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.308);
@@ -645,13 +645,12 @@ input[type=modal]:hover {
 }
 
 .box-bottom .statline {
-    line-height: 18px;
-    margin-top: 8px;
+    margin-top: 7px;
     margin-left: 8px;
     color: rgb(32, 32, 70);
     font-family: 'Lato', sans-serif;
     padding: 0px;
-    font-size: 10px;
+    font-size: 9px;
 }
 
 .stats-container {

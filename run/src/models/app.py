@@ -459,7 +459,69 @@ class NBAapi():
             last_game = {}
             for attr in last_cell:
                 last_game[attr['data-stat']] = attr.text
-            print(last_game)
+            last_game['date_recorded'] = d
+            return last_game
+        
+        elif opt == 'season_gamelog':
+            today = date.today()
+            d = today.strftime("%m/%d/%y")
+            print("Looking for table....")
+            table = soup.find('tbody')
+            cells = table.find_all('tr')
+            game_rows = []
+            for cell in cells:
+                if cell == '\n':
+                    pass
+                else:
+                    game_rows.append(cell)
+            all_games = []
+            for game in game_rows:
+
+                td = game.find_all('td')
+                game_stats = {}
+                for attr in td:
+                    game_stats[attr['data-stat']] = attr.text
+
+                game_stats['date_recorded'] = d
+
+                if 'reason' in game_stats:
+                    print('DNP Found')
+                    game_stats['game_season'] = '0F'
+                    game_stats['gs'] = '0F'
+                    game_stats['mp'] = '0F'
+                    game_stats['fg'] = '0F'
+                    game_stats['fga'] = '0F'
+                    game_stats['fg_pct'] = '0F'
+                    game_stats['fg3'] = '0F'
+                    game_stats['fg3a'] = '0F'
+                    game_stats['fg3_pct'] = '0F'
+                    game_stats['ft'] = '0F'
+                    game_stats['fta'] = '0F'
+                    game_stats['ft_pct'] = '0F'
+                    game_stats['orb'] = '0F'
+                    game_stats['drb'] = '0F'
+                    game_stats['trb'] = '0F'
+                    game_stats['ast'] = '0F'
+                    game_stats['stl'] = '0F'
+                    game_stats['blk'] = '0F'
+                    game_stats['tov'] = '0F'
+                    game_stats['pf'] = '0F'
+                    game_stats['pts'] = '0F'
+                    game_stats['game_score'] = '0'
+                    game_stats['plus_minus'] = '0'
+                else:
+                    game_stats['reason'] = 'None'
+
+                all_games.append(game_stats)
+                
+            return all_games
+
+
+        elif opt == 'img':
+            filtered = soup.find("div", {"id": "meta"})
+            img = filtered.find_all('img')[0]
+            return img['src']
+
         else:
             pass
 

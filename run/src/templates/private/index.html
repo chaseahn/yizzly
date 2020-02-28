@@ -266,11 +266,25 @@
                                 Last Night
                             </div>
                             <div class="statline">
-                                31pts
+                                {{player.last_game.game_location}} {{player.last_game.opp_id}} 
+                                {{player.last_game.pts}}pts ({{player.last_game.fg}}-{{player.last_game.fga}}fg, {{player.last_game.fg3}}-{{player.last_game.fg3a}}fg3) <br> 
+                                {{player.last_game.trb}}reb {{player.last_game.ast}}ast  
+                                {{player.last_game.stl}}stl {{player.last_game.blk}}blk {{player.last_game.tov}}tov
                             </div>
                         </div>
                     </div>
                 {% endfor %}
+            {% else %}
+            <div class="player-box">
+                <div class="box-top">
+                    <div class="pcol1">
+                        <text>
+                            Track players by adding them to your account.
+                        </text>
+                    </div>
+                </div>
+            </div>
+
             {% endif %}
             </div>
         </div>

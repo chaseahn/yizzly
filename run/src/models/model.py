@@ -4,7 +4,7 @@ import sqlite3
 import time
 import jsonify
 
-from datetime import date
+from datetime import date, timedelta
 from flask import session
 from random import randint
 from time import gmtime, strftime, sleep
@@ -13,6 +13,7 @@ from ..mappers.opencursor import OpenCursor
 from ..extension.security import hasher
 from ..models.app import NBAapi
 
+GL_YEAR = '20'
 
 class User:
     def __init__(self, row={}, username='', password=''):
@@ -264,11 +265,8 @@ class Players:
             current_player = Players(p_id=num)
             current_season = Stats(current_player.pk)
             year = current_season.season.split('-')[1]
-            gamelog_link = current_player.pbr_link.replace('.html',f'/gamelog/20{year}')
-
-            last_game = NBAapi().scrape_pbr_profile_for(
-                gamelog_link,'last_game'
-                )
+            gamelog_link = current_player.pbr_link.replace('.html',f'/gamelog/20{year}')  
+            last_game_stats = GameLog().fetch_last_game(player_pk=current_player.pk)
 
             profile = {
                 'first_name': current_player.first_name,
@@ -286,7 +284,9 @@ class Players:
                 'stl': current_season.stl_per_g,
                 'blk': current_season.blk_per_g,
                 'id': current_player.player_id,
-                'pk': current_player.pk
+                'pk': current_player.pk,
+                'gamelog_link': gamelog_link,
+                'last_game': last_game_stats
             }
 
             player_list.append(profile)
@@ -320,6 +320,18 @@ class Players:
     def get_player_stats(self, player_id):
         #return season avgs
         pass
+
+    def get_player_pk(self,p_id):
+        with OpenCursor() as cur:
+            SQL = """ SELECT * FROM players WHERE
+                  player_id=?; """
+            val = (p_id,)
+            cur.execute(SQL,val)
+            row = cur.fetchone()
+        if row:
+            return row['pk']
+        else:
+            pass
 
 
 class Stats():
@@ -378,7 +390,6 @@ class Stats():
             row = cur.fetchone()
         if row:
             #if row recorded is from today, show it
-            print(row['date_recorded'] )
             if row['date_recorded'] == date.today().strftime("%m/%d/%y"):
                 self.row_set(row)
             #else scrape again for todays recent stats and save
@@ -488,7 +499,9 @@ class GameLog():
 
     def row_set(self,row={}):
         row = dict(row)
-        self.ranker = row.get('ranker')
+        self.pk = row.get('pk')
+        self.reason = row.get('reason')
+        self.date_recorded = row.get('date_recorded')
         self.game_season = row.get('game_season')
         self.date_game = row.get('date_game')
         self.age = row.get('age')
@@ -501,7 +514,6 @@ class GameLog():
         self.fg = row.get('fg')
         self.fga = row.get('fga')
         self.fg_pct = row.get('fg_pct')
-        self.fg3 = row.get('fg3')
         self.fg3 = row.get('fg3')
         self.fg3_pct = row.get('fg3_pct')
         self.ft = row.get('ft')
@@ -518,6 +530,7 @@ class GameLog():
         self.pts = row.get('pts')
         self.game_score = row.get('game_score')
         self.plus_minus = row.get('plus_minus')
+        self.player_pk = row.get('player_pk')
 
     def fetch_last_game(self,player_pk):
         with OpenCursor() as cur:
@@ -527,29 +540,233 @@ class GameLog():
             cur.execute(SQL,val)
             row = cur.fetchone()
         if row:
-            #if row recorded is from today, show it
-            print(row['date_recorded'] )
-            if row['date_recorded'] == date.today().strftime("%m/%d/%y"):
-                self.row_set(row)
-            #else scrape again for todays recent stats and save
+            today = date.today().strftime("%m/%d/%y")
+            last_night = date.today() - timedelta(days=1)
+            d = last_night.strftime("%Y-%m-%d")
+            last_date_game = row['date_game']
+
+            #if the last entry's date played matches today, load atr
+            if row['date_recorded'] == today:
+                print('Up to date')
+                return dict(row)
+
+            #check if there is a new game
             else:
                 with OpenCursor() as cur:
                     SQL = """SELECT * FROM players WHERE pk=? """
                     val = (player_pk,)
                     cur.execute(SQL,val)
-                    row = cur.fetchone()
-                    if row:
-                        p_id = row['player_id']
+                    player_row = cur.fetchone()
+                    if player_row:
+                        #Scrape profile
+                        p_id = player_row['player_id']
                         updated_stats = NBAapi().scrape_pbr_profile_for(
-                            row['pbr_link'],'season'
+                            player_row['pbr_link'].replace('.html',f'/gamelog/20{GL_YEAR}'),
+                            'season_gamelog'
                             )
-                        seed = Players().add_season_stats(p_id,updated_stats)
-                        print('added a new update for season Stats')
-                        self.fetch_last_game(
-                            player_pk
-                        )
+
+                        print('Checking for updated game.')
+
+                        last_pbr_date_game = updated_stats[-1]['date_game']
+
+                        if last_date_game == last_pbr_date_game:
+                            #update the last row to show todays date
+                            with OpenCursor() as cur:
+                                SQL = """UPDATE gamelog SET date_recorded = ? 
+                                WHERE pk=? """
+                                val = (today,last_row['pk'])
+                                cur.execute(SQL,val)
+                            print('No new games. Fetching most recent')
+                            self.fetch_last_game(
+                                player_pk
+                            )
+                        else:
+                            #locate where the last entry is which is last_game_date
+                            #if there is a gamedate that matches the night before scrape it
+                            #and load profile recursivley
+                            for i in range(len(updated_stats)):
+                                for j in range(len(updated_stats[i])):
+                                    if updated_stats[i][j] == last_date_game:
+                                        index = i
+                            
+                            games_to_add = updated_stats[i:]
+                            print('New games. Updating Game log.')
+                            seed = GameLog().add_entire_player_gamelog(
+                                clip=games_to_add,
+                                player_id=p_id
+                                )
+                            self.fetch_last_game(
+                                player_pk
+                            )
                     else:
                         pass
         else:
             print('Nothing found')
             self.row_set({})
+    
+    def add_lastest_player_gamelog(self, player_id, clip={}):
+
+        p = Players(p_id=player_id)
+        player_pk = p.pk
+        try:
+            with OpenCursor() as cur:
+                SQL = """ INSERT INTO gamelog(
+                    reason,
+                    date_recorded,
+                    game_season,
+                    date_game,
+                    age,
+                    team_id,
+                    game_location,
+                    opp_id,
+                    game_result,
+                    gs,
+                    mp,
+                    fg,
+                    fga,
+                    fg_pct,
+                    fg3,
+                    fg3a,
+                    fg3_pct,
+                    ft,
+                    fta,
+                    ft_pct,
+                    orb,
+                    drb,
+                    trb,
+                    ast,
+                    stl,
+                    blk,
+                    tov,
+                    pf,
+                    pts,
+                    game_score,
+                    plus_minus,
+                    player_pk
+                    ) VALUES (
+                    ?,?,?,?,?,?,?,?,?,?,
+                    ?,?,?,?,?,?,?,?,?,?,
+                    ?,?,?,?,?,?,?,?,?,?,
+                    ?,?); """
+                val = (
+                    clip['reason'],
+                    clip['date_recorded'],
+                    clip['game_season'],
+                    clip['date_game'],
+                    clip['age'],
+                    clip['team_id'],
+                    clip['game_location'],
+                    clip['opp_id'],
+                    clip['game_result'],
+                    clip['gs'],
+                    clip['mp'],
+                    clip['fg'],
+                    clip['fga'],
+                    clip['fg_pct'],
+                    clip['fg3'],
+                    clip['fg3a'],
+                    clip['fg3_pct'],
+                    clip['ft'],
+                    clip['fta'],
+                    clip['ft_pct'],
+                    clip['orb'],
+                    clip['drb'],
+                    clip['trb'],
+                    clip['ast'],
+                    clip['stl'],
+                    clip['blk'],
+                    clip['tov'],
+                    clip['pf'],
+                    clip['pts'],
+                    clip['game_score'],
+                    clip['plus_minus'],
+                    player_pk
+                    )
+                cur.execute(SQL,val)
+        except:
+            print('hit except')
+            pass
+    
+    def add_entire_player_gamelog(self, player_id, clips=[]):
+
+        p = Players(p_id=player_id)
+        player_pk = p.pk
+
+        for clip in clips:
+            try:
+                with OpenCursor() as cur:
+                    SQL = """ INSERT INTO gamelog(
+                        reason,
+                        date_recorded,
+                        game_season,
+                        date_game,
+                        age,
+                        team_id,
+                        game_location,
+                        opp_id,
+                        game_result,
+                        gs,
+                        mp,
+                        fg,
+                        fga,
+                        fg_pct,
+                        fg3,
+                        fg3a,
+                        fg3_pct,
+                        ft,
+                        fta,
+                        ft_pct,
+                        orb,
+                        drb,
+                        trb,
+                        ast,
+                        stl,
+                        blk,
+                        tov,
+                        pf,
+                        pts,
+                        game_score,
+                        plus_minus,
+                        player_pk
+                        ) VALUES (
+                        ?,?,?,?,?,?,?,?,?,?,
+                        ?,?,?,?,?,?,?,?,?,?,
+                        ?,?,?,?,?,?,?,?,?,?,
+                        ?,?); """
+                    val = (
+                        clip['reason'],
+                        clip['date_recorded'],
+                        clip['game_season'],
+                        clip['date_game'],
+                        clip['age'],
+                        clip['team_id'],
+                        clip['game_location'],
+                        clip['opp_id'],
+                        clip['game_result'],
+                        clip['gs'],
+                        clip['mp'],
+                        clip['fg'],
+                        clip['fga'],
+                        clip['fg_pct'],
+                        clip['fg3'],
+                        clip['fg3a'],
+                        clip['fg3_pct'],
+                        clip['ft'],
+                        clip['fta'],
+                        clip['ft_pct'],
+                        clip['orb'],
+                        clip['drb'],
+                        clip['trb'],
+                        clip['ast'],
+                        clip['stl'],
+                        clip['blk'],
+                        clip['tov'],
+                        clip['pf'],
+                        clip['pts'],
+                        clip['game_score'],
+                        clip['plus_minus'],
+                        player_pk
+                        )
+                    cur.execute(SQL,val)
+            except KeyError as e:
+                print(e)

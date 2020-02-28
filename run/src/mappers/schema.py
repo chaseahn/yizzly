@@ -103,8 +103,8 @@ def run(dbname='winik.db'):
     # create USER table FOR LOGIN AND SESSION
     CUR.execute("""CREATE TABLE gamelog(
         pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        reason,
         date_recorded VARCHAR,
-        ranker VARCHAR,
         game_season VARCHAR,
         date_game VARCHAR,
         age VARCHAR,
@@ -118,7 +118,7 @@ def run(dbname='winik.db'):
         fga VARCHAR,
         fg_pct VARCHAR,
         fg3 VARCHAR,
-        fg3 VARCHAR,
+        fg3a VARCHAR,
         fg3_pct VARCHAR,
         ft VARCHAR,
         fta VARCHAR,
@@ -133,8 +133,8 @@ def run(dbname='winik.db'):
         pf VARCHAR,
         pts VARCHAR,
         game_score VARCHAR,
-        plus_minus VARCHAR, 
-        player_pk INTEGER,
+        plus_minus VARCHAR,
+        player_pk VARCHAR,
         FOREIGN KEY(player_pk) REFERENCES player(pk)
     );""")
 
