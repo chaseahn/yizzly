@@ -267,6 +267,17 @@ class Players:
             year = current_season.season.split('-')[1]
             gamelog_link = current_player.pbr_link.replace('.html',f'/gamelog/20{year}')  
             last_game_stats = GameLog().fetch_last_game(player_pk=current_player.pk)
+            today = date.today().strftime("%y-%m-%d")
+            last_night = date.today() - timedelta(days=1)
+            try:
+                if str(last_game_stats['date_game']) != str(last_night):
+                    print('Did not play last night')
+                    no_game = True
+                else:
+                    no_game = False
+            except:
+                no_game = True
+                
 
             profile = {
                 'first_name': current_player.first_name,
@@ -286,7 +297,8 @@ class Players:
                 'id': current_player.player_id,
                 'pk': current_player.pk,
                 'gamelog_link': gamelog_link,
-                'last_game': last_game_stats
+                'last_game': last_game_stats,
+                'no_game': no_game
             }
 
             player_list.append(profile)
@@ -533,6 +545,9 @@ class GameLog():
         self.player_pk = row.get('player_pk')
 
     def fetch_last_game(self,player_pk):
+
+        #FIXME LOADS EVERYTIME FOR NEW PLAYER NEED IT BE AT ONCE...
+
         with OpenCursor() as cur:
             SQL = """SELECT * FROM gamelog WHERE player_pk=? 
             ORDER BY pk DESC LIMIT 1"""
@@ -566,6 +581,7 @@ class GameLog():
                             )
 
                         print('Checking for updated game.')
+                        print(updated_stats)
 
                         last_pbr_date_game = updated_stats[-1]['date_game']
 
@@ -574,7 +590,7 @@ class GameLog():
                             with OpenCursor() as cur:
                                 SQL = """UPDATE gamelog SET date_recorded = ? 
                                 WHERE pk=? """
-                                val = (today,last_row['pk'])
+                                val = (today,row['pk'])
                                 cur.execute(SQL,val)
                             print('No new games. Fetching most recent')
                             self.fetch_last_game(
@@ -585,15 +601,19 @@ class GameLog():
                             #if there is a gamedate that matches the night before scrape it
                             #and load profile recursivley
                             for i in range(len(updated_stats)):
-                                for j in range(len(updated_stats[i])):
-                                    if updated_stats[i][j] == last_date_game:
-                                        index = i
-                            
+                                for key in updated_stats[i]:
+                                    try:
+                                        if updated_stats[i]['date_game'] == last_date_game:
+                                            index = i
+                                    except KeyError:
+                                        print(KeyError)
+                                        pass
                             games_to_add = updated_stats[i:]
                             print('New games. Updating Game log.')
+                            print('adding'+str(games_to_add))
                             seed = GameLog().add_entire_player_gamelog(
-                                clip=games_to_add,
-                                player_id=p_id
+                                player_id=p_id,
+                                clips=games_to_add
                                 )
                             self.fetch_last_game(
                                 player_pk

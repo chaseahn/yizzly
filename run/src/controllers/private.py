@@ -30,9 +30,6 @@ def index():
         p = Players()
         players_list = p.return_tracking_profiles()
 
-
-        print(players_list)
-
         return render_template(
             'private/index.html', 
             title="Rooks Portal",
@@ -346,3 +343,13 @@ def convert_edl():
             message="Let's convert your EDL file!",
             title="Convert EDL"
             )
+
+
+@subcontroller.route('/account',methods=['GET','POST'])
+def account():
+    if request.method == 'GET':
+        return render_template('private/account.html',
+        title= "Account Page",
+        message="Manage your account here.")
+    elif request.method == 'POST':
+        pass
