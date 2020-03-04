@@ -215,8 +215,8 @@ button[type=submit]:hover {
     color: rgb(82, 188, 96);
 }
 
-input[type=menu] {
-    height: 20px;
+button[type=menu] {
+    height: 22px;
     width: 50px;
     border-width: 0px;
     border-radius: 4px;
@@ -230,14 +230,16 @@ input[type=menu] {
     box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
     cursor: pointer;
     text-align: center;
+    line-height: 22px;
 }
 
-input[type=menu]:hover:nth-child(2) {
+button[type=menu]:hover:nth-child(2) {
     background-color: rgba(99, 240, 92, 0.8);
     transition: ease-in;
     color: white;
 }
-input[type=menu]:hover:nth-child(3){
+
+button[type=menu]:hover:nth-child(3){
     background-color: rgba(255, 32, 32, 0.8);
     transition: ease-in;
     color: white;
@@ -519,10 +521,11 @@ a:link {
     margin-bottom: 10px;
 }
 
-input[type=modal] {
+button[type=modal] {
     height: 25px;
-    width: 80px;
-    text-align: center;
+    width: auto;
+    padding-left: 16px;
+    padding-right: 16px;
     border-width: 0px;
     border-radius: 4px;
     overflow: hidden;
@@ -537,9 +540,11 @@ input[type=modal] {
     background-color: rgba(255, 255, 255, 0.411);
     box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
     cursor: pointer;
+    text-align: center;
+    
 }
 
-input[type=modal]:hover {
+button[type=modal]:hover {
     background-color: rgb(187, 135, 235);
     transition: ease-in;
     color: white;
@@ -635,6 +640,16 @@ input[type=modal]:hover {
     background-color: rgba(255, 255, 255, 0.479);
 }
 
+.players-grid .blank-box {
+    height: 80px;
+    width:auto;
+    color:white;
+    box-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.308);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.479);
+}
+
+
 /* 
 .players-grid .player-box .pcol1 .icon {
     
@@ -666,6 +681,12 @@ input[type=modal]:hover {
 .player-box .box-top .pcol2 {
     width:67%;
     margin-left:8px;
+}
+
+.blank-box .box-top .pcol3 {
+    width:70%;
+    margin-top: 19px;
+    text-align: center;
 }
 
 
@@ -767,6 +788,17 @@ input[type=modal]:hover {
     text-align: center;
     line-height: 13px;
 }
+
+
+.players-grid .blank-box .box-top .pcol0 img {
+    height:60px;
+    width:auto;
+    margin-left: 8px;
+    margin-top: 8px;
+    border-radius: 4px;
+    text-shadow: 0px 10px 20px -10px rgba(23, 38, 66, 0.308);
+}
+
 
 .red {
     background-color: Red;

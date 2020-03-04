@@ -121,7 +121,7 @@
                     Player Tracker
                 </h1>
                 
-                <input value="+ ADD PLAYER" onclick="document.getElementById('id01').style.display='block'" type="modal">
+                <button value="+ ADD PLAYER" onclick="document.getElementById('id01').style.display='block'" type="modal">+ ADD PLAYER</button>
             </div>
 
 
@@ -279,12 +279,16 @@
                     </div>
                 {% endfor %}
             {% else %}
-            <div class="player-box">
+            <div class="blank-box">
                 <div class="box-top">
-                    <div class="pcol1">
-                        <text>
-                            Track players by adding them to your account.
-                        </text>
+                    <div class="pcol0">
+                        <img src="{{url_for('static', filename='img/headshot.png')}}">
+                    </div>
+                    
+                    <div class="pcol3">
+                        <div class="header">
+                            <text>Track players by adding them to your account.</text>
+                        </div>
                     </div>
                 </div>
             </div>

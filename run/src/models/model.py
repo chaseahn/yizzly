@@ -201,7 +201,19 @@ class Players:
             self.row_set(row)
         else:
             self.row_set({})
-
+    
+    def check_if_player_exists (self, p_id):
+        with OpenCursor() as cur:
+            SQL = """ SELECT * FROM players WHERE
+                  player_id=?; """
+            val = (p_id,)
+            cur.execute(SQL,val)
+            row = cur.fetchone()
+        if row:
+            return True
+        else:
+            return False
+    
     def add_player(self, clip={}, user_pk=''):
         with OpenCursor() as cur:
             SQL = """ INSERT INTO players(

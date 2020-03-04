@@ -27,22 +27,24 @@ def index():
         #from log_commit
         session['clip_was_logged'] = False
         session['user_entered_cues_for_conversion'] = False
+
         p = Players()
         players_list = p.return_tracking_profiles()
+        session['tracked_players'] = players_list
 
         return render_template(
             'private/index.html', 
-            title="Rooks Portal",
+            title="Portal",
             username=user.username,
             message="What would you like to do today?",
             player_list=players_list
             )
+
     elif request.method == 'POST':
         session['first_name'] = request.form.get('first_name')
         session['last_name'] = request.form.get('last_name')
         return redirect(url_for('private.add_player'))
     else:
-        print('yo')
         pass
 
 @subcontroller.route('/log',methods=['GET','POST'])
@@ -72,28 +74,37 @@ def log():
                 )
         
     elif request.method == 'POST':
-        # create a clip
-        # redirect to log_commit for inspection and submission
-        user_input = request.form['info']
-        dmm = DMMLogger(log_input=user_input)
-        clip_object = dmm.create_clip_object()
-        #bring over clip info
-        session['clip'] = clip_object
-        return redirect(url_for('private.log_commit'))
+        try:
+            # create a clip
+            # redirect to log_commit for inspection and submission
+            user_input = request.form['info']
+            dmm = DMMLogger(log_input=user_input)
+            clip_object = dmm.create_clip_object()
+            #bring over clip info
+            session['clip'] = clip_object
+            return redirect(url_for('private.log_commit'))
+        except ValueError:
+            flash('Something went wrong with your input. Try clicking HELP to see what went wrong or click MANUAL to do it yourself.')
+            return redirect(url_for('private.log'))
     else:
         pass
 
 @subcontroller.route('/log-commit',methods=['GET','POST'])
 def log_commit():
     if request.method == 'GET':
-        clip_object = session['clip']
-        user = User({'username': session['username'], 'pk': session['pk']})
-        return render_template('private/log_commit.html',
-            title="Footage Log: Commit",
-            username=user.username,
-            clip=clip_object,
-            message="Save this clip for later! :)"
-            )
+        try:
+            clip_object = session['clip']
+            user = User({'username': session['username'], 'pk': session['pk']})
+            return render_template('private/log_commit.html',
+                title="Footage Log: Commit",
+                username=user.username,
+                clip=clip_object,
+                message="Save this clip for later! :)"
+                )
+        except KeyError:
+            flash('You need to start a new clip first.')
+            return redirect(url_for('private.index'))
+
     elif request.method == 'POST':
         # Check for includes....
         # FIXME check ALGO for now it works
@@ -169,6 +180,9 @@ def cuesheet():
             user_input = request.form['info']
             cue = CueSheet(user_input=user_input, name=filename)
             session['tracked_events'] = cue.parse_input()
+            if session['tracked_events'] == []:
+                flash("I couldn't read that... Try clicking HELP to see what went wrong")
+                return redirect(url_for('private.cuesheet'))
             session['user_entered_cues_for_conversion'] = True
             return redirect(url_for('private.cuesheet'))
         else:
@@ -213,7 +227,7 @@ def add_player():
             fname=session['first_name'], 
             lname=session['last_name']
             )
-        if session['found_players'] == [{}]:
+        if session['found_players'] == [{}] or session['found_players'] == []:
             flash("We couldn't find a player with that name.")
             return redirect(url_for('private.index'))
         else:
@@ -250,13 +264,20 @@ def add_player():
                 )
 
     elif request.method == 'POST':
-        
+
+        selected_value = request.form['add_player']
+        p = Players()
+
         for player in session['found_players']:
-            if player['playerId'] == request.form['add_player']:
-                player_to_add = player
+            if player['playerId'] == selected_value:
+                if p.check_if_player_exists(selected_value):
+                    flash(f"You are already tracking {player['firstName']} {player['lastName']}.")
+                    return redirect(url_for('private.index'))
+                else:
+                    player_to_add = player
             else:
                 pass
-        p = Players()
+        
         p.add_player(
             clip=player_to_add,
             user_pk=user.pk
@@ -347,9 +368,11 @@ def convert_edl():
 
 @subcontroller.route('/account',methods=['GET','POST'])
 def account():
+    user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
         return render_template('private/account.html',
         title= "Account Page",
-        message="Manage your account here.")
+        message="Manage your account here.",
+        username=user.username)
     elif request.method == 'POST':
         pass
