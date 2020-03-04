@@ -39,28 +39,19 @@
 
         <div class="row-container">
         <div class="title">
-            <div class="user-store">
-                <div class="button">
-                    <div class="button-text">
-                        Logout
-                    </div>
-                </div>
-                <div class="button">
-                    <a href='/account'>
-                    <div class="button-text">
-                        Account
-                    </div>
-                    </a>
-                </div>
-                <div class="user-greeting">
-                    <span>Hello {{username}}!</span>
-                </div>
-            </div>
             <div class="header-container">
                 <div class="logo-text">
                     <a href="/index">
-                        <span>ROOKS PORTAL</span> 
+                        <span>Pa Portal</span> 
                     </a>
+                </div>
+                <div class="menu">
+                    <div class="user-greeting">
+                        <i class="fa fa-circle" style="font-size:8px;color:rgb(96, 255, 96);margin-right:2px;"></i>
+                        {{username.upper()}}
+                    </div>
+                    <input value="Account" type="menu">
+                    <input value="Logout" type="menu">
                 </div>
             </div>
             <h1> 

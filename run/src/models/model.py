@@ -269,6 +269,8 @@ class Players:
             last_game_stats = GameLog().fetch_last_game(player_pk=current_player.pk)
             today = date.today().strftime("%y-%m-%d")
             last_night = date.today() - timedelta(days=1)
+
+            #FIXME 
             try:
                 if str(last_game_stats['date_game']) != str(last_night):
                     print('Did not play last night')

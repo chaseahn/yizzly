@@ -215,8 +215,38 @@ button[type=submit]:hover {
     color: rgb(82, 188, 96);
 }
 
+input[type=menu] {
+    height: 20px;
+    width: 50px;
+    border-width: 0px;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: ease-in .4s;
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    font-size: 8px;
+    color: rgb(182, 134, 206);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
+    cursor: pointer;
+    text-align: center;
+}
+
+input[type=menu]:hover:nth-child(2) {
+    background-color: rgba(99, 240, 92, 0.8);
+    transition: ease-in;
+    color: white;
+}
+input[type=menu]:hover:nth-child(3){
+    background-color: rgba(255, 32, 32, 0.8);
+    transition: ease-in;
+    color: white;
+}
+
+
+
 .title {
-    text-align: justify;
+    margin-top: 20px;
 }
 
 .title .header-container {
@@ -225,14 +255,45 @@ button[type=submit]:hover {
     display: flex;
     margin: 0;
     padding: 0;
+    text-align: center;
+    justify-content: space-between;
 }
 
-.user-store .user-greeting {
-    width: 80px;
-    height: 25px;
+.title .header-container .menu {
+    float: right;
+    display: inline-flex;
+    height: 100%;
+    width: auto;
+    min-width: 200px;
+    max-width: 250px;
+    justify-content: space-between;
+}
+
+.title .header-container .menu .menu-item{
+    margin:0;
+    height: 100%;
+    width: auto;
+}
+
+.title .header-container .menu .user-greeting {
+    height: 18px;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 2px solid;
+    border-radius: 4px;
+    border-color: white;
+    overflow: hidden;
+    transition: ease-in .4s;
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    font-size: 8px;
+    color: rgb(89, 1, 133);
+    background-color: rgba(255, 255, 255, 0.537);
+    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
     text-align: center;
-    border: 0px dashed #f69c55;
-    text-align: center;
+    line-height: 20px;
+    letter-spacing: 1px;
 }
 
 .user-store .user-greeting span {
@@ -261,7 +322,8 @@ p {
 .logo-text {
     font-family: 'Bowlby One SC', cursive;
     font-size: 1em;
-    color: rgb(252, 211, 255)
+    color: rgb(252, 211, 255);
+    float: left;
 }
 
 .subheader {
@@ -448,6 +510,14 @@ a:link {
     font-size: 1em;
 }
 
+.mini-button{
+    width: auto;
+    height: auto;
+    margin: 0;
+    cursor: pointer;
+    color: rgb(182, 134, 206);
+    margin-bottom: 10px;
+}
 
 input[type=modal] {
     height: 25px;
@@ -470,10 +540,11 @@ input[type=modal] {
 }
 
 input[type=modal]:hover {
-    background-color: rgba(187, 135, 235, .8);
+    background-color: rgb(187, 135, 235);
     transition: ease-in;
     color: white;
 }
+
 
 
 .modal-box {

@@ -21,6 +21,18 @@
         <![endif]-->
         <form action="/cuesheet" method="post" enctype="multipart/form-data">
         <div class="container">
+            <div class = "crumb-row">
+                <div class="mini-button align-left">
+                    <a href='/index'>
+                        <input value="GO BACK" type="modal">
+                    </a>
+                </div>
+                <div class="mini-button align-right">
+                    <a href=''>
+                        <input value="HELP" type="modal">
+                    </a>
+                </div>
+            </div>
             {% if tracks %}
                 {% for track in tracks %}
                 <div class="h-col">

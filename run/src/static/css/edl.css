@@ -38,36 +38,10 @@ input[type=submit]:hover {
     border-color: #C9FFD0;
 }
 
-.mini-button{
-    width: auto;
-    height: 20px;
-    margin: 0;
-    padding: 0px 12px;
-    cursor: pointer;
-    text-align: center;
-    color: rgb(182, 134, 206);
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
-    font-family: 'Exo', sans-serif;
-    font-size: 10px;
-    transition: ease-in .4s;
-    display: inline-block;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-    line-height: 20px;
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgba(255, 255, 255, 0.4));
-}
 
-.mini-button:nth-child(1):hover { 
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgba(38, 249, 63, 0.4));
-    transition: ease-in;
-}
 
-.mini-button:nth-child(2):hover { 
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgba(235, 156, 147, 0.4));
-    transition: ease-in;
-}
+
+
 
 .align-left{
     float: left;
