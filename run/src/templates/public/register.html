@@ -10,7 +10,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -19,24 +20,30 @@
         <![endif]-->
         <form action="/register" method="post" enctype="multipart/form-data">
         <div class="login-container">
-            <h1>Register an Account</h1>
-            <div>
-                <input type="text" placeholder="Username" name="username">
+            <div class="login-info">
+            <div class="header">
+                Register
             </div>
             <div>
-                <input type="password" placeholder="Password" name="password">
+                <input type="text" placeholder="Username" name="username" autocomplete="off">
             </div>
             <div>
-                <input type="email" placeholder="Email" name="email">
+                <input type="password" placeholder="Password" name="password" autocomplete="off">
             </div>
             <div>
-                <font color="red">{{message}}</font>
+                <input type="email" placeholder="Email" name="email" autocomplete="off">
             </div>
             <div>
-                <input name="post_button" type="submit" value="Submit">
+                <button name="post_button" type="submit" value="Submit" autocomplete="off">Submit</button>
             </div>
-            <div>
-                <a href="/"> Return to login </a>
+            <div class="topcorner">
+               <div class="medium-button-dark" onclick="location.href='/'">
+                    Return to login 
+               </div> 
+            </div>
+            <div class="warning">
+                {{message}}
+            </div>
             </div>
         </div>
         </form>
@@ -44,3 +51,24 @@
         <script src="" async defer></script>
     </body>
 </html>
+
+
+<!-- <div class="login-container">
+            <div class="login-info">
+                <div class="header">
+                    Pa Portal
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter Username" name="username" autocomplete="off">
+                </div>
+                <div>
+                    <input type="password" placeholder="Enter Password" name="password" autocomplete="off">
+                </div>
+                <div>
+                    <button name="post_button" type="submit" value="Login">Login </button>
+                </div>
+                <div class="warning">
+                    {{message}}
+                </div>
+            </div>
+        </div> -->

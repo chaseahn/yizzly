@@ -43,7 +43,10 @@ def login():
                         session['logged_in'] = True
                         return redirect('/index')
             except TypeError as e:
-                print(e)
+                return render_template(
+                    'public/login.html', 
+                    message="Incorrect info, try again." 
+                    )
 
     else:
         pass

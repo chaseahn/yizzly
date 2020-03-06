@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -31,21 +32,28 @@
         {% endif %}
         {% endwith %}
         <div class="login-container">
-            <h1>Login to access Portal</h1>
-            <div>
-                <input type="text" placeholder="Username" name="username">
+            <div class="login-info">
+                <div class="header">
+                    Pa Portal
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter Username" name="username" autocomplete="off">
+                </div>
+                <div>
+                    <input type="password" placeholder="Enter Password" name="password" autocomplete="off">
+                </div>
+                <div>
+                    <button name="post_button" type="submit" value="Login">Login </button>
+                </div>
+                <div class="warning">
+                    {{message}}
+                </div>
             </div>
-            <div>
-                <input type="password" placeholder="Password" name="password">
-            </div>
-            <div>
-                <font color="red">{{message}}</font>
-            </div>
-            <div>
-                <input name="post_button" type="submit" value="Login">
-            </div>
-            <div>
-                <a href="/register"> Register </a>
+        </div>
+
+        <div class="topcorner">
+            <div class="medium-button-dark" onclick="location.href='/register'">
+                Register
             </div>
         </div>
         </form>
