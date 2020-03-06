@@ -22,14 +22,8 @@
         <form action="/log" method="post" enctype="multipart/form-data">
         <div class="container">
             <div class="crumb-row">
-                <div class="align-left">
-                    <a href='/index'>
-                        <input value="GO BACK" type="modal">
-                    </a>
-                </div>
-                <div class="align-right">
-                    <input value="MANUAL" type="modal">
-                </div>
+                <button value="GO BACK" type="modal" onclick="location.href='/index'";>GO BACK</button>
+                <button value="MANUAL" type="modal" onclick="location.href=''";>MANUAL</button>
             </div>
             <div>
                 <textarea type="text" placeholder="{{placeholder}}" name="info" required></textarea>

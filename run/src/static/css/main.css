@@ -524,8 +524,8 @@ a:link {
 button[type=modal] {
     height: 25px;
     width: auto;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-width: 0px;
     border-radius: 4px;
     overflow: hidden;

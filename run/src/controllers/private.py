@@ -21,6 +21,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @subcontroller.route('/index',methods=['GET','POST'])
+@login_required
 def index():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
@@ -48,6 +49,7 @@ def index():
         pass
 
 @subcontroller.route('/log',methods=['GET','POST'])
+@login_required
 def log():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
@@ -90,6 +92,7 @@ def log():
         pass
 
 @subcontroller.route('/log-commit',methods=['GET','POST'])
+@login_required
 def log_commit():
     if request.method == 'GET':
         try:
@@ -156,6 +159,7 @@ def log_commit():
         pass
 
 @subcontroller.route('/cuesheet',methods=['GET','POST'])
+@login_required
 def cuesheet():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
@@ -218,6 +222,7 @@ def cuesheet():
         pass
 
 @subcontroller.route('/add-player',methods=['GET','POST'])
+@login_required
 def add_player():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
@@ -305,6 +310,7 @@ def add_player():
         pass
 
 @subcontroller.route('/convert-edl',methods=["GET","POST"])
+@login_required
 def convert_edl():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':
@@ -367,6 +373,7 @@ def convert_edl():
 
 
 @subcontroller.route('/account',methods=['GET','POST'])
+@login_required
 def account():
     user = User({'username': session['username'], 'pk': session['pk']})
     if request.method == 'GET':

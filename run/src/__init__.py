@@ -40,6 +40,7 @@ def login():
                         #send to mainpage
                         session['username'] = user.username
                         session['pk'] = user.pk
+                        session['logged_in'] = True
                         return redirect('/index')
             except TypeError as e:
                 print(e)
@@ -107,6 +108,11 @@ def verify():
 
     else:
         pass
+
+@controller.route('/logout',methods=['GET'])
+def logout():
+    session.pop('logged_in')
+    return redirect(url_for('login'))
 
 @controller.route('/success',methods=['GET'])
 def success():

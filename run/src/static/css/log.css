@@ -116,36 +116,7 @@ textarea[name=description] {
     box-sizing: border-box;
 }
 
-button {
-    width: 100%;
-    height: 26px;
-    margin: 0;
-    cursor: pointer;
-    text-align: center;
-    border-style: solid;
-    border-width: 1.5px;
-    border-color: rgba(231, 184, 255, 0.6);
-    color: rgb(182, 134, 206);
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
-    font-family: 'Exo', sans-serif;
-    font-weight: 700;
-    font-size: 10px;
-    background-color: rgb(201, 76, 76, 0);
-    transition: ease-in .4s;
-    display: inline-block;
-    letter-spacing: 3px;
-    margin-top: 10px;
-}
 
-button:hover {
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.397), rgba(147, 235, 187, 0.4));
-    box-shadow: 0px 3px 10px -5px rgba(151, 255, 248, 0.678);
-    transition: ease-in;
-    color: rgb(67, 147, 181);
-    border-color: rgb(183, 242, 249);
-}
 
 .column .inline_input .button-push {
     margin-top: 7px;
@@ -294,6 +265,7 @@ input[type="checkbox"]:checked + label {
     display: inline-flex;
     justify-content: space-between;
     width:100%;
+    margin-bottom: 10px;
 }
 
 .mini-button{
@@ -382,29 +354,18 @@ h6 {
     justify-content: flex-end;
 }
 
-input[type=button] {
-    width:100px;
-    float: right;
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
-    margin-right: 10px;
-    border-radius: 8px;
-    box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.413);
-    color: rgb(205, 66, 66);
-    font-family: 'Lato', sans-serif;
-    font-size: 8px;
-    border-width: 0px;
-    border-style: solid;
-    padding: 8px;
-    transition: ease-in .4s;
+button[type=copy] {
+    width: 100%;
+    height: 25px;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    
 }
 
-input[type=button]:hover {
-
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgba(255, 65, 65, 0.804));
-    color: rgb(255, 255, 255);
-    transition: ease-in;
-    cursor: pointer;
-}
 
 .game-info {
     height: 100%;
@@ -435,4 +396,8 @@ input[type=button]:hover {
 .strip {
     padding: 0px;
     margin-bottom: 1px;
+}
+
+.players-grid .players-box .box-top .blank-state {
+    padding:
 }
