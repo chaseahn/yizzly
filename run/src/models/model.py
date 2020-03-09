@@ -248,7 +248,7 @@ class Players:
 
     def return_all_saved_player_ids(self, pk):
         with OpenCursor() as cur:
-            SQL = """ SELECT * FROM players where pk=?; """
+            SQL = """ SELECT * FROM players where user_pk=?; """
             val = (pk,)
             cur.execute(SQL,val)
             players = cur.fetchall()

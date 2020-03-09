@@ -36,15 +36,15 @@
             <div class="clip_container">
                 <div class="column">
                    <div class="inline_input">
-                        Game ID: <input type="text" name="game_id" value="{{clip.game_id}}"><br>
-                        Home Team: <input type="text" name="home_team" value="{{clip.home_team}}"><br>
-                        Away Team: <input type="text" name="away_team" value="{{clip.away_team}}"><br>
-                        Game Date: <input type="text" name="game_date" value="{{clip.game_date}}"><br>
+                        Game ID: <input type="log" name="game_id" value="{{clip.game_id}}"><br>
+                        Home Team: <input type="log"name="home_team" value="{{clip.home_team}}"><br>
+                        Away Team: <input type="log" name="away_team" value="{{clip.away_team}}"><br>
+                        Game Date: <input type="log" name="game_date" value="{{clip.game_date}}"><br>
                    </div>
                 </div>
                 <div class="column">
                     <div class="inline_input">
-                        Clip Rating: <input type="text" name="rating" value="{{clip.rating}}"><br>
+                        Clip Rating: <input type="log" name="rating" value="{{clip.rating}}"><br>
                         Clip Type: 
                             <select name="type">
                                 <option value="Layup" {% if 'Layup' in clip.clip_type %} selected="selected"{% endif %}>Layup</option>
@@ -76,7 +76,7 @@
                                     <label for="check_3">Moment</label>
                                 </div>
                             </div>
-                        Players:<br> <input type="text" name="players" value="{{clip.players}}"><br>     
+                        Players:<br> <input type="log" name="players" value="{{clip.players}}"><br>     
                     </div>
                 </div>
                 <div class="column">
@@ -96,7 +96,7 @@
                                 </select>
                             </div>
                             <div class="gametime-col2">
-                                <input type="text" name="time" value="{{clip.time}}"><br>
+                                <input type="log" name="time" value="{{clip.time}}"><br>
                             </div>
                         </div>
                         <div class="button-push">

@@ -28,7 +28,13 @@ mail = Mail(controller)
 @controller.route('/',methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return render_template('public/login.html')
+        try:
+            if session['user']:
+                return redirect(url_for('private.index'))
+        except:
+            return render_template(
+                'public/login.html'
+                )
     elif request.method == 'POST':
         if request.form['post_button'] == 'Login':
             un = request.form['username']
@@ -44,8 +50,8 @@ def login():
                         return redirect('/index')
             except TypeError as e:
                 return render_template(
-                    'public/login.html', 
-                    message="Incorrect info, try again." 
+                    'public/login.html',
+                    message="The information you entered is not correct, try again."
                     )
 
     else:
@@ -114,7 +120,7 @@ def verify():
 
 @controller.route('/logout',methods=['GET'])
 def logout():
-    session.pop('logged_in')
+    session.clear()
     return redirect(url_for('login'))
 
 @controller.route('/success',methods=['GET'])

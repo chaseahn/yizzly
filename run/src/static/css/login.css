@@ -88,5 +88,7 @@ a:hover {
 .warning {
   color: #ff5353;
   font-family: 'PT Sans', sans-serif;
-  font-size: 8px;
+  font-size: 14px;
+  margin-top: 10px;
+  padding-bottom: 30px;
 }

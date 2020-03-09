@@ -26,16 +26,22 @@ textarea {
     justify-content: center;
     width: 100%;
     height: auto;
-    padding: 12px 20px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.582), rgb(207, 147, 235, .4));
-    box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.5);
+    padding-top: 12px;
+    padding-bottom: 12px;
     margin-bottom: 15px;
+    border-radius: 1em; 
+    margin-top: 20px;
+    min-height: 103px;
+    background-image: linear-gradient(120deg,  rgba(140, 228, 242, 0.722), rgba(69, 196, 242, 0.4));
+    box-shadow: 0px 10px 20px -10px rgba(18, 55, 43, 0.5);
+    border: 2px rgb(153, 210, 210) solid;
+    -moz-box-shadow:    inset 0 0 10px #0000004a;
+    -webkit-box-shadow: inset 0 0 10px #0000004a;
+    box-shadow:         inset 0 0 10px #0000004a;
 }
 
 .column {
-    width: 33%;
+    width: 32%;
     height: 100%;
     /* background: lightgray;
     border-style: solid;
@@ -44,9 +50,10 @@ textarea {
 
 .inline_input {
     display: block;
-    color: rgb(32, 32, 70);
+    color: rgb(140, 228, 242);
     font-family: 'Lato', sans-serif;
     font-size: 10px;
+    text-shadow: 0px 1px 2px #1a0404cf;
 }
 
 input[type=submit] {
@@ -79,7 +86,7 @@ input[type=submit]:hover {
     border-color: #C9FFD0;
 }
 
-input[type=text] {
+input[type=log] {
     width: 90%;
     height: 26px;
     padding: 6px 10px;
@@ -152,8 +159,8 @@ input[type="checkbox"]:checked {
 input[type="checkbox"] + label {
     cursor: pointer;
     border: 1px solid;
-    border-color: rgba(231, 184, 255, 0.6);
-    color: rgb(145, 83, 176);
+    border-color: rgba(140, 228, 242, 0.722);
+    color: rgb(236, 155, 252);
     background-color: rgba(255, 255, 255, 0);
     padding: 5px 10px;
     border-radius: 4px;
@@ -183,6 +190,7 @@ input[type="checkbox"]:checked + label {
     width: 33%;
     height: 100%;
 }
+
 .mini-button{
     width: auto;
     height: 20px;
@@ -354,17 +362,7 @@ h6 {
     justify-content: flex-end;
 }
 
-button[type=copy] {
-    width: 100%;
-    height: 25px;
-    border: 2px solid black;
-    border-radius: 4px;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-    margin-top: 10px;
-    
-}
+
 
 
 .game-info {
