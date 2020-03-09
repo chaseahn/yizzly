@@ -246,10 +246,11 @@ class Players:
                 )
             cur.execute(SQL,val)
 
-    def return_all_saved_player_ids(self):
+    def return_all_saved_player_ids(self, pk):
         with OpenCursor() as cur:
-            SQL = """ SELECT * FROM players; """
-            cur.execute(SQL,)
+            SQL = """ SELECT * FROM players where pk=?; """
+            val = (pk,)
+            cur.execute(SQL,val)
             players = cur.fetchall()
         if players:
             id_list = []
@@ -267,9 +268,9 @@ class Players:
             cur.execute(SQL,val)
         print('deleted')
     
-    def return_tracking_profiles(self):
+    def return_tracking_profiles(self, pk):
 
-        tracked_ids = self.return_all_saved_player_ids()
+        tracked_ids = self.return_all_saved_player_ids(pk)
         player_list = []
 
         for num in tracked_ids:

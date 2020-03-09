@@ -71,3 +71,36 @@ button[type=submit]:hover {
     letter-spacing: 1px;
     cursor: pointer;
 }
+
+
+/* INDEX BUTTON MENU */
+
+button[type=menu] {
+    height: 22px;
+    width: 50px;
+    border-width: 0px;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: ease-in .4s;
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+    font-size: 8px;
+    color: rgb(255, 162, 230);
+    background-color: rgba(255, 255, 255, 0);
+    /* box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4); */
+    cursor: pointer;
+    text-align: center;
+    line-height: 22px;
+}
+
+button[type=menu]:hover:nth-child(2) {
+    background-color: rgba(99, 240, 92, 0.8);
+    transition: ease-in;
+    color: white;
+}
+
+button[type=menu]:hover:nth-child(3){
+    background-color: rgba(255, 32, 32, 0.8);
+    transition: ease-in;
+    color: white;
+}

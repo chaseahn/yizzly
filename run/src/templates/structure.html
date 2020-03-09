@@ -10,6 +10,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -40,12 +41,14 @@
                     </a>
                 </div>
                 <div class="menu">
+                    <a href='/account'>
                     <div class="user-greeting">
                         <i class="fa fa-circle" style="font-size:8px;color:rgb(255, 162, 230);margin-right:2px;"></i>
                         {{username.upper()}}
                     </div>
-                    <button value="Account" type="menu" onclick="location.href='/account';">Account</button>
-                    <button value="Logout" type="menu" onclick="location.href='/logout'">Logout</button>
+                    </a>
+                    <button value="Search" type="menu" onclick="location.href='/search';">SEARCH</button>
+                    <button value="Logout" type="menu" onclick="location.href='/logout'">LOGOUT</button>
                 </div>
             </div>
             <h1> 

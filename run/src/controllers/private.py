@@ -30,7 +30,7 @@ def index():
         session['user_entered_cues_for_conversion'] = False
 
         p = Players()
-        players_list = p.return_tracking_profiles()
+        players_list = p.return_tracking_profiles(session['pk'])
         session['tracked_players'] = players_list
 
         return render_template(

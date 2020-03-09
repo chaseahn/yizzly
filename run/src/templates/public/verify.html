@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -18,16 +19,30 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <form action="/verify" method="post" enctype="multipart/form-data">
+        {% with error = get_flashed_messages() %}
+        {% if error %}
+            {% for e in error %}
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                    <div class="alert-text">
+                        {{e}}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
         <div class="login-container">
-            <h1>Enter the 6 Digit Verification Code</h1>
+            <div class="login-info">
+            <div class="header">
+                            Pa Portal
+            </div>
+            
             <div>
-                <input type="text" placeholder="Verification Code" name="code">
+                <input type="text" placeholder="Verification Code" name="code" autocomplete="off">
             </div>
             <div>
-                <font color="red">{{message}}</font>
+                <button name="post_button" type="submit" value="Verify">Verify</button>
             </div>
-            <div>
-                <input name="post_button" type="submit" value="Verify">
             </div>
         </div>
         </form>
