@@ -14,6 +14,7 @@ def run(dbname='winik.db'):
         username VARCHAR,
         password VARCHAR,
         email VARCHAR,
+        tracking VARCHAR,
         CONSTRAINT unique_username UNIQUE(username),
         CONSTRAINT unique_email UNIQUE(email)
     );""")

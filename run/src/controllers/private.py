@@ -30,7 +30,7 @@ def index():
         session['user_entered_cues_for_conversion'] = False
 
         p = Players()
-        players_list = p.return_tracking_profiles(session['pk'])
+        players_list = p.return_tracking_profiles(user.pk,user.username)
         session['tracked_players'] = players_list
 
         return render_template(
@@ -276,31 +276,48 @@ def add_player():
         for player in session['found_players']:
             if player['playerId'] == selected_value:
                 if p.check_if_player_exists(selected_value):
-                    flash(f"You are already tracking {player['firstName']} {player['lastName']}.")
+                    #if player exists already in DB, ADD player ID to 
+                    #user tracking abd redirect to index
+                    u = User(username=user.username)
+                    #update user.tracking
+                    if str(player['playerId']) in u.tracking:
+                        flash(f"You are already tracking {player['firstName']} {player['lastName']}.")
+                        return redirect(url_for('private.index'))
+                    update = str(player['playerId'])+'-'
+                    u.tracking += update
+                    u.save()
+                    print('Added to Tracked Players.')
+                    # flash(f"You are already tracking {player['firstName']} {player['lastName']}.")
                     return redirect(url_for('private.index'))
                 else:
+                    #if player does NOT exist in DB, ADD player
                     player_to_add = player
-            else:
-                pass
-        
-        p.add_player(
-            clip=player_to_add,
-            user_pk=user.pk
-            )
-        p.add_season_stats(
-            player_id=player_to_add['playerId'],
-            clip=player['stats']
-            )
-        year = player_to_add['stats']['season'].split('-')[1]
-        gamelog = NBAapi().scrape_pbr_profile_for(
-            link=player_to_add['pbr_link'].replace('.html',f'/gamelog/20{year}'), 
-            opt='season_gamelog'
-            )
-        g = GameLog()
-        g.add_entire_player_gamelog(
-            clips=gamelog,
-            player_id=player_to_add['playerId']
-        )
+                    p.add_player(
+                    clip=player_to_add,
+                    user_pk=user.pk
+                    )
+                    p.add_season_stats(
+                        player_id=player_to_add['playerId'],
+                        clip=player['stats']
+                        )
+                    year = player_to_add['stats']['season'].split('-')[1]
+                    gamelog = NBAapi().scrape_pbr_profile_for(
+                        link=player_to_add['pbr_link'].replace('.html',f'/gamelog/20{year}'), 
+                        opt='season_gamelog'
+                        )
+                    g = GameLog()
+                    g.add_entire_player_gamelog(
+                        clips=gamelog,
+                        player_id=player_to_add['playerId']
+                    )
+
+                    u = User(username=user.username)
+                    update = str(player['playerId'])+'-'
+                    u.tracking += update
+                    u.save()
+                    
+                    print('Added to Tracked Players.')
+
         print('Complete.')
         session.pop('found_players', None)
         session.pop('first_name', None)

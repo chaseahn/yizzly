@@ -41,7 +41,7 @@ def login():
             pw = hasher(request.form['password'])
             #check login and serve to main page
             try:
-                with User(username=un,password=pw) as user:
+                with User(username=un) as user:
                     if user.login(pw):
                         #send to mainpage
                         session['username'] = user.username
@@ -100,8 +100,7 @@ def verify():
         if request.form['code'] == new_user['code']:
             
             with User(
-                username=new_user['username'],
-                password=new_user['password']
+                username=new_user['username']
                 ) as user:
                 
                 user.create_user(

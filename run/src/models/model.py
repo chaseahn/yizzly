@@ -16,9 +16,9 @@ from ..models.app import NBAapi
 GL_YEAR = '20'
 
 class User:
-    def __init__(self, row={}, username='', password=''):
+    def __init__(self, row={}, username=''):
         if username:
-            self.check_cred(username,password)
+            self.check_cred(username)
         else:
             self.row_set(row)
 
@@ -33,6 +33,8 @@ class User:
         self.pk       = row.get('pk')
         self.username = row.get('username')
         self.password = row.get('password')
+        self.email    = row.get('email')
+        self.tracking = row.get('tracking')
 
     def create_user(self,username,password,email):
         #FIXME check this later with row set above
@@ -41,9 +43,9 @@ class User:
         self.email = email
         with OpenCursor() as cur:
             SQL = """ INSERT INTO user(
-                username,password,email) VALUES (
-                ?,?,?); """
-            val = (self.username,self.password,self.email)
+                username,password,email,tracking) VALUES (
+                ?,?,?,?); """
+            val = (self.username,self.password,self.email,'')
             cur.execute(SQL,val)
             print('user created')
     
@@ -55,11 +57,11 @@ class User:
             else:
                 return False
     
-    def check_cred(self,username,password):
+    def check_cred(self,username):
         with OpenCursor() as cur:
             SQL = """ SELECT * FROM user WHERE
-                  username=? and password=?; """
-            val = (username,password)
+                  username=?; """
+            val = (username,)
             cur.execute(SQL,val)
             row = cur.fetchone()
         if row:
@@ -78,6 +80,44 @@ class User:
             return True
         else:
             return False
+    
+    def update_tracking_ids(self,pk,tracking):
+        with OpenCursor() as cur:
+            SQL = """UPDATE user SET tracking = ? 
+            WHERE pk=? """
+            val = (tracking,row['pk'])
+            cur.execute(SQL,val)
+    
+    def get_user_by_pk(self,pk):
+        with OpenCursor() as cur:
+            SQL = """ SELECT * FROM user WHERE
+                  pk=?; """
+            val = (pk,)
+            cur.execute(SQL,val)
+            row = cur.fetchone()
+        if row:
+            self.row_set(row)
+        else:
+            self.row_set({})
+
+    def save(self):
+        if self:
+            with OpenCursor() as cur:
+                SQL = """ UPDATE user SET 
+                    username=?,password=?,email=?,tracking=?
+                    WHERE pk=?; """
+                val = (self.username,self.password,self.email,self.tracking,self.pk)
+                cur.execute(SQL, val)
+        else:
+            print('Else SAVED')
+            with OpenCursor() as cur:
+                SQL = """ INSERT INTO user(
+                username,password,email,tracking) VALUES (
+                ?,?,?,?); """
+                val = (self.username,self.password,self.email,'')
+                cur.execute(SQL, val)
+                self.pk = cur.lastrowid
+
 
 
 class Clips:
@@ -268,13 +308,21 @@ class Players:
             cur.execute(SQL,val)
         print('deleted')
     
-    def return_tracking_profiles(self, pk):
+    def return_tracking_profiles(self, pk, un):
 
-        tracked_ids = self.return_all_saved_player_ids(pk)
+        u = User(username=un)
+        try:
+            tracked_ids = u.tracking.split('-')
+            tracked_ids= filter(None, tracked_ids)
+            print(tracked_ids)
+        except:
+            tracked_ids = []
         player_list = []
 
-        for num in tracked_ids:
+        if tracked_ids == []:
+            return player_list
 
+        for num in tracked_ids:
             current_player = Players(p_id=num)
             current_season = Stats(current_player.pk)
             year = current_season.season.split('-')[1]
@@ -315,6 +363,8 @@ class Players:
                 'last_game': last_game_stats,
                 'no_game': no_game
             }
+
+            print(profile)
 
             player_list.append(profile)
 
