@@ -2,7 +2,7 @@
 
 /* LOGIN REGISTER INPUTS */
 
-input[type=text], input[type=password], input[type=email] {
+input[type=logintext], input[type=password], input[type=email] {
     width: 320px;
     padding: 12px 20px;
     border-width: 0px;
@@ -137,7 +137,6 @@ button[type=copy]:hover {
 }
 
 
-
 /* TEXT Input */
 input[type=text] {
   width: 78%;
@@ -147,10 +146,9 @@ input[type=text] {
   border-style: solid;
   border-width: 0px;
   border-color: rgba(231, 184, 255, 0.6);
-  color: rgb(29, 3, 42);
+  color: black;
   border-radius: 0px;
   overflow: hidden;
-  box-shadow: 0px 3px 10px -5px rgb(128, 128, 128, .4);
   font-family: 'Lato', sans-serif;
   background-color: rgb(201, 76, 76, 0);
   transition: ease-in .4s;
