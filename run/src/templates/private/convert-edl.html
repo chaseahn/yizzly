@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/edl.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
@@ -22,15 +23,8 @@
         <![endif]-->
         <form action="/convert-edl" method="post" enctype="multipart/form-data">
         <div class="container">
-            <div class="mini-button align-left">
-                <a href='/index'>
-                    <input value="GO BACK" type="modal">
-                </a>
-            </div>
-            <div class="mini-button align-right">
-                <a href=''>
-                    <input value="HELP" type="modal">
-                </a>
+            <div class="crumb-row">
+                <input value="GO BACK" type="modal" onclick="location.href='/index';">
             </div>
             <div class="main-row">
                 <div class="main-item">
@@ -43,9 +37,9 @@
                     </div>
                 </div>
                 <label for="convert" class="row-action">
-                    <i class="fa fa-angle-double-right" style="font-size:24px"></i>
+                    <i class="fa fa-exchange" style="font-size:24px" aria-hidden="true"></i>
                 </label>
-                <input name="post_button" id="convert" type="submit" value="CONVERT">
+                <input name="post_button" id="convert" type="convert" value="CONVERT">
             </div>
         </div>
 
@@ -60,3 +54,27 @@
     </body>
 </html>
 {% endblock %}
+
+
+<!-- <div class="faq-title">
+                <input value="HELP"onclick="document.getElementById('id01').style.display='block'" type="modal">
+                <div class="w3-container">
+                    <div id="id01" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
+                                <div class="modal-header">
+                                    <div class="text">
+                                        Add Player: Enter first and last name
+                                    </div>
+                                    <div class="span-shift">
+                                        <span onclick="document.getElementById('id01').style.display='none'">&times;</span>
+                                    </div>
+                                </div>
+                                <div class="modal-box">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->

@@ -54,16 +54,18 @@ input[type=submit]:hover {
 .h-col {
     width: 100%;
     height: auto;
-    border-style: solid;
-    border-width: 0px;
-    border-color: rgb(223, 223, 223);
     border-radius: 1em; 
     line-height: 25px;
     margin-top: 10px;
     min-height: 103px;
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.331), rgba(207, 147, 235, 0.201));
-    box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.133);
     display: flex;
+    min-height: 103px;
+    background-image: linear-gradient(120deg,  rgba(140, 228, 242, 0.722), rgba(69, 196, 242, 0.4));
+    box-shadow: 0px 10px 20px -10px rgba(18, 55, 43, 0.5);
+    border: 2px rgb(153, 210, 210) solid;
+    -moz-box-shadow:    inset 0 0 10px #0000004a;
+    -webkit-box-shadow: inset 0 0 10px #0000004a;
+    box-shadow:         inset 0 0 10px #0000004a;
 }
 
 .clip-title {
@@ -110,6 +112,10 @@ input[type=submit]:hover {
     font-family: 'Lato', sans-serif;
     padding: 0px;
     font-size: 8px;
+
+    -moz-box-shadow:    inset 0 0 10px #0000006a;
+    -webkit-box-shadow: inset 0 0 10px #0000006a;
+    box-shadow:         inset 0 0 10px #0000006a;
 }
 
 .game-info {
@@ -166,29 +172,7 @@ h6 {
     justify-content: flex-end;
 }
 
-button[type=post] {
-    width:100px;
-    float: right;
-    background-image: linear-gradient(120deg,  rgba(255, 255, 255, 0.331), rgba(207, 147, 235, 0.201));
-    margin-right: 10px;
-    border-radius: 8px;
-    box-shadow: 0px 10px 20px -10px rgba(76, 120, 203, 0.413);
-    color: rgb(182, 134, 206);
-    font-family: 'Lato', sans-serif;
-    font-size: 8px;
-    border-width: 0px;
-    border-style: solid;
-    padding: 8px;
-    transition: ease-in .4s;
-    cursor: pointer;
-}
 
-button[type=post]:hover {
-    background-color: rgba(72, 235, 145, 0.986);
-    box-shadow: 0px 3px 10px -5px rgba(151, 255, 163, 0.678);
-    transition: ease-in;
-    color: white;
-}
 
 .game-info {
     height: 100%;
@@ -202,15 +186,20 @@ button[type=post]:hover {
 
 .col-1 {
     width: 25%;
+    color: white;
+    text-shadow: 0px 1px 2px #04141ab2;
 }
 
 .col-2 {
     width: 50%;
+    color: white;
+    text-shadow: 0px 1px 2px #04141ab2;
 }
 
 .info-header {
-    font-family: 'Exo', sans-serif;
-    font-weight: 700;
+    color: rgb(140, 228, 242);
+    font-family: 'Lato', sans-serif;
+    text-shadow: 0px 1px 2px #04141a6e;
     font-size: 6px;
     padding:0;
 }

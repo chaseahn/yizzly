@@ -364,12 +364,8 @@ class Players:
                 'no_game': no_game
             }
 
-            print(profile)
-
             player_list.append(profile)
 
-
-        
         return player_list
     
     def add_season_stats(self,player_id,clip={}):

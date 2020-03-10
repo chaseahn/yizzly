@@ -28,7 +28,10 @@
             <div>
                 <textarea type="text" placeholder="{{placeholder}}" name="info" required></textarea>
             </div>
-            <input name="post_button" type="submit" value="CONVERT"/>
+            <div class="push">
+                <input name="post_button" type="submit" value="CONVERT"/>
+            </div>
+            
             <div class="row">
             </div>
             {% with clip = previous_clip %}
@@ -101,7 +104,7 @@
                         </div>
                     </div>
                     <div class="button-cont">
-                        <input type="button" value="DELETE CLIP">
+                        <button type="post" value="DELETE CLIP">DELETE CLIP</button>
                     </div>
                 </div>
             {% endif %}

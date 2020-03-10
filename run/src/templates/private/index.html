@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans&display=swap" rel="stylesheet">
     </head>
@@ -143,12 +144,11 @@
                                 <img src="{{url_for('static', filename='img/settings.png')}}" />
                             </div>
                             <div class="text-setting">
-                                <h1>
+                                
                                     <b>Step 1:</b> Make sure all clips are in a single line with the track highlighted as pictured below.
-                                </h1>
-                                <h1>
-                                    Step 2: Export Edl from File > Export > EDL with the settings pictured to the left.
-                                </h1>
+                                    <br>
+                                    <b>Step 2:</b> Export Edl from File > Export > EDL with the settings pictured to the left.
+                                
                                 <img src="{{url_for('static', filename='img/timeline.png')}}" />
                             </div>
                         </div>
@@ -173,8 +173,8 @@
                     </div>
                     <div class="modal-box">
                         <div class="input-container">
-                            <input name="first_name" type="text" placeholder="First Name" required>
-                            <input name="last_name" type="text" placeholder="Last Name" required>
+                            <input name="first_name" type="modaltext" placeholder="First Name" autocomplete="off" required>
+                            <input name="last_name" type="modaltext" placeholder="Last Name" autocomplete="off" required>
                         </div>
                         <div class="submit-container">
                             <input name="post_button" type="submit" value="SEARCH FOR PLAYER">
@@ -286,15 +286,15 @@
                     </div>
                 {% endfor %}
             {% else %}
-            <div class="blank-box">
+            <div class="blank-box" onclick="document.getElementById('id01').style.display='block'" >
                 <div class="box-top">
                     <div class="pcol0">
                         <img src="{{url_for('static', filename='img/headshot.png')}}">
                     </div>
                     
                     <div class="pcol3">
-                        <div class="header">
-                            <text>Track players by adding them to your account.</text>
+                        <div class="blank-text">
+                            Track players by adding them to your account.
                         </div>
                     </div>
                 </div>

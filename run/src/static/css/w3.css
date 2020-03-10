@@ -1,14 +1,14 @@
 
 .w3-modal{z-index:3;display:none;padding-top:100px;position:fixed;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.4)}
-.w3-modal-content{margin:auto;background-color:#fff;position:relative;padding:20px;outline:0;width:600px;height:auto;margin-top:10%;border-radius: 10px;box-shadow: 0px 10px 40px -10px rgba(30, 55, 103, 0.598);}
+.w3-modal-content{margin:auto;background-color:#fff;position:relative;padding:20px;outline:0;width:500px;height:auto;margin-top:10%;border-radius: 10px;box-shadow: 0px 10px 40px -10px rgba(30, 55, 103, 0.598);}
 
 @media (max-width:1205px){.w3-auto{max-width:95%}}
-@media (max-width:600px){.w3-modal-content{margin:0 10px;width:auto!important}.w3-modal{padding-top:30px}
+@media (max-width:500px){.w3-modal-content{margin:0 10px;width:auto!important}.w3-modal{padding-top:30px}
 .w3-dropdown-hover.w3-mobile .w3-dropdown-content,.w3-dropdown-click.w3-mobile .w3-dropdown-content{position:relative}	
 .w3-hide-small{display:none!important}.w3-mobile{display:block;width:100%!important}.w3-bar-item.w3-mobile,.w3-dropdown-hover.w3-mobile,.w3-dropdown-click.w3-mobile{text-align:center}
 .w3-dropdown-hover.w3-mobile,.w3-dropdown-hover.w3-mobile .w3-btn,.w3-dropdown-hover.w3-mobile .w3-button,.w3-dropdown-click.w3-mobile,.w3-dropdown-click.w3-mobile .w3-btn,.w3-dropdown-click.w3-mobile .w3-button{width:100%}}
 @media (max-width:768px){.w3-modal-content{width:500px}.w3-modal{padding-top:30px}}
-@media (min-width:993px){.w3-modal-content{width:700px}.w3-hide-large{display:none!important}.w3-sidebar.w3-collapse{display:block!important}}
+@media (min-width:993px){.w3-modal-content{width:500px}.w3-hide-large{display:none!important}.w3-sidebar.w3-collapse{display:block!important}}
 @media (max-width:992px) and (min-width:601px){.w3-hide-medium{display:none!important}}
 @media (max-width:992px){.w3-sidebar.w3-collapse{display:none}.w3-main{margin-left:0!important;margin-right:0!important}.w3-auto{max-width:100%}}
 
