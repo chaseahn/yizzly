@@ -36,12 +36,15 @@
                         <div class="cue-comp">
                             {{track.composers}}
                         </div>
+                        <div class="cue-comp">
+                            {{track.publishers}}
+                        </div>
                     </div>
                     <div class="quarter">
-                        <input type="text" name="in-tc-{{track.index}}" placeholder="Enter In Timecode" required>
+                        <input type="tctext" name="in-tc-{{track.index}}" placeholder="Enter In Timecode" autocomplete="off" required>
                     </div>
                     <div class="quarter">
-                        <input type="text" name="out-tc-{{track.index}}" placeholder="Enter Out Timecode" required>
+                        <input type="tctext" name="out-tc-{{track.index}}" placeholder="Enter Out Timecode" autocomplete="off" required>
                     </div>
                 </div>
                 {% endfor %}

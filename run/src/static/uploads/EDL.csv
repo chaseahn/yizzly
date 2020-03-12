@@ -1,0 +1,238 @@
+event_number,clip_name,start,end
+001,ESPN_E_App_Logo_Reveal_sfx_1080_23.98fps.mov,00:00:00;00,00:00:04;00
+002,rooks_mem_prax_1.mov,00:00:04;00,00:00:13;17
+003,rooks_mem_prax_1.mov,00:00:13;17,00:00:17;27
+004,rooks_mem_prax_1.mov,00:00:17;27,00:00:26;17
+005,rooks_mem_prax_1.mov,00:00:26;17,00:00:29;02
+006,rooks_mem_prax_1.mov,00:00:29;02,00:00:37;20
+007,rooks_mem_prax_1.mov,00:00:37;20,00:00:40;00
+008,rooks_mem_prax_1.mov,00:00:40;00,00:00:42;08
+009,open NO BOL 021620.mov,00:00:42;08,00:00:58;24
+010,MVI_0266.MP4,00:00:58;24,00:01:00;12
+011,rooks_tp1_chicago_scenics_2.mov,00:01:00;12,00:01:01;18
+012,rooks_tp1_chicago_scenics_3.mov,00:01:01;18,00:01:01;22
+013,rooks_tp2_chicago_scenics.mov,00:01:01;22,00:01:02;13
+014,rooks_rj_wired_and_broll_split_021420.mov,00:01:02;13,00:01:04;28
+015,MVI_0369.MP4,00:01:04;28,00:01:07;25
+016,MVI_4788.MP4,00:01:07;25,00:01:08;03
+017,MVI_4984.MP4,00:01:08;03,00:01:11;02
+018,MVI_4774.MP4,00:01:11;02,00:01:12;15
+019,MVI_0041.MP4,00:01:12;15,00:01:15;26
+020,rooks_rising_stars_postgame_presser.mov,00:01:15;26,00:01:17;04
+021,GOPR3606.MP4,00:01:17;04,00:01:24;19
+022,rooks_nop_por_zion.mov,00:01:24;19,00:01:26;04
+023,rooks_nop_por_zion.mov,00:01:26;04,00:01:28;15
+024,rooks_mem_lac_ja.mov,00:01:28;15,00:01:31;19
+025,phantom_selects_mem_vs_atl_030220_broll_pt2.mov,00:01:31;19,00:01:33;03
+026,phantom_selects_mem_vs_atl_030220_broll_pt2.mov,00:01:33;03,00:01:35;00
+027,rooks_mem_atl_ja.mov,00:01:35;00,00:01:37;20
+028,phantom_selects_nop_vs_dal_030420_broll_pt1.mov,00:01:37;20,00:01:43;11
+029,rooks_nickeil_sitdown.mov,00:01:43;11,00:01:46;06
+030,rooks_zion_boston_phantom.mov,00:01:46;06,00:01:48;16
+031,rooks_200127_nop_bos_zion.mov,00:01:48;16,00:01:50;01
+032,rooks_mem_sac_ja.mov,00:01:50;01,00:01:53;03
+033,rooks_mem_sac_ja.mov,00:01:53;03,00:01:55;11
+034,phantom_selects_mem_vs_bkn_030420_broll_pt2.mov,00:01:55;11,00:02:02;03
+035,rooks_jaren_jackson_sitdown.mov,00:02:02;03,00:02:04;13
+036,MVI_0295.MP4,00:02:04;13,00:02:07;07
+037,rooks_ja_recent_dunks.mov,00:02:07;07,00:02:08;06
+038,rooks_nop_gsw_zion.mov,00:02:08;06,00:02:09;25
+039,rooks_200303_nop_min_zion.mov,00:02:09;25,00:02:11;00
+040,phantom_selects_mem_vs_bkn_030420_broll_pt1.mov,00:02:11;00,00:02:13;06
+041,phantom_selects_mem_vs_bkn_030420_broll_pt1.mov,00:02:13;06,00:02:14;11
+042,rooks_jamorant_sitdown.mov,00:02:14;11,00:02:17;09
+043,phantom_selects_mem_vs_atl_030220_broll_pt1.mov,00:02:17;09,00:02:19;29
+044,rooks_jamorant_sitdown.mov,00:02:19;29,00:02:21;16
+045,rooks_zion_boston_phantom.mov,00:02:21;16,00:02:25;04
+046,phantom_selects_nop_vs_dal_030420_broll_pt1.mov,00:02:25;04,00:02:30;25
+047,phantom_selects_nop_vs_dal_030420_broll_pt2.mov,00:02:30;25,00:02:35;06
+048,rooks_all_star_zion_sitdown.mov,00:02:35;06,00:02:39;00
+049,rooks_zion_boston_phantom.mov,00:02:39;00,00:02:43;12
+050,phantom_selects_lal_vs_mem_022920_broll_pt2.mov,00:02:43;12,00:02:47;01
+051,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:02:47;01,00:02:52;12
+052,rooks_staples_scenics.mov,00:02:52;12,00:02:56;17
+053,rooks_staples_scenics.mov,00:02:56;17,00:02:58;15
+054,rooks_staples_scenics.mov,00:02:58;15,00:03:00;22
+055,A134C945_200225B5_CANON.MXF,00:03:00;22,00:03:05;02
+056,rooks_mem_vs_lal_tp1.mov,00:03:05;02,00:03:09;04
+057,A134C936_200225UZ_CANON.MXF,00:03:09;04,00:03:19;11
+058,rooks_mem_vs_lal_tp1.mov,00:03:19;11,00:03:21;04
+059,rooks_mem_vs_lal_tp1.mov,00:03:21;04,00:03:22;09
+060,rooks_mem_vs_lal_tp1.mov,00:03:22;09,00:03:24;11
+061,rooks_mem_vs_lal_tp1.mov,00:03:24;11,00:03:27;12
+062,rooks_mem_vs_lal_tp1.mov,00:03:27;12,00:03:31;13
+063,A134C964_200225HV_CANON.MXF,00:03:31;13,00:03:34;01
+064,A134C969_200225I9_CANON.MXF,00:03:34;01,00:03:38;27
+065,A134C966_200225E7_CANON.MXF,00:03:38;27,00:03:41;12
+066,rooks_mem_vs_lal_tp1.mov,00:03:41;12,00:03:46;11
+067,A134C990_200225U7_CANON.MXF,00:03:46;11,00:03:48;16
+068,A134C989_20022521_CANON.MXF,00:03:48;16,00:03:50;00
+069,A134C986_200225NB_CANON.MXF,00:03:50;00,00:03:52;02
+070,A134C986_200225NB_CANON.MXF,00:03:52;02,00:03:53;01
+071,rooks_mem_vs_lal_tp1.mov,00:03:53;01,00:03:58;05
+072,rooks_mem_vs_lal_tp1.mov,00:03:58;05,00:03:59;18
+073,A135C998_2002253D_CANON.MXF,00:03:59;18,00:04:03;25
+074,rooks_mem_vs_lal_tp1.mov,00:04:03;25,00:04:09;18
+075,rooks_mem_vs_lal_tp1.mov,00:04:09;18,00:04:13;03
+076,phantom_selects_nop_vs_lal_022520_broll_pt1.mov,00:04:13;03,00:04:15;03
+077,rooks_mem_vs_lal_tp2.mov,00:04:15;03,00:04:21;26
+078,rooks_jamorant_sitdown.mov,00:04:21;26,00:04:24;03
+079,rooks_mem_vs_lal_tp2.mov,00:04:24;03,00:04:31;00
+080,rooks_jamorant_sitdown.mov,00:04:31;00,00:04:32;27
+081,rooks_mem_vs_lal_tp2.mov,00:04:32;27,00:04:39;22
+082,phantom_selects_nop_vs_lal_022520_broll_pt1.mov,00:04:39;22,00:04:44;26
+083,rooks_938581_zion_intv.mov,00:04:44;26,00:04:49;00
+084,phantom_selects_nop_vs_lal_022520_broll_pt1.mov,00:04:49;00,00:05:01;15
+085,rooks_hou_vs_lal_wireless.mov,00:05:01;15,00:05:03;04
+086,A135D071_200225Q7_CANON.MXF,00:05:03;04,00:05:05;13
+087,phantom_selects_nop_vs_lal_022520_broll_pt1.mov,00:05:05;13,00:05:10;08
+088,rooks_mem_vs_lal_tp2.mov,00:05:10;08,00:05:19;25
+089,A135D069_2002250J_CANON.MXF,00:05:19;25,00:05:25;00
+090,A135D069_2002250J_CANON.MXF,00:05:25;00,00:05:26;00
+091,A136C096_200225EA_CANON.MXF,00:05:26;00,00:05:30;21
+092,rooks_mem_vs_lal_tp2.mov,00:05:30;21,00:05:35;23
+093,rooks_mem_vs_lal_tp2.mov,00:05:35;23,00:05:40;14
+094,phantom_selects_nop_vs_lal_02252020_broll_pt2.mov,00:05:40;14,00:05:54;03
+095,rooks_arena_chicago_united_2.mov,00:05:54;03,00:05:56;25
+096,rooks_chi_okc_white.mov,00:05:56;25,00:06:01;22
+097,rooks_chi_okc_white.mov,00:06:01;22,00:06:03;26
+098,rooks_chi_okc_white.mov,00:06:03;26,00:06:04;11
+099,rooks_chi_okc_white.mov,00:06:04;11,00:06:06;07
+100,rooks_chi_phx_white.mov,00:06:06;07,00:06:08;05
+101,rooks_chi_phx_white.mov,00:06:08;05,00:06:10;07
+102,rooks_chi_phx_white.mov,00:06:10;07,00:06:12;19
+103,MVI_5254.MP4,00:06:12;19,00:06:14;04
+104,rooks_coby_phantom_vs_dal.mov,00:06:14;04,00:06:15;13
+105,rooks_coby_phantom_vs_dal.mov,00:06:15;13,00:06:16;03
+106,MVI_5254.MP4,00:06:16;03,00:06:18;10
+107,rooks_chi_okc_white.mov,00:06:18;10,00:06:23;24
+108,rooks_chi_okc_white.mov,00:06:23;24,00:06:26;17
+109,MVI_7168.MP4,00:06:26;17,00:06:29;02
+110,MVI_7158.MP4,00:06:29;02,00:06:33;14
+111,rooks_cobychi_broll_co.mov,00:06:33;14,00:06:37;26
+112,rooks_coby_ride_along.mov,00:06:37;26,00:06:39;10
+113,rooks_cobychi_broll_co.mov,00:06:39;10,00:06:41;28
+114,rooks_coby_ride_along.mov,00:06:41;28,00:06:47;03
+115,MVI_7163.MP4,00:06:47;03,00:06:50;10
+116,rooks_coby_ride_along.mov,00:06:50;10,00:06:52;24
+117,rooks_coby_ride_along.mov,00:06:52;24,00:06:55;21
+118,rooks_coby_ride_along.mov,00:06:55;21,00:07:01;12
+119,rooks_coby_ride_along.mov,00:07:01;12,00:07:11;06
+120,rooks_coby_ride_along.mov,00:07:11;06,00:07:15;21
+121,rooks_coby_ride_along.mov,00:07:15;21,00:07:22;08
+122,rooks_coby_ride_along.mov,00:07:22;08,00:07:28;20
+123,rooks_chicago_scenics_mw_1.mov,00:07:28;20,00:07:30;09
+124,rooks_coby_ride_along.mov,00:07:30;09,00:07:32;19
+125,rooks_coby_ride_along.mov,00:07:32;19,00:07:34;18
+126,rooks_coby_ride_along.mov,00:07:34;18,00:07:36;18
+127,rooks_coby_ride_along.mov,00:07:36;18,00:07:40;18
+128,rooks_coby_ride_along.mov,00:07:40;18,00:07:43;14
+129,C0005.MP4,00:07:43;14,00:07:44;10
+130,C0006.MP4,00:07:44;10,00:07:45;20
+131,C0005.MP4,00:07:45;20,00:07:47;03
+132,MVI_8944.MP4,00:07:47;03,00:07:52;21
+133,rooks_coby_vs_lal_bts.mov,00:07:52;21,00:07:57;16
+134,rooks_chi_was_coby_wire.mov,00:07:57;16,00:07:59;21
+135,rooks_chi_was_coby_wire.mov,00:07:59;21,00:08:01;03
+136,rooks_chi_was_coby_wire.mov,00:08:01;03,00:08:05;19
+137,rooks_chi_was_coby_wire.mov,00:08:05;19,00:08:06;12
+138,rooks_chi_was_coby_wire.mov,00:08:06;12,00:08:08;20
+139,C0008.MP4,00:08:08;20,00:08:10;09
+140,C0013.MP4,00:08:10;09,00:08:11;19
+141,rooks_chicago_banners.mov,00:08:11;19,00:08:13;09
+142,rooks_chicago_banners.mov,00:08:13;09,00:08:14;08
+143,rooks_chi_was_coby_wire.mov,00:08:14;08,00:08:19;04
+144,rooks_chi_was_coby_wire.mov,00:08:19;04,00:08:20;13
+145,rooks_chi_was_coby_wire.mov,00:08:20;13,00:08:23;21
+146,rooks_chi_was_coby_wire.mov,00:08:23;21,00:08:24;04
+147,rooks_chi_was_coby_wire.mov,00:08:24;04,00:08:28;05
+148,rooks_chi_was_coby_wire.mov,00:08:28;05,00:08:31;01
+149,rooks_chi_was_coby_wire.mov,00:08:31;01,00:08:37;24
+150,rooks_chi_was_coby_wire.mov,00:08:37;24,00:08:38;24
+151,rooks_chi_was_coby_wire.mov,00:08:38;24,00:08:43;00
+152,rooks_chi_was_coby_wire.mov,00:08:43;00,00:08:48;22
+153,rooks_chi_was_coby_wire.mov,00:08:48;22,00:08:49;14
+154,rooks_chi_was_coby_wire.mov,00:08:49;14,00:08:55;00
+155,rooks_chi_was_coby_wire.mov,00:08:55;00,00:08:57;18
+156,rooks_chi_was_coby_wire.mov,00:08:57;18,00:08:59;16
+157,rooks_chi_was_coby_wire.mov,00:08:59;16,00:09:01;13
+158,rooks_chi_was_coby_wire.mov,00:09:01;13,00:09:04;16
+159,rooks_chi_was_coby_wire.mov,00:09:04;16,00:09:06;19
+160,rooks_chi_was_coby_wire.mov,00:09:06;19,00:09:09;12
+161,rooks_chi_was_coby_wire.mov,00:09:09;12,00:09:16;21
+162,MVI_8998.MP4,00:09:16;21,00:09:25;04
+163,rooks_arena_nyc_msg.mov,00:09:25;04,00:09:26;19
+164,rooks_more_rj_phantom.mov,00:09:26;19,00:09:31;05
+165,rooks_rjbarrett_sitdown.mov,00:09:31;05,00:09:32;02
+166,rooks_200302_nyk_hou_rj.mov,00:09:32;02,00:09:35;25
+167,phantom_selects_hou_vs_nyk_030220_broll.mov,00:09:35;25,00:09:37;11
+168,phantom_selects_hou_vs_nyk_030220_broll.mov,00:09:37;11,00:09:39;00
+169,rooks_1221_mil_nyk_rj_phantom.mov,00:09:39;00,00:09:41;17
+170,phantom_selects_hou_vs_nyk_030220_broll.mov,00:09:41;17,00:09:43;00
+171,phantom_selects_hou_vs_nyk_030220_broll.mov,00:09:43;00,00:09:45;08
+172,phantom_selects_hou_vs_nyk_030220_broll.mov,00:09:45;08,00:09:49;04
+173,DELTA PORTLAND clean.mp4,00:09:49;04,00:09:56;19
+174,DELTA PORTLAND clean.mp4,00:09:56;19,00:09:57;24
+175,DELTA PORTLAND clean.mp4,00:09:57;24,00:10:01;28
+176,DELTA PORTLAND clean.mp4,00:10:01;28,00:10:03;28
+177,rooks_barrett_updated_plays.mov,00:10:03;28,00:10:04;27
+178,rooks_barrett_updated_plays.mov,00:10:04;27,00:10:06;02
+179,DELTA PORTLAND clean.mp4,00:10:06;02,00:10:12;28
+180,DELTA PORTLAND clean.mp4,00:10:12;28,00:10:14;17
+181,DELTA PORTLAND clean.mp4,00:10:14;17,00:10:26;15
+182,rooks_barrett_updated_plays.mov,00:10:26;15,00:10:28;24
+183,rooks_barrett_updated_plays.mov,00:10:28;24,00:10:29;06
+184,rooks_barrett_updated_plays.mov,00:10:29;06,00:10:31;07
+185,rooks_barrett_updated_plays.mov,00:10:31;07,00:10:33;29
+186,DELTA PORTLAND clean.mp4,00:10:33;29,00:10:36;16
+187,DELTA PORTLAND clean.mp4,00:10:36;16,00:10:37;27
+188,DELTA PORTLAND clean.mp4,00:10:37;27,00:10:38;25
+189,DELTA PORTLAND clean.mp4,00:10:38;25,00:10:39;02
+190,DELTA PORTLAND clean.mp4,00:10:39;02,00:10:41;27
+191,DELTA PORTLAND clean.mp4,00:10:41;27,00:10:43;26
+192,DELTA PORTLAND clean.mp4,00:10:43;26,00:10:47;19
+193,DELTA PORTLAND clean.mp4,00:10:47;19,00:10:53;26
+194,rooks_hof_2018_steve_nash_split_clean.mov,00:10:53;26,00:10:55;19
+195,rooks_hof_2018_steve_nash_split_clean.mov,00:10:55;19,00:10:57;29
+196,rooks_hof_2018_steve_nash_split_clean.mov,00:10:57;29,00:10:58;17
+197,rooks_hof_2018_steve_nash_split_clean.mov,00:10:58;17,00:11:01;01
+198,rooks_hof_2018_steve_nash_split_clean.mov,00:11:01;01,00:11:03;05
+199,rooks_hof_2018_steve_nash_split_clean.mov,00:11:03;05,00:11:06;02
+200,DELTA PORTLAND clean.mp4,00:11:06;02,00:11:07;15
+201,rooks_rj_nash_all_star.mov,00:11:07;15,00:11:12;08
+202,DELTA PORTLAND clean.mp4,00:11:12;08,00:11:15;22
+203,DELTA PORTLAND clean.mp4,00:11:15;22,00:11:16;29
+204,DELTA PORTLAND clean.mp4,00:11:16;29,00:11:17;23
+205,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:11:17;23,00:11:18;17
+206,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:11:18;17,00:11:19;28
+207,phantom_selects_lal_vs_nop_030120_broll_pt1.mov,00:11:19;28,00:11:21;12
+208,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:11:21;12,00:11:23;08
+209,phantom_selects_lal_vs_nop_030120_broll_pt1.mov,00:11:23;08,00:11:25;27
+210,phantom_selects_lal_vs_nop_030120_broll_pt1.mov,00:11:25;27,00:11:26;29
+211,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:11:26;29,00:11:27;26
+212,phantom_selects_lal_vs_nop_030120_broll_pt1.mov,00:11:27;26,00:11:34;07
+213,phantom_selects_lal_vs_nop_030120_broll_pt1.mov,00:11:34;07,00:11:36;14
+214,2-25 RAW SOT LeBron James Postgame vs Pelicans.mov,00:11:36;14,00:11:38;28
+215,phantom_selects_lal_vs_nop_030120_broll_pt2.mov,00:11:38;28,00:11:42;13
+216,phantom_selects_lal_vs_nop_030120_broll_pt1.mov,00:11:42;13,00:11:47;06
+217,phantom_selects_lal_vs_nop_030120_broll_pt2.mov,00:11:47;06,00:11:49;00
+218,rooks_lal_vs_nop_wireless.mov,00:11:49;00,00:11:51;21
+219,phantom_selects_lal_vs_nop_030120_broll_pt1.mov,00:11:51;21,00:11:54;14
+220,phantom_selects_lal_vs_nop_030120_broll_pt2.mov,00:11:54;14,00:11:59;26
+221,phantom_selects_lal_vs_nop_030120_broll_pt1.mov,00:11:59;26,00:12:00;29
+222,phantom_selects_lal_vs_nop_030120_broll_pt2.mov,00:12:00;29,00:12:10;06
+223,phantom_selects_lal_vs_nop_030120_broll_pt2.mov,00:12:10;06,00:12:20;05
+224,rooks_200225_nop_lal_zion.mov,00:12:20;05,00:12:23;17
+225,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:12:23;17,00:12:34;28
+226,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:12:34;28,00:12:36;01
+227,phantom_selects_lal_vs_mem_022920_broll_pt2.mov,00:12:36;01,00:12:45;09
+228,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:12:45;09,00:12:47;17
+229,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:12:47;17,00:12:51;01
+230,phantom_selects_lal_vs_mem_022920_broll_pt2.mov,00:12:51;01,00:12:52;16
+231,phantom_selects_lal_vs_mem_022920_broll_pt1.mov,00:12:52;16,00:12:53;13
+232,phantom_selects_lal_vs_mem_022920_broll_pt2.mov,00:12:53;13,00:12:57;22
+233,phantom_selects_lal_vs_mem_022920_broll_pt2.mov,00:12:57;22,00:13:02;08
+234,rooks_200301_nop_lal_lebron.mov,00:13:02;08,00:13:04;09
+235,phantom_selects_lal_vs_mem_022920_broll_pt2.mov,00:13:04;09,00:13:09;00
+236,ROOKS EPISODE 8 SPLIT CLEAN.mov,00:13:09;00,00:13:16;01
+237,EPISODE 4 SPLIT CLEAN.mov,00:13:16;01,00:13:21;05
